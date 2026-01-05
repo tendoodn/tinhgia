@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tiện ích Tendoo</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <link rel="shortcut icon" href="https://tendoo.vn/images/navigation/logo.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    <style>
+        :root { --red-viettel: #ee002d; --bg-gray: #f4f4f4; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background: linear-gradient(180deg, #ffeeef 0%, #f7f7f7 100%); 
+            min-height: 100vh; }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid #dbdbdb;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            top: -1px; }
+        .sticky-header { 
+            position: sticky; 
+            top: 0; z-index: 
+            1000; width: 100%; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            border-radius: 15px 15px 0 0;}
+        .tabs { 
+            display: flex; 
+            background: #dbdbdb; 
+            margin: 0; 
+            padding: 0;}
+        .tab-btn { 
+            flex: 1; 
+            padding: 15px 5px; 
+            border: none; 
+            border-radius: 0;  
+            font-weight: bold; 
+            background: #f0f0f0; 
+            cursor: pointer; 
+            margin: 0;}
+        .tab-btn.active { 
+            background: var(--red-viettel); 
+            color: white; 
+            box-shadow: 0 2px 0 var(--red-viettel); }
+        .tool-section { display: none; }
+        .tool-section.active { display: block; }
+        h2 { 
+            color: var(--red-viettel); 
+            text-align: center; 
+            font-size: 17px; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            margin: 10px 0 20px 0; }
+        /* Form  */
+        .form-group { margin-bottom: 12px; }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            font-size: 13px; 
+            color: #333; }
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 2px solid #ddd; 
+            border-radius: 6px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            outline: none; }
+        input:focus { border-color: var(--red-viettel); }
+        .result-box { 
+            background-color: #fff0f1; 
+            border: 2px solid var(--red-viettel); 
+            color: var(--red-viettel); 
+            font-weight: 900; 
+            font-size: 22px; 
+            text-align: center; 
+            animation: blinker 1.5s linear infinite; }
+            @keyframes blinker { 50% { opacity: 0.5; } }
+        .custom-tax { 
+            display: none; 
+            margin-top: 8px; }
+        .custom-tax input { 
+            background: #fffde7; 
+            border-color: #fbc02d; }
+        /* Links & App */
+        .promo-box { 
+            margin-top: 15px; 
+            border: 2px solid var(--red-viettel); 
+            border-radius: 10px; 
+            overflow: hidden; }
+        .promo-header { 
+            background: var(--red-viettel); 
+            color: white; 
+            text-align: center; 
+            padding: 5px; 
+            font-weight: bold; 
+            font-size: 15px; }
+        .links-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 5px; 
+            padding: 8px; }
+        .link-btn { 
+            text-decoration: none; 
+            color: white; 
+            background: #333; 
+            padding: 8px; 
+            border-radius: 5px; 
+            font-size: 11px; 
+            text-align: center; 
+            font-weight: bold; }
+        .btn-zalo { 
+            background: #0068ff; 
+            grid-column: span 2; 
+            font-size: 13px; }
+        .download-section { 
+            margin-top: 15px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            border-top: 1px solid #eee; 
+            padding-top: 10px; }
+        .app-col { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; }
+        .download-content { 
+            margin-top: 20px; 
+            border-top: 1px dashed #ccc; 
+            padding-top: 15px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            align-items: start; }
+        .app-section { 
+            text-align: center; 
+            padding: 0 5px; }
+        .separator { border-left: 1px solid #ccc; }
+        .logo-group { 
+            display: flex; 
+            justify-content: center; 
+            gap: 5px; }
+        .logo-row { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr 1fr; 
+            gap: 8px; 
+            align-items: center; }
+        .app-title { 
+            font-size: 11px; 
+            font-weight: bold; 
+            text-align: center; 
+            color: var(--red-viettel); 
+            margin: 0; }
+        .store-link { width: 45%; }
+        .store-img { 
+            width: 100%; 
+            height: auto; 
+            display: block; }
+        /* Khối liên hệ & Dịch vụ */
+        .contact-box { 
+            margin-top: 20px; 
+            border: 2px solid var(--red-viettel); 
+            border-radius: 10px; 
+            padding: 12px; 
+            background: #fff; }
+        .contact-box h3 { 
+            margin: 0 0 10px 0; 
+            font-size: 14px; 
+            color: var(--red-viettel); 
+            text-align: center; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 5px; }
+        .service-text { 
+            font-size: 12px; 
+            line-height: 1.5; 
+            color: #444; 
+            margin-bottom: 10px; 
+            text-align: justify; }
+        .contact-info { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px; 
+            font-size: 12px; }
+        .contact-info a { 
+            text-decoration: none; 
+            color: var(--red-viettel); 
+            font-weight: bold; 
+            background: #f9f9f9; 
+            padding: 8px; 
+            border-radius: 5px; 
+            border: 1px solid var(--red-viettel); 
+            display: block;  
+            text-align: center; 
+            animation: blinker 1.5s linear infinite; }
+            @keyframes blinker { 50% { opacity: 0.5; } }
+        .address { 
+            font-size: 8px; 
+            text-align: center; 
+            color: #777; 
+            margin-top: 5px; 
+            font-style: italic; }
+        /* Nút hỗ trợ nhanh */
+        .quick-links { 
+            display: flex; 
+            gap: 5px; 
+            margin-top: 10px; }
+        .quick-links a { 
+            flex: 1; 
+            text-decoration: none; 
+            color: white; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 11px; 
+            text-align: center; 
+            font-weight: bold; }
+        .bg-black { background: #333; }
+        .bg-blue { background: #0068ff; }
+        /* hoa rơi */
+        .flower-petal { 
+            position: fixed; 
+            top: -10px; 
+            z-index: 9999; 
+            pointer-events: none; 
+            background-color: #ffb7c5; 
+            border-radius: 10px 0 10px 10px; 
+            opacity: 0.8; 
+            animation: fall linear infinite;}
+            @keyframes fall {
+            0% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 1; }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0; }}
+        /* --- GIAO DIỆN WEB (MÀN HÌNH LỚN > 768px) --- */
+        @media (min-width: 768px) {
+            h2 { 
+                font-size: 25px; 
+                margin-bottom: 30px; }
+            label { font-size: 20px; }
+            input, select { 
+                font-size: 20px; 
+                padding: 15px; 
+                border-radius: 12px; }
+            .container { 
+                max-width: 900px; 
+                padding: 40px; }
+            .tab-btn { 
+                font-size: 20px; 
+                padding: 20px 5px; }
+            .result-box { 
+                font-size: 22px; 
+                padding: 16px !important; }
+            .btn-check { 
+                font-size: 22px; 
+                padding: 16px; }
+            .contact-box h3 { 
+                font-size: 32px; 
+                padding-bottom: 15px; }
+            .link-btn { 
+                font-size: 15px; 
+                padding: 10px; 
+                border-width: 4px; 
+                border-radius: 20px; 
+                margin-top:2px; }
+            .service-text { font-size: 24px; }
+            .contact-info { 
+                font-size: 24px; 
+                gap: 15px; }
+                @keyframes shake-effect {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-3px); }
+                50% { transform: translateX(3px); }
+                75% { transform: translateX(-3px); }
+                100% { transform: translateX(0); }}
+            .contact-in:hover {
+                animation: shake-effect 0.4s ease-in-out infinite; 
+                cursor: pointer;}
+            .contact-info a { padding: 15px; }
+            .address { 
+                font-size: 22px; 
+                margin-bottom: 1px; }
+            .download-section { 
+                display: flex !important; 
+                flex-direction: row !important; 
+                justify-content: center !important; 
+                gap: 20px !important; 
+                padding-top: 30px; 
+                border-top: 2px dashed #ccc; }
+            .app-col { 
+                flex-direction: row !important;
+                gap: 20px !important; }
+            .app-title { 
+                font-size: 24px; 
+                margin-bottom: 5px; }
+            .logo-row { 
+                display: flex !important; 
+                justify-content: center !important; 
+                gap: 30px !important; }
+            .store-link { 
+                width: 50% !important; 
+                max-width: 160px;}
+            }
+        
+        @media (min-width: 1024px) {
+            .sticky-header, .container { max-width: 1000px; }
+            .sticky-header { 
+                border-radius: 20px 20px 0 0;
+                top: 0;  }
+            .tab-btn { 
+                font-size: 24px; 
+                padding: 20px; }
+            .separator { border-left: 3px solid #eee; }
+            .logo-group { gap: 15px; }}
+
+        /* báo giá */
+        .baogia { 
+            margin-top: 10px; 
+            overflow-x: auto; }
+        .table-title { 
+            color: var(--red-viettel); 
+            text-align: center; 
+            font-size: 18px; 
+            margin-bottom: 15px; 
+            text-transform: uppercase; }
+        .banggia { 
+            width: 100%; 
+            border-collapse: collapse;
+            background: #fff; 
+            font-size: 13px; 
+            border: 1px solid #ddd; }
+        .banggia th { 
+            background: #fffde7; 
+            color: #333; 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            text-align: center; 
+            font-weight: bold; }
+        .banggia td { 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            text-align: center; 
+            vertical-align: middle; }
+        .product-name { 
+            font-weight: bold; 
+            color: #000; }
+        .sub-name { 
+            color: #ee002d; 
+            font-size: 11px; }
+        .specs { 
+            text-align: left !important; 
+            line-height: 1.6; 
+            color: #444; }
+        .gia { 
+            color: #ee002d; 
+            font-weight: bold; 
+            font-size: 15px; }
+        .img-product { 
+            width: 80px; 
+            height: auto; 
+            border-radius: 4px; }
+        /* hiển thị cho điện thoại */
+        @media (max-width: 600px) {
+            .banggia thead { display: none; }
+            .banggia tr { 
+                display: block; 
+                margin-bottom: 15px; 
+                border: 2px solid #ee002d; 
+                border-radius: 8px; 
+                overflow: hidden; }
+            .banggia td { 
+                display: block; 
+                text-align: right; 
+                border: none; 
+                border-bottom: 1px solid #eee; 
+                position: relative; 
+                padding-left: 50%; }
+            .banggia td::before {
+                content: attr(data-label);
+                position: absolute; 
+                left: 10px; 
+                width: 45%; 
+                text-align: left;
+                font-weight: bold; 
+                color: #666; 
+                font-size: 11px;}
+            .specs { text-align: right !important; } }
+        /* Cho Web */
+        @media (min-width: 1024px) {
+            .banggia { font-size: 16px; }
+            .table-title { font-size: 28px; }
+            .img-product { width: 120px; } }
+        .product-link {
+            color: #0056b3; 
+            text-decoration: none; 
+            transition: color 0.2s;
+            display: block; }
+        .product-link:hover {
+            color: #ee002d;
+            text-decoration: underline; }
+        .banggia td .product-link {font-weight: bold;}
+
+        /* liên hệ */
+        .contact-fixed {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;  
+            display: flex;
+            flex-direction: column;
+            gap: 15px;     
+            z-index: 9999; }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            text-decoration: none; }
+        .contact-icon:hover {transform: scale(1.1); }
+        .contact-icon img {
+            width: 30px;
+            height: 30px; }
+        .pulsezalo {
+            position: relative;
+            background-color: #0084FF; 
+            animation: zalo-ripple 2s infinite;
+            border-radius: 50%; }
+            @keyframes zalo-ripple {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.4), 
+                                0 0 0 0 rgba(0, 132, 255, 0.4); }
+                70% {
+                    box-shadow: 0 0 0 15px rgba(0, 132, 255, 0), 
+                                0 0 0 30px rgba(0, 132, 255, 0); }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0), 
+                                0 0 0 0 rgba(0, 132, 255, 0); } }
+        .contact-icon.zalo img {
+            width: 30px;
+            height: 30px;
+            z-index: 2;
+            position: relative; }
+        .pulsephone {
+            position: relative;
+            background-color: #ff0000; 
+            animation: phone-ripple 2s infinite;
+            border-radius: 50%; }
+            @keyframes phone-ripple {
+                0% {
+                    box-shadow: 0 0 0 0 rgb(255, 0, 0), 
+                                0 0 0 0 rgb(255, 1, 1); }
+                70% {
+                    box-shadow: 0 0 0 15px rgba(0, 132, 255, 0), 
+                                0 0 0 30px rgba(0, 132, 255, 0); }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0), 
+                                0 0 0 0 rgba(0, 132, 255, 0); } }
+
+    </style>
+</head>
+<body>
+    <div class="sticky-header">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTool('gia-ban', this)">TÍNH GIÁ BÁN</button>
+            <button class="tab-btn" onclick="showTool('thue-nop', this)">TÍNH THUẾ PHẢI NỘP</button>
+            <button class="tab-btn" onclick="showTool('baogia', this)">BÁO GIÁ POS</button>
+        </div>
+    </div>
+<div class="container">
+    
+    <div id="gia-ban" class="tool-section active">
+        <h2>TÍNH GIÁ NIÊM YẾT</h2>
+        <div class="form-group">
+            <label>Nhập số tiền vốn của sản phẩm</label>
+            <input type="number" id="von-gb" placeholder="Vốn nhập hàng..." oninput="tinhGiaBan()">
+        </div>
+        <div class="form-group">
+            <label>Nhập số tiền lời mong muốn</label>
+            <input type="number" id="loi-gb" placeholder="Lợi nhuận mong muốn..." oninput="tinhGiaBan()">
+        </div>
+        <div class="form-group">
+            <label>Chọn tỉ lệ thuế</label>
+            <select id="thue-gb" onchange="handleTaxSelect('gb')">
+                <option value="0.015">1.5%</option>
+                <option value="0.045">4.5%</option>
+                <option value="0.07">7%</option>
+                <option value="0.1">10%</option>
+                <option value="custom">-- Khác (Tự nhập %) --</option>
+            </select>
+            <div id="custom-gb" class="custom-tax">
+                <input type="number" id="custom-val-gb" placeholder="Nhập % thuế..." oninput="tinhGiaBan()">
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="color: var(--red-viettel); font-weight: 900;">GIÁ BÁN NIÊM YẾT</label>
+            <input type="text" id="res-gb" class="result-box" readonly placeholder="0 VNĐ">
+        </div>
+    </div>
+
+    <div id="thue-nop" class="tool-section">
+        <h2>TÍNH THUẾ PHẢI NỘP</h2>
+        <div class="form-group">
+            <label>Tổng doanh thu</label>
+            <input type="number" id="dt-tn" placeholder="Tổng tiền đã bán được..." oninput="tinhThueNop()">
+        </div>
+        <div class="form-group">
+            <label>Tỉ lệ thuế (%)</label>
+            <select id="thue-tn" onchange="handleTaxSelect('tn')">
+                <option value="0.015">1.5% (Hộ kinh doanh)</option>
+                <option value="0.045">4.5%</option>
+                <option value="0.07">7%</option>
+                <option value="0.1">10% (VAT)</option>
+                <option value="custom">-- Khác (Tự nhập %) --</option>
+            </select>
+            <div id="custom-tn" class="custom-tax">
+                <input type="number" id="custom-val-tn" placeholder="Nhập % thuế..." oninput="tinhThueNop()">
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="color: var(--red-viettel); font-weight: 900;">THUẾ PHẢI NỘP</label>
+            <input type="text" id="res-tn" class="result-box" readonly placeholder="0 VNĐ">
+        </div>
+    </div>
+
+    <div id="baogia" class="tool-section">
+        <h2 class="table-title">BẢNG BÁO GIÁ THIẾT BỊ POS</h2>
+        <div class="form-group">
+            <table class="banggia">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>SẢN PHẨM</th>
+                <th>THÔNG SỐ</th>
+                <th>GIÁ NIÊM YẾT</th>
+                <th>BẢO HÀNH</th>
+                <th>HÌNH ẢNH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="STT">1</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-tinh-tien-cam-ung-window-cpos-602---man-hinh-15-6-inch---may-moi---LZ4WrTS1qCrc4vrXEwr6y8" 
+                        target="_blank" 
+                        class="product-link">
+                        Máy Pos Window CPOS 602<br></a>
+                <span class="sub-name">
+                        Màn hình HD 1366*768</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Màn Hình: Cảm ứng 15.6 inch<br>
+                    CPU: Core i5 - 3th<br>
+                    Ram: 8G | Rom: 128G<br>
+                    HĐH: Window 10
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">6.850.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/26dd1255-bc88-4e3a-ad33-fe0f4b9c5d36.png" alt="POS 602" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">2</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-pos-cam-ung-cpos-a10-pro-android---ram-4gb-49gfJBY3zVmxZVpiUL8LFx" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy POS Cảm Ứng CPOS A10 Pro<br></a>
+                    <span class="sub-name">
+                        ( Phiên bản 4G / 3 2G )<br>
+                        Màn hình FHD 1980*1080</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Màn Hình : Cảm ứng 15.6 inch<br>
+                    ( FHD 1980*1080 )<br>
+                    CPU : RK3566<br>
+                    Ram : 4G Rom : 32G<br>
+                    HĐH : Android 11<br>
+                    Tích hợp : Wifi + Blutoot + loa
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">6.550.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/da31864c-a514-4718-83e2-76cc5fe7b7d2.png" alt="CPOS A10" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">3</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-pos-cam-ung-window-cpos-603---man-hinh-15-6-inch-fhd-44LYCgXhGpkp4Z7BF8vfWA" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy Pos Window CPOS 603<br></a>
+                    <span class="sub-name">(Màn hình FHD 1980*1080)</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Màn Hình : Cảm ứng 15.6 inch<br>
+                    ( FHD 1980*1080 )<br>
+                    CPU : Core i5 - 4th<br>
+                    Ram : 8G Rom : 128G<br>
+                    HĐH : Window 10<br>
+                    Tích hợp : Wifi + bluetooth + loa nhỏ
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">7.950.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/1baa780b-4617-4e9e-a890-871bff5be6b4.png" alt="POS 603" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">4</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-pos-cam-ung-window-cpos-603---2-man-hinh---new----the-he-4--WZvUpm3uhgmxoUs3mQVQax" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy Pos Window CPOS 603 2 màn hình<br></a>
+                    <span class="sub-name">
+                        Màn hình FHD 1980*1080<br>
+                        ( 2 Màn 1 5.6" + 1 1.6 " )</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Màn Hình : 2 màn cảm ứng 15.6 inch<br>
+                    ( FHD 1980*1080 )<br>
+                    CPU : Core i5 - 4th<br>
+                    Ram : 8G Rom : 128G<br>
+                    HĐH : Window 10<br>
+                    Tích hợp : Wifi + bluetooth + loa nhỏ
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">9.150.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/b1117636-9dc1-49c2-b08e-2ea9f97ade13.png" alt="POS 603 Dual" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">5</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-in-hoa-don-gpos-g302--usb---lan-model-2025--M2kpyu1q4MroFoopdfghem" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy in hoá đơn GPOS G302<br></a>
+                    <span class="sub-name">( Nâng cao )</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Kết nối : USB & LAN<br>
+                    Tốc độ in : 230mm/s<br>
+                    Tự động cắt giấy
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">1.250.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/e27a694b-e4f3-4899-869b-60294e2c031c.png" alt="GPOS G302" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">6</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-in-tem-ma-vach-pdit-pd304--usb---lan--T81Jc4swqaWYADDSqW8FNG" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy in tem mã vạch<br></a>
+                    <span class="sub-name">
+                        PDIT 304<br>
+                        ( Nâng cao )</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Kết nối : USB + LAN<br>
+                    Tốc độ in : 130mm/s<br>
+                    Căn khổ tự động
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">1.350.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/3064bb81-9c0c-4aef-9d95-1ff0e29679e1.jpg" alt="PDIT 304" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">7</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-quet-ma-vach-imarcone-mc-9103-GMiBzYY4dEPgTKcbsUxUqY" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy quét mã vạch iMarcone MC-9103<br></a>
+                    <span class="sub-name">(siêu nhạy)</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Kết nối : USB<br>
+                    Tốc độ : 2.500 Scan / S<br>
+                    ( Tự động đọc mã siêu nhạy )<br>
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">1.550.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/bd4d6ea5-b419-4fe0-b495-8f10cf3158f9.jpg" alt="MC-9103" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">8</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/may-doc-ma-vach-syble-xb-6240--new-2025-2d--Ezh9Mrm97Caw7wHzna1TRf" 
+                        target="_blank" 
+                        class="product-link">
+                    Máy đọc mã vạch Syble XB-6240<br></a>
+                    <span class="sub-name">(New 2025)</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    Kết nối : USB<br>
+                    ( Quét mã vạch nhạy hơn<br>
+                    + QR Code)
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">890.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/c9ad25c3-748b-446e-9347-cea5e4e7ef56.png" alt="Syble XB 6240" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">9</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/ngan-keo-dung-tien-lon-10-kep-4ZqY3ahF46MrHSd9Rj575G" 
+                        target="_blank" 
+                        class="product-link">
+                    Ngăn kéo đựng tiền lớn 10 kẹp<br></a>
+                    <span class="sub-name">(....)</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    ......
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">850.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">12 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/29004281-0205-49b7-ab1b-6f4e3d27ad35.jpg" alt="ngan keo" class="img-product">
+                </td>
+            </tr>
+            <tr>
+                <td data-label="STT">10</td>
+                <td data-label="SẢN PHẨM" class="product-name">
+                    <a href="https://cpos.tendoo.net/products/giay-in-nhiet-k80-45-Sdv4GMikZnismFAF7yo5Wb" 
+                        target="_blank" 
+                        class="product-link">
+                    Giấy in bill máy in nhiệt<br></a>
+                    <span class="sub-name">(Khổ K80*45)</span></td>
+                <td data-label="THÔNG SỐ" class="specs">
+                    ...
+                </td>
+                <td data-label="GIÁ NIÊM YẾT" class="gia">4.000 VNĐ</td>
+                <td data-label="BẢO HÀNH">0 Tháng</td>
+                <td data-label="HÌNH ẢNH">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/f5613dbe-3261-4cb4-a520-d5d0430bd7f3.jpg" alt="Giay in" class="img-product">
+                </td>
+            </tr>
+
+
+
+
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+    <div class="promo-box">
+        <div class="promo-header">LIÊN KẾT - HỖ TRỢ</div>
+        <div class="links-grid">
+            <a href="https://seller.tendoo.vn/" class="link-btn">Quản lý bán hàng Tendoo</a>
+            <a href="https://vinvoice.viettel.vn/" class="link-btn">Phát hành HĐĐT Sinvoice </a>
+            <a href="https://hoadondientu.gdt.gov.vn/" class="link-btn" style="grid-column: span 2; background: #444;">Tra cứu HĐ đầu vào</a>
+            <a href="https://cpos.tendoo.net/" class="link-btn" style="grid-column: span 2; background: #444;">Báo giá Máy In - Máy POS</a>
+            <a href="https://zalo.me/g/fqshfn900" class="link-btn btn-zalo">Tham Gia Group Zalo Hỗ Trợ</a>
+        </div>
+    </div>
+
+    <div class="contact-box">
+        <h3>DỊCH VỤ CUNG CẤP</h3>
+        <div class="service-text"><b>
+            • Máy bán hàng, máy in bill - in tem, máy quét mã vạch, tủ đựng tiền.<br>
+            • Phần mềm quản lý bán hàng, phần mềm kế toán, chữ ký số, hoá đơn điện tử.<br>
+            • Dịch vụ kế toán trọn gói theo yêu cầu.<br></b>
+            • Ngoài ra còn có nhiều dịch vụ giải pháp như: Voice Brandname, dịch vụ chữ ký số CA,Giải pháp chữ ký số từ xa , chữ ký số cá nhân , Gia hạn chữ ký số (Usb Token),Hợp đồng điện tử – vContract Viettel,  gói cước 4G Viettel , MOBILE SIP Trunking Viettel, Hộp đen ô tô, Giám Sát Hành Trình, dịch vụ chống trộm xe máy và giám sát thông minh cho xe máy Smart Motor, Camera giám sát hành trình, dịch vụ cáp quang Viettel, hóa đơn điện tử Viettel, tem vé điện tử…chứng thư số đấu thầu, Cloud Server Viettel, dịch vụ VPS<br>
+        </div>
+        <div class="contact-info">
+            <a  class="contact-in" href="tel:0393906086">Phương:03939 060 86</a>
+            <a  class="contact-in" href="tel:0868838242">Trung : 0868 838 242</a>
+            <a  class="contact-in" href="tel:0396413824">Long: 0396 413 824</a>
+            <a  class="contact-in" href="tel:0962168440">Ms.Trân: 0962 168 440</a>
+        </div>
+        <div class="address">Địa chỉ: VP Viettel Tân Phú,Xã Tân Phú, Tỉnh Đồng Nai (gần bến xe Tân Phú)</div>
+
+    <div class="download-content">
+        <div class="app-section">
+            <p class="app-title">TẢI APP TENDOO</p>
+            <div class="logo-group">
+                <a href="https://apps.apple.com/vn/app/tendoo/id6744569634" class="store-link">
+                    <img src="https://cdn.sobanhang.com/finan-prd/20962f85-88f9-49d9-938b-964e83ba11c3/image/9d751109-65d3-46a2-8a16-b5e21f5998db.png" class="store-img">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.viettel.tendoo" class="store-link">
+                    <img src="https://cdn.sobanhang.com/finan-prd/20962f85-88f9-49d9-938b-964e83ba11c3/image/92737d66-2233-4bd7-a0f2-9f91eeb3c41a.png" class="store-img">
+                </a>
+            </div>
+        </div>
+
+        <div class="app-section separator">
+            <p class="app-title">TẢI APP SINVOICE</p>
+            <div class="logo-group">
+                <a href="https://apps.apple.com/vn/app/id6754704207" class="store-link">
+                    <img src="https://cdn.sobanhang.com/finan-prd/20962f85-88f9-49d9-938b-964e83ba11c3/image/9d751109-65d3-46a2-8a16-b5e21f5998db.png" class="store-img">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.viettel.sinvoicemobile" class="store-link">
+                    <img src="https://cdn.sobanhang.com/finan-prd/20962f85-88f9-49d9-938b-964e83ba11c3/image/92737d66-2233-4bd7-a0f2-9f91eeb3c41a.png" class="store-img">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact-fixed">
+    <a href="https://zalo.me/g/fqshfn900" target="_blank" class="contact-icon pulsezalo">
+        <img src="https://canpos.vn/wp-content/plugins/button-contact-vr/img/zalo.png" alt="Zalo" class="fas fa-phone-alt">
+    </a>
+    
+    <a href="tel:0393906086" target="_blank" class="contact-icon pulsephone">
+        <img src="https://canpos.vn/wp-content/plugins/button-contact-vr/img/phone.png" alt="Zalo" class="fas fa-phone-alt">
+    </a>
+</div>
+<script>
+    // Tab tuỳ chọn
+    function showTool(toolId, element) {
+    window.scrollTo({
+        top: 0, 
+        behavior: 'smooth'
+    });
+    document.querySelectorAll('.tool-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById(toolId).classList.add('active');
+    element.classList.add('active');
+}
+
+    // Nhập thuế tùy chỉnh
+    function handleTaxSelect(prefix) {
+        const select = document.getElementById(`thue-${prefix}`);
+        const custom = document.getElementById(`custom-${prefix}`);
+        custom.style.display = (select.value === 'custom') ? 'block' : 'none';
+        if (prefix === 'gb') tinhGiaBan(); else tinhThueNop();
+    }
+
+    // Tính Giá Bán
+    function tinhGiaBan() {
+        const x = parseFloat(document.getElementById('von-gb').value) || 0;
+        const y = parseFloat(document.getElementById('loi-gb').value) || 0;
+        const select = document.getElementById('thue-gb').value;
+        let t = (select === 'custom') ? (parseFloat(document.getElementById('custom-val-gb').value) || 0) / 100 : parseFloat(select);
+
+        const res = document.getElementById('res-gb');
+        if ((x > 0 || y > 0) && t < 1) {
+            res.value = Math.round((x + y) / (1 - t)).toLocaleString('vi-VN') + " VNĐ";
+        } else res.value = "";
+    }
+
+    // Tính Thuế Phải Nộp
+    function tinhThueNop() {
+        const dt = parseFloat(document.getElementById('dt-tn').value) || 0;
+        const select = document.getElementById('thue-tn').value;
+        let t = (select === 'custom') ? (parseFloat(document.getElementById('custom-val-tn').value) || 0) / 100 : parseFloat(select);
+
+        const res = document.getElementById('res-tn');
+        if (dt > 0) {
+            res.value = Math.round(dt * t).toLocaleString('vi-VN') + " VNĐ";
+        } else res.value = "";
+    }
+</script>
+
+<script>
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('flower-petal');
+        const size = Math.random() * 10 + 5 + 'px';
+        petal.style.width = size;
+        petal.style.height = size;
+        petal.style.left = Math.random() * 100 + 'vw';
+        const duration = Math.random() * 5 + 3 + 's';
+        petal.style.animationDuration = duration;
+        petal.style.opacity = Math.random();
+        document.body.appendChild(petal);
+        setTimeout(() => {
+            petal.remove();
+        }, parseFloat(duration) * 1000);
+    }
+    setInterval(createPetal, 300);
+</script>
+
+</body>
+</html>

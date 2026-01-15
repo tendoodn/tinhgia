@@ -118,9 +118,10 @@
 <div class="cherry-blossom-container" id="blossoms"></div>
 
 <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('tab1', this)">ĐỊNH GIÁ</button>
-    <button class="tab-btn" onclick="switchTab('tab2', this)">THUẾ 2026</button>
-    <button class="tab-btn" onclick="switchTab('tab3', this)">MÁY POS</button>
+    <button class="tab-btn active" onclick="switchTab('tab1', this)">ĐỊNH GIÁ NIÊM YẾT</button>
+    <button class="tab-btn" onclick="switchTab('tab2', this)">TỈNH THỬ THUẾ</button>
+    <button class="tab-btn" onclick="switchTab('tab3', this)">GIÁ MÁY POS</button>
+    <button class="tab-btn" onclick="switchTab('tab4', this)">DỊCH VỤ KẾ TOÁN</button>
 </div>
 
 <div class="container">
@@ -133,10 +134,10 @@
             <input type="number" id="y_val" class="form-control" placeholder="0" oninput="calcPrice()">
             <label>Tỉ lệ thuế ngành (t)</label>
             <select id="t_select" class="form-control" onchange="toggleT()">
-                <option value="0.015">Bán lẻ (1.5%)</option>
-                <option value="0.045">Sản xuất (4.5%)</option>
-                <option value="0.07">Dịch vụ (7%)</option>
-                <option value="0.1">Ăn uống (10%)</option>
+                <option value="0.015">Phân phối, cung cấp hàng hóa (1.5%)</option>
+                <option value="0.045">Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu (4.5%)</option>
+                <option value="0.07">Dịch vụ, xây dựng không bao thầu nguyên vật liệu (7%)</option>
+                <option value="0.03">Hoạt động kinh doanh khác (3%)</option>
                 <option value="custom">Tự nhập %</option>
             </select>
             <input type="number" id="t_custom" class="form-control" style="display:none" placeholder="Nhập số %" oninput="calcPrice()">
@@ -156,11 +157,16 @@
                     <input type="number" id="tax_a" class="form-control" value="600000000" oninput="calcTax()">
                 </div>
                 <div>
-                    <label>Nhóm ngành (b)</label>
+                    <label>
+                        <img loading="lazy" decoding="async" width="19" height="19" src="https://www.misaeshop.vn/mshopkeeper/images/tax-tool/ic-input-2.svg" alt="icon" class="lazyloaded" data-ll-status="loaded">
+                        Chọn ngành nghề 
+                        <span class="required">*</span>
+                    </label>
                     <select id="tax_b" class="form-control" onchange="toggleB()">
-                        <option value="0.01|0.005">Bán lẻ (1.5%)</option>
-                        <option value="0.03|0.015">Sản xuất (4.5%)</option>
-                        <option value="0.05|0.02">Dịch vụ (7%)</option>
+                        <option value="0.01|0.005">Phân phối, cung cấp hàng hóa (1.5%)</option>
+                        <option value="0.03|0.015">Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu (4.5%)</option>
+                        <option value="0.05|0.02">Dịch vụ, xây dựng không bao thầu nguyên vật liệu (7%)</option>
+                        <option value="0.02|0.01">Hoạt động kinh doanh khác (3%)</option>
                         <option value="custom">Tự nhập (GTGT|TNCN)</option>
                     </select>
                 </div>
@@ -222,21 +228,47 @@
         <div class="pos-grid">
             <div class="pos-item" onclick="openPos('Sunmi V2 PRO', ['https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg', 'https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg'])">
                 <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">602</div>
                 <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
             </div>
             <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
                 <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Tendoo P2 Smart</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Tendoo P2 Smart</div>
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">602 dual</div>
                 <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
             </div>
-            div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
                 <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Tendoo P2 Smart</div>
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">603</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">603 dual</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">in bill</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">in mã</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">quét cầm tay</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">quét để bàn</div>
+                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
+            </div>
+            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
+                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">giấy in</div>
                 <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
             </div>
         </div>

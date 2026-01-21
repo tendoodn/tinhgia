@@ -6,6 +6,17 @@
     <title>Tendoo A2.3 - Tài Chính & POS 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="https://seller.tendoo.vn/favicon.ico">
+<link rel="shortcut icon" href="https://seller.tendoo.vn/favicon.ico">
+
+<link rel="apple-touch-icon" href="https://seller.tendoo.vn/favicon.ico">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tendoo POS">
+<meta name="msapplication-TileImage" content="https://seller.tendoo.vn/favicon.ico">
+<meta name="msapplication-TileColor" content="#ee002e">
+<meta name="theme-color" content="#ee002e">
     <style>
         :root { --primary: #ee002d; --bg: #f4f6f8; --white: #ffffff; --text: #212529; --gray: #6c757d; --green: #28a745; --purple: #6f42c1; --red-light: #fff5f5; --blue-light: #f0f4ff; }
         
@@ -100,6 +111,165 @@
     display: block;    /* Chuyển về dạng khối để có thể dùng margin */
     margin: 0 auto;    /* Căn giữa ảnh theo chiều ngang */
 }
+/* Swiper Custom */
+.swiper-pagination-bullet-active { background: var(--primary) !important; }
+.swiper-slide img { user-select: none; pointer-events: none; }
+/*hoa dơn*/
+.add-cart-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.add-cart-btn:hover {
+    background: #c20025;
+    transform: scale(1.05);
+}
+.add-cart-btn:active {
+    transform: scale(0.95);
+}
+/*ke toan*/
+/* Banner Kế toán */
+.accountant-banner {
+    width: 100%;
+    height: 300px; /* Máy tính */
+    background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1000&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* Lớp phủ làm nổi bật chữ */
+.banner-overlay {
+    background: linear-gradient(to right, rgba(238, 0, 46, 0.8), rgba(0, 0, 0, 0.3));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.banner-text h2 { color: white; font-size: 1.8rem; margin: 0; }
+.banner-text p { color: #fecaca; margin: 10px 0; }
+.banner-badge { background: white; color: var(--primary); display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; }
+
+/* Grid bảng giá */
+.ketoan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.ketoan-card {
+    background: white;
+    border: 1px solid #eee;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    position: relative;
+}
+
+.ketoan-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.ketoan-card.featured { border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(238,0,46,0.1); }
+.ketoan-card h4 { margin: 0 0 15px; font-size: 1.1rem; }
+.ketoan-card .price { font-size: 1.6rem; font-weight: 900; color: var(--primary); margin-bottom: 20px; }
+.ketoan-card .price span { font-size: 0.9rem; color: #64748b; }
+.ketoan-card ul { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; height: 120px; }
+.ketoan-card li { font-size: 0.85rem; margin-bottom: 10px; color: #475569; }
+.ketoan-card li i { color: #22c55e; margin-right: 8px; }
+
+.ketoan-card button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ketoan-card.featured button { background: var(--primary); color: white; }
+
+/* Mobile */
+@media (max-width: 600px) {
+    .accountant-banner { height: 180px; }
+    .banner-overlay { padding: 0 20px; }
+    .banner-text h2 { font-size: 1.2rem; }
+    .banner-text p { font-size: 0.8rem; }
+}
+/*lua ga*/
+.order-notification {
+    position: fixed;
+    bottom: 20px;
+    left: -400px; /* Bắt đầu ẩn bên trái */
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 320px;
+    border-left: 4px solid var(--primary);
+}
+
+.order-notification.show { left: 20px; }
+
+.notif-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.notif-title { font-size: 0.85rem; font-weight: bold; color: #333; }
+.notif-desc { font-size: 0.8rem; color: #64748b; margin: 2px 0; }
+.notif-time { font-size: 0.7rem; color: #94a3b8; }
+
+.notif-close {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    z-index: 100;
+}
+.slider-nav:hover { background: #fff; color: var(--primary); }
     </style>
 </head>
 <body>
@@ -109,7 +279,7 @@
 <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('tab1', this)">ĐỊNH GIÁ</button>
     <button class="tab-btn" onclick="switchTab('tab2', this)">TÍNH THUẾ</button>
-    <button class="tab-btn" onclick="switchTab('tab3', this)">BÁO GIÁ POS</button>
+    <button class="tab-btn" onclick="switchTab('tab3', this)">BÁO GIÁ</button>
     <button class="tab-btn" onclick="switchTab('tab4', this)">KẾ TOÁN</button>
 </div>
 
@@ -213,124 +383,271 @@
 
     <div id="tab3" class="tab-content">
          <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">Phí khởi tạo hồ sơ lần đầu thu 500.000đ (chỉ thu một lần duy nhất)</h2></center>
-        <div class="sub-tabs">
+       <div class="sub-tabs">
             <button class="sub-tab-btn active" onclick="switchSubTab('sub_hardware', this)">MÁY POS</button>
             <button class="sub-tab-btn" onclick="switchSubTab('sub_software', this)">PHẦN MỀM</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">GÓI HOÁ ĐƠN</button>
-        </div>
+            <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">HOÁ ĐƠN</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">VCONTRACT</button>
+    </div>
         
         <div id="sub_hardware" class="sub-tab-content">
             <div class="pos-grid">
-                <div class="pos-item" onclick="openPos('Sunmi V2 PRO', ['https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg', 'https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg'])">
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
                 <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">602</div>
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
                 <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">602 dual</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">603</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">603 dual</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">in bill</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">in mã</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Tendoo P2 Smart', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">quét cầm tay</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Máy quét để bàn', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy quét để bàn</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
-            <div class="pos-item" onclick="openPos('Giấy in nhiệt K80*45', ['https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png', 'https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png'])">
-                <img src="https://img.vnpay.vn/vnpay-pos-merchant-website/image-3-1627376711319.png">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Giấy in nhiệt K80*45</div>
-                <div style="color:var(--primary); font-weight:800;">3.890.000đ</div>
-            </div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                </div>
+                
+            
             </div>
         </div>
 
         <div id="sub_software" class="sub-tab-content" style="display:none">
             <div class="pos-grid">
-                <div class="pos-item" onclick="openPos('Tendoo-Quản lý bán hàng', ['https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg'])">
-                    <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                    <div style="font-size:0.8rem; font-weight:bold; margin-top:8px;">Tendoo-Quản lý bán hàng</div>
-                    <div style="color:var(--primary); font-weight:800;">785.000 đ/năm</div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
                 </div>
-                <div class="pos-item" onclick="openPos('Chữ ký số Viettel HSM', ['https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg'])">
-                    <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                    <div style="font-size:0.8rem; font-weight:bold; margin-top:8px;">Chữ ký số Viettel HSM</div>
-                    <div style="color:var(--primary); font-weight:800;">421.000 đ/năm</div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
                 </div>
-                <div class="pos-item" onclick="openPos('Phần mềm kế toán', ['https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg'])">
-                    <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                    <div style="font-size:0.8rem; font-weight:bold; margin-top:8px;">Phần mềm kế toán</div>
-                    <div style="color:var(--primary); font-weight:800;">750.000 đ/năm</div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Sunmi V2 PRO', 
+                    price: 3450000,
+                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
+                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    })">
+                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
+                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
+                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
                 </div>
             </div>
         </div>
 
-        <div id="sub_hoadon" class="sub-tab-content" style="display:none">
-            <div class="card">
-            <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">HOÁ ĐƠN KHỞI TẠO TỪ MÁY TÍNH TIỀN</h2></center>
-                <table class="table-invoice">
-                    <thead>
-                        <tr>
-                            <th>Số tờ</th>
-                            <th>Đơn giá (Chưa VAT)</th>
-                            <th>Thành tiền (Chưa VAT)</th>
-                            <th>Tổng thanh toán (Sau VAT)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>300 tờ</td><td>650 đ</td><td>195.000 đ</td><td style="color:var(--primary); font-weight:bold;">214.500 đ</td></tr>
-                        <tr><td>500 tờ</td><td>550 đ</td><td>275.000 đ</td><td style="color:var(--primary); font-weight:bold;">302.500 đ</td></tr>
-                        <tr><td>1.000 tờ</td><td>450 đ</td><td>450.000 đ</td><td style="color:var(--primary); font-weight:bold;">495.000 đ</td></tr>
-                        <tr><td>2.000 tờ</td><td>400 đ</td><td>800.000 đ</td><td style="color:var(--primary); font-weight:bold;">880.000 đ</td></tr>
-                    </tbody>
-                </table>
-                <br>
-            <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">HOÁ ĐƠN ĐẦU VÀO</h2></center>
+       
+            
+             
 
-                <table class="table-invoice">
-                    <thead>
-                        <tr>
-                            <th>Số tờ</th>
-                            <th>Đơn giá (Chưa VAT)</th>
-                            <th>Thành tiền (Chưa VAT)</th>
-                            <th>Tổng thanh toán (Sau VAT)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>300 tờ</td><td>650 đ</td><td>195.000 đ</td><td style="color:var(--primary); font-weight:bold;">214.500 đ</td></tr>
-                        <tr><td>500 tờ</td><td>550 đ</td><td>275.000 đ</td><td style="color:var(--primary); font-weight:bold;">302.500 đ</td></tr>
-                        <tr><td>1.000 tờ</td><td>450 đ</td><td>450.000 đ</td><td style="color:var(--primary); font-weight:bold;">495.000 đ</td></tr>
-                        <tr><td>2.000 tờ</td><td>400 đ</td><td>800.000 đ</td><td style="color:var(--primary); font-weight:bold;">880.000 đ</td></tr>
-                    </tbody>
-                </table>
+                <div id="sub_hoadon" class="sub-tab-content" style="display:none">
+                    <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">HOÁ ĐƠN KHỞI TẠO TỪ MÁY TÍNH TIỀN</h2></center>
+    <div class="card">
+        <table class="table-invoice">
+            <thead>
+                <tr>
+                    <th>Số tờ</th>
+                    <th>Thành tiền (Sau VAT)</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>300 tờ</td>
+                    <td style="color:var(--primary); font-weight:bold;">214.500 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
+                </tr>
+                <tr>
+                    <td>500 tờ</td>
+                    <td style="color:var(--primary); font-weight:bold;">302.500 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 500 tờ', 302500)">+ Giỏ hàng</button></td>
+                </tr>
+                <tr>
+                    <td>1.000 tờ</td>
+                    <td style="color:var(--primary); font-weight:bold;">495.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 1.000 tờ', 495000)">+ Giỏ hàng</button></td>
+                </tr>
+                <tr>
+                    <td>2.000 tờ</td>
+                    <td style="color:var(--primary); font-weight:bold;">880.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 2.000 tờ', 880000)">+ Giỏ hàng</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="sub_vcontract" class="sub-tab-content" style="display:none">
+    <div class="card" style="margin-top: 15px;">
+        <div style="background: #e0f2fe; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #0284c7;">
+            <h4 style="margin:0; color:#0369a1;"><i class="fas fa-file-signature"></i> Hợp đồng điện tử vContract</h4>
+            <p style="font-size: 0.8rem; color: #0c4a6e; margin: 5px 0 0;">Ký kết không giấy tờ - Pháp lý vững chắc - Tiết kiệm 90% chi phí.</p>
+        </div>
+
+        <table class="table-invoice">
+            <thead>
+                <tr>
+                    <th>Gói dịch vụ</th>
+                    <th>Giá (Sau VAT)</th>
+                    <th>Chọn mua</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gói vCon 50 (50 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">650.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 50 lượt', 650000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCon 100 (100 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">1.100.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 100 lượt', 1100000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCon 200 (200 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">2.000.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 200 lượt', 2000000)">+ Giỏ</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+            </div>
+        
+
+<div id="tab4" class="tab-content">
+        <div class="accountant-banner">
+        <div class="banner-overlay">
+            <div class="banner-text">
+                <h2>GIẢI PHÁP KẾ TOÁN THUẾ 2026</h2>
+                <p>An tâm kinh doanh - Mọi việc thuế để Tendoo lo</p>
+                <div class="banner-badge">Chuyên nghiệp - Tận tâm - Bảo mật</div>
             </div>
         </div>
     </div>
-<div id="tab4" class="tab-content">
+
+    <div style="padding: 20px;">
+        <h3 style="text-align: center; color: var(--primary); margin-bottom: 25px;">BẢNG GIÁ DỊCH VỤ CHI TIẾT</h3>
+        
+        <div class="ketoan-grid">
+            <div class="ketoan-card">
+                <div class="card-tag">Phổ biến</div>
+                <h4>Khai Thuế Ban Đầu</h4>
+                <div class="price">1.500.000đ</div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Thiết lập hồ sơ thuế</li>
+                    <li><i class="fas fa-check"></i> Đăng ký hóa đơn điện tử</li>
+                    <li><i class="fas fa-check"></i> Mua chữ ký số (Token)</li>
+                </ul>
+                <button onclick="addInvoiceToCart('Gói Khai Thuế Ban Đầu', 1500000)">+ THÊM GIỎ HÀNG</button>
+            </div>
+
+            <div class="ketoan-card featured">
+                <h4>Kế Toán Trọn Gói</h4>
+                <div class="price">500.000đ<span>/tháng</span></div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Báo cáo thuế hàng tháng/quý</li>
+                    <li><i class="fas fa-check"></i> Quyết toán thuế cuối năm</li>
+                    <li><i class="fas fa-check"></i> Đại diện làm việc với cơ quan thuế</li>
+                </ul>
+                <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 500000)">+ THÊM GIỎ HÀNG</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
 
     <img src="https://i.ibb.co/23brjGx6/z7451248947957-91ba6db41c4c5a633b9269cb5ab143ce.jpg" alt="Kế toán siêu cấp vip pro" class="responsive-img">
 </div>
@@ -348,11 +665,68 @@
 </div>
 
 <div id="posModal" class="modal" onclick="closePos()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <div style="padding:20px; text-align:center;">
-            <img id="m_img" src="" style="width:100%; max-height:250px; object-fit:contain; margin-bottom:15px;">
-            <h3 id="m_name" style="margin:0 0 10px; font-size:1.2rem;"></h3>
-            <button onclick="closePos()" style="width:100%; padding:15px; border:none; background:#f1f5f9; border-radius:12px; font-weight:bold; color:#475569; cursor:pointer;">ĐÓNG</button>
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 500px;">
+        <div style="padding:20px;">
+            <div class="swiper mySwiper" style="width: 100%; height: 250px; border-radius:10px; margin-bottom:15px;">
+                <div class="swiper-wrapper" id="m_slider_wrapper"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            
+            <h3 id="m_name" style="margin:10px 0 5px; color:var(--primary);"></h3>
+            <div id="m_price" style="font-weight:900; font-size:1.2rem; margin-bottom:15px;"></div>
+            
+            <div style="background:#f8fafc; padding:15px; border-radius:10px; margin-bottom:20px;">
+                <b style="font-size:0.8rem; color:var(--gray); text-transform:uppercase;">Thông số kỹ thuật:</b>
+                <p id="m_specs" style="font-size:0.85rem; margin:8px 0 0; color:#475569;"></p>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+                <button onclick="addToCart()" style="flex:2; padding:15px; border:none; background:var(--primary); color:white; border-radius:12px; font-weight:bold; cursor:pointer;"><i class="fas fa-cart-plus"></i> THÊM VÀO GIỎ</button>
+                <button onclick="closePos()" style="flex:1; padding:15px; border:none; background:#eee; border-radius:12px; font-weight:bold; color:var(--gray); cursor:pointer;">ĐÓNG</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cart_bubble" onclick="toggleCartModal()" style="position:fixed; bottom:30px; right:20px; width:60px; height:60px; background:var(--primary); border-radius:50%; display:none; align-items:center; justify-content:center; color:white; box-shadow:0 10px 30px rgba(238,0,46,0.4); z-index:999; cursor:pointer;">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart_count" style="position:absolute; top:0; right:0; background:black; font-size:10px; padding:4px 7px; border-radius:50%;">0</span>
+</div>
+
+<div id="cartModal" class="modal" onclick="toggleCartModal()">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-height:85vh; overflow-y:auto; position: relative;">
+        <button onclick="toggleCartModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; z-index: 10;">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div style="padding:25px 20px;">
+            <h3 style="text-align:center; border-bottom:2px solid #f1f5f9; padding-bottom:15px; margin-top: 0;">GIỎ HÀNG CỦA BẠN</h3>
+            
+            <div id="cart_items_list" style="margin:20px 0;"></div>
+            
+            <div id="cart_total_area" style="border-top: 2px dashed #eee; padding-top: 15px;">
+                <div id="cart_total" style="text-align:right; font-weight:900; font-size:1.3rem; color:var(--primary); margin-bottom:20px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 0.75rem; color: var(--gray);">SỐ ĐIỆN THOẠI NHẬN BÁO GIÁ:</label>
+                <input type="text" id="cust_phone" class="form-control" placeholder="Nhập SĐT để Tendoo liên hệ..." style="margin-top:5px;">
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button onclick="sendOrderZalo()" style="width:100%; padding:16px; border:none; background:#0068ff; color:white; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fab fa-whatsapp" style="font-size:1.4rem;"></i> GỬI QUA ZALO 0868.838.242
+                </button>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="toggleCartModal()" style="flex: 1; padding:12px; border:1px solid #ddd; background:white; color:var(--gray); border-radius:10px; font-weight:600; cursor:pointer;">
+                        MUA TIẾP
+                    </button>
+                    <button onclick="clearCart()" style="flex: 1; padding:12px; border:1px solid #fee2e2; background:#fef2f2; color:#ef4444; border-radius:10px; font-weight:600; cursor:pointer;">
+                        XÓA HẾT
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -516,7 +890,6 @@
         
         let subDetail = `
             <div style="margin-top:10px; border: 2px solid #333; padding: 12px; border-radius: 10px; background: #f8fafc;">
-                <div style="font-weight:bold; font-size:0.8rem; margin-bottom:8px; text-align:center; text-transform:uppercase;">BẢNG TỔNG HỢP NĂM</div>
                 <div class="math-row"><span>Tổng doanh thu (a):</span> <span>${fmt(totalRev)}</span></div>
                 <div class="math-row"><span>Doanh thu miễn thuế:</span> <span>${fmt(THRESHOLD)}</span></div>
                 <div class="math-row" style="color:var(--green); font-weight:bold;"><span>DT chịu thuế TNCN (b):</span> <span>${fmt(taxableRevTNCN)}</span></div>
@@ -589,12 +962,165 @@
         // Công thức ngược: Giá bán = (Giá vốn + Lợi nhuận) / (1 - % thuế)
         document.getElementById('p_res').innerText = fmt((t < 1) ? (x + y) / (1 - t) : 0);
     }
+//gio hang
+    let currentProduct = null;
+let cart = [];
+let swiper = null;
 
-    function openPos(name, img) {
-        document.getElementById('m_name').innerText = name;
-        document.getElementById('m_img').src = img;
-        document.getElementById('posModal').style.display = 'flex';
+let currentImages = []; 
+let currentIndex = 0;
+
+function openPos(product) {
+    // Lấy mảng ảnh từ object product, nếu không có thì dùng ảnh mặc định
+    currentImages = product.images || [product.image]; 
+    currentIndex = 0;
+
+    // Đổ dữ liệu vào Modal
+    document.getElementById('modal_product_name').innerText = product.name;
+    document.getElementById('modal_product_price').innerText = product.price.toLocaleString() + 'đ';
+    document.getElementById('modal_product_specs').innerText = product.specs;
+
+    // Cập nhật hiển thị ảnh đầu tiên và trạng thái nút bấm
+    updateSlider();
+
+    // Hiển thị Modal
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function updateSlider() {
+    const imgElement = document.getElementById('modal_product_img');
+    const indexElement = document.getElementById('image_index');
+    
+    // Hiển thị ảnh hiện tại
+    imgElement.src = currentImages[currentIndex];
+    
+    // Cập nhật số thứ tự ảnh (VD: 1/2)
+    if (indexElement) {
+        indexElement.innerText = (currentIndex + 1) + '/' + currentImages.length;
     }
+
+    // Ẩn nút điều hướng nếu chỉ có 1 ảnh
+    const navBtns = document.querySelectorAll('.slider-nav');
+    navBtns.forEach(btn => {
+        btn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+    });
+}
+
+function changeImage(step) {
+    currentIndex += step;
+    // Vòng lặp: nếu quá ảnh cuối thì về ảnh đầu và ngược lại
+    if (currentIndex >= currentImages.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = currentImages.length - 1;
+    updateSlider();
+}
+
+function addToCart() {
+    cart.push(currentProduct);
+    updateCartUI();
+    closePos();
+    alert('Đã thêm ' + currentProduct.name + ' vào giỏ hàng!');
+}
+
+function updateCartUI() {
+    const bubble = document.getElementById('cart_bubble');
+    const list = document.getElementById('cart_items_list');
+    const totalDiv = document.getElementById('cart_total');
+    
+    bubble.style.display = cart.length > 0 ? 'flex' : 'none';
+    document.getElementById('cart_count').innerText = cart.length;
+    
+    if (cart.length === 0) {
+        list.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:20px;">Giỏ hàng trống</div>`;
+        totalDiv.innerText = 'Tổng cộng: 0 đ';
+        return;
+    }
+
+    let total = 0;
+    list.innerHTML = cart.map((item, idx) => {
+        total += item.price;
+        return `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:10px; background:#f8fafc; border-radius:8px;">
+                <div style="flex:1;">
+                    <div style="font-size:0.85rem; font-weight:600; color:#334155;">${item.name}</div>
+                    <div style="font-size:0.8rem; color:var(--primary); font-weight:700;">${fmt(item.price)}</div>
+                </div>
+                <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#cbd5e1; cursor:pointer; padding:5px;">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>`;
+    }).join('');
+    
+    totalDiv.innerText = 'Tổng cộng: ' + fmt(total);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+function toggleCartModal() {
+    const m = document.getElementById('cartModal');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function sendOrderZalo() {
+    const phone = document.getElementById('cust_phone').value;
+    if (!phone) { 
+        alert('Vui lòng nhập Số điện thoại để Tendoo liên hệ hỗ trợ!'); 
+        return; 
+    }
+    
+    // 1. Soạn nội dung tin nhắn có định dạng
+    let message = `🚀 *YÊU CẦU BÁO GIÁ TENDOO 2026*\n`;
+    message += `━━━━━━━━━━━━━━━━━━\n`;
+    message += `📞 SĐT Khách: ${phone}\n`;
+    message += `📦 Đơn hàng gồm:\n`;
+    
+    // Cộng phí khởi tạo 500k nếu chưa có trong giỏ (tùy chọn)
+    cart.forEach((item, i) => {
+        message += `  ${i+1}. ${item.name} (${fmt(item.price)})\n`;
+    });
+    
+    message += `━━━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *TỔNG CỘNG: ${document.getElementById('cart_total').innerText}*`;
+
+    // 2. Logic Sao chép thông minh (Hỗ trợ cả PC và Mobile)
+    const copyToClipboard = (text) => {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                document.execCommand('copy') ? res() : rej();
+                document.body.removeChild(textArea);
+            });
+        }
+    };
+
+    // 3. Thực hiện sao chép và gọi App Zalo
+    copyToClipboard(message).then(() => {
+        alert("✅ Đã sao chép đơn hàng!\n\nƯu tiên mở ứng dụng Zalo... Bạn chỉ cần 'Dán' (Ctrl+V) vào ô chat của Tendoo để gửi đơn.");
+        
+        // Cố gắng gọi giao thức ứng dụng Zalo trực tiếp
+        // chat?phone=... là lệnh gọi thẳng vào cửa sổ chat trên Zalo PC và Mobile
+        window.location.href = "zalo://chat?phone=0868838242";
+
+        // Sau 1.5 giây nếu không thấy phản hồi (máy không cài zalo app), 
+        // sẽ mở link web dự phòng để người dùng quét mã
+        setTimeout(function() {
+            if(document.hasFocus()) {
+                window.open("https://zalo.me/0868838242", '_blank');
+            }
+        }, 1500);
+    });
+}
     function closePos() { document.getElementById('posModal').style.display = 'none'; }
 
     function createPetals() {
@@ -611,6 +1137,197 @@
     }
 
     window.onload = () => { renderIndustryFields(); createPetals(); calcPrice(); };
+
+    function addInvoiceToCart(name, price) {
+    // Tạo đối tượng tương tự sản phẩm POS để giỏ hàng xử lý được
+    const invoiceItem = {
+        name: name,
+        price: price,
+        images: [], // Hóa đơn không cần ảnh slide
+        specs: "Hóa đơn điện tử có mã của Cơ quan Thuế theo Thông tư 78/2021/TT-BTC."
+    };
+    
+    cart.push(invoiceItem);
+    updateCartUI();
+    
+    // Hiệu ứng thông báo nhỏ thay vì dùng alert gây gián đoạn
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.innerText = "Đã thêm!";
+    btn.style.background = "#28a745";
+    
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.background = "";
+    }, 1500);
+}
+function clearCart() {
+    if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?")) {
+        cart = [];
+        updateCartUI();
+        toggleCartModal(); // Tắt giỏ hàng sau khi xóa hết
+    }
+}
+const fakeData = {
+    names: ["Anh Hùng", "Chị Lan", "Anh Minh", "Chú Bảy", "Chị Thảo", "Anh Quốc", "Tiệm Cafe Mộc", "Shop Bella"],
+    cities: ["Đồng Nai", "TP.HCM", "Bình Dương", "Vũng Tàu", "Long An", "Cần Thơ"],
+    products: [
+        { name: "Máy Sunmi V2 PRO", img: "https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" },
+        { name: "Combo Máy in & Phần mềm", img: "https://pos365.vn/storage/app/media/may-in-hoa-don-xprinter-n160ii.jpg" },
+        { name: "Gói 1.000 tờ hóa đơn", img: "https://vnpay.vn/wp-content/uploads/2022/10/invoice-icon.png" },
+        { name: "Máy POS để bàn T2", img: "https://cdn.pico.vn/Product/37841/300_300_may-tinh-tien-sunmi-t2-2-man-hinh-1.jpg" }
+    ]
+};
+
+function showRandomNotif() {
+    const name = fakeData.names[Math.floor(Math.random() * fakeData.names.length)];
+    const city = fakeData.cities[Math.floor(Math.random() * fakeData.cities.length)];
+    const product = fakeData.products[Math.floor(Math.random() * fakeData.products.length)];
+    
+    document.getElementById('notif_title').innerText = `${name} (${city})`;
+    document.getElementById('notif_desc').innerText = `Vừa đặt mua ${product.name}`;
+    document.getElementById('notif_thumb').src = product.img;
+    
+    const notif = document.getElementById('order_notif');
+    notif.classList.add('show');
+    
+    // Tự ẩn sau 6 giây
+    setTimeout(() => {
+        hideNotif();
+    }, 6000);
+}
+
+function hideNotif() {
+    document.getElementById('order_notif').classList.remove('show');
+}
+
+// Bắt đầu chạy sau 5 giây khi web tải xong
+setTimeout(() => {
+    showRandomNotif();
+    // Sau đó cứ mỗi 20 giây lại hiện một cái mới
+    setInterval(showRandomNotif, 20000);
+}, 5000);
+
+// Tự động cuộn lên đầu khi nhấn vào bất kỳ tab nào
+document.addEventListener('click', function (e) {
+    // Kiểm tra nếu mục được nhấn có class là 'tab-item' hoặc nằm trong thanh điều hướng tab
+    if (e.target.classList.contains('tab-item') || e.target.closest('.tabs')) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Cuộn mượt mà
+        });
+    }
+}, true);
+
+//popup
+let currentImageList = [];
+let currentImgIdx = 0;
+
+function openPos(product) {
+    // 1. Chuẩn bị danh sách ảnh (ưu tiên mảng images, nếu không có lấy image đơn lẻ)
+    currentImageList = product.images || [product.image];
+    currentImgIdx = 0;
+
+    // 2. Đổ dữ liệu vào giao diện
+    document.getElementById('modal_product_name').innerText = product.name;
+    document.getElementById('modal_product_price').innerText = product.price.toLocaleString() + 'đ';
+    document.getElementById('modal_product_specs').innerText = product.specs;
+
+    // 3. Hiển thị ảnh đầu tiên và cập nhật slider
+    updateModalGallery();
+
+    // 4. Gán hành động cho nút thêm vào giỏ
+    document.getElementById('modal_add_btn').onclick = function() {
+        // Gọi hàm addToCart hiện có của bạn
+        if(typeof addToCart === 'function') {
+            addToCart(product.name, product.price, currentImageList[0], product.specs);
+        } else {
+            // Nếu hàm giỏ hàng của bạn tên khác, hãy đổi ở đây
+            alert("Đã thêm " + product.name + " vào giỏ!");
+        }
+        closeModal();
+    };
+
+    // 5. Hiện Modal bằng Flex để căn giữa
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function changeImage(n) {
+    currentImgIdx += n;
+    if (currentImgIdx >= currentImageList.length) currentImgIdx = 0;
+    if (currentImgIdx < 0) currentImgIdx = currentImageList.length - 1;
+    updateModalGallery();
+}
+
+function updateModalGallery() {
+    const imgObj = document.getElementById('modal_product_img');
+    const counter = document.getElementById('image_counter');
+    const btnPrev = document.getElementById('btn_prev');
+    const btnNext = document.getElementById('btn_next');
+
+    imgObj.src = currentImageList[currentImgIdx];
+    counter.innerText = (currentImgIdx + 1) + '/' + currentImageList.length;
+
+    // Ẩn các nút điều hướng nếu chỉ có 1 ảnh cho sạch giao diện
+    const isMultiple = currentImageList.length > 1;
+    btnPrev.style.display = isMultiple ? 'flex' : 'none';
+    btnNext.style.display = isMultiple ? 'flex' : 'none';
+    counter.style.display = isMultiple ? 'block' : 'none';
+}
+
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+// Đóng khi bấm ra ngoài vùng trắng của modal
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
 </script>
+<div id="order_notif" class="order-notification">
+    <div class="notif-img">
+        <img id="notif_thumb" src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" alt="POS">
+    </div>
+    <div class="notif-content">
+        <div id="notif_title" class="notif-title">Anh Hùng (Đồng Nai)</div>
+        <div id="notif_desc" class="notif-desc">Vừa đặt mua máy Sunmi V2 PRO</div>
+        <div class="notif-time">1 phút trước</div>
+    </div>
+    <button class="notif-close" onclick="hideNotif()">×</button>
+</div>
+<div id="productModal" class="modal" style="display:none; position:fixed; z-index:10001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+    <div style="background:#fff; width:95%; max-width:420px; border-radius:20px; position:relative; padding:25px 20px 20px; box-shadow:0 20px 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease;">
+        
+        <div onclick="closeModal()" style="position:absolute; top:12px; right:12px; width:32px; height:32px; background:#f1f5f9; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:22px; color:#64748b; z-index:110;">
+            &times;
+        </div>
+        
+        <div style="position: relative; width: 100%; border-radius: 12px; background: #f8fafc; overflow:hidden; border: 1px solid #f1f5f9;">
+            <img id="modal_product_img" src="" style="width: 100%; height: auto; display: block; min-height: 200px; object-fit: contain;">
+            
+            <button class="slider-nav" onclick="changeImage(-1)" id="btn_prev" style="left: 8px;">&#10094;</button>
+            <button class="slider-nav" onclick="changeImage(1)" id="btn_next" style="right: 8px;">&#10095;</button>
+            
+            <div id="image_counter" style="position: absolute; bottom: 10px; right: 10px; background: rgba(15, 23, 42, 0.7); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">1/1</div>
+        </div>
+
+        <h3 id="modal_product_name" style="margin:15px 0 5px; font-size:1.25rem; color:#1e293b; text-align:center;"></h3>
+        <div id="modal_product_price" style="color:#ee002e; font-size:1.5rem; font-weight:900; margin-bottom:15px; text-align:center;"></div>
+        
+        <div style="text-align:left; background:#f8fafc; padding:15px; border-radius:12px; border:1px solid #f1f5f9;">
+            <div style="font-weight:bold; margin-bottom:8px; font-size:0.85rem; color:#475569; display:flex; align-items:center; gap:5px;">
+                <i class="fas fa-info-circle"></i> CẤU HÌNH CHI TIẾT
+            </div>
+            <div id="modal_product_specs" style="font-size:0.85rem; color:#334155; line-height:1.6;"></div>
+        </div>
+        
+        <button id="modal_add_btn" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(238,0,46,0.3);">
+            THÊM VÀO GIỎ HÀNG
+        </button>
+    </div>
+</div>
 </body>
 </html>

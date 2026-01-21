@@ -541,7 +541,7 @@
                 <tr>
                     <td>300 tờ</td>
                     <td style="color:var(--primary); font-weight:bold;">214.500 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
+                    <td><button class="add-cart-btn" onclick="addGeneralToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
                 </tr>
                 <tr>
                     <td>500 tờ</td>
@@ -1028,12 +1028,7 @@ function changeImage(step) {
     updateSlider();
 }
 
-function addToCart() {
-    cart.push(currentProduct);
-    updateCartUI();
-    closePos();
-    alert('Đã thêm ' + currentProduct.name + ' vào giỏ hàng!');
-}
+
 
 function updateCartUI() {
     const bubble = document.getElementById('cart_bubble');
@@ -1152,17 +1147,7 @@ function sendOrderZalo() {
 
     window.onload = () => { renderIndustryFields(); createPetals(); calcPrice(); };
 
-    function addInvoiceToCart(name, price) {
-    // Tạo đối tượng tương tự sản phẩm POS để giỏ hàng xử lý được
-    const invoiceItem = {
-        name: name,
-        price: price,
-        images: [], // Hóa đơn không cần ảnh slide
-        specs: "Hóa đơn điện tử có mã của Cơ quan Thuế theo Thông tư 78/2021/TT-BTC."
-    };
     
-    cart.push(invoiceItem);
-    updateCartUI();
     
     // Hiệu ứng thông báo nhỏ thay vì dùng alert gây gián đoạn
     const btn = event.target;
@@ -1300,6 +1285,53 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+// Khởi tạo giỏ hàng nếu chưa có
+let cart = JSON.parse(localStorage.getItem('tendoo_cart')) || [];
+
+function addGeneralToCart(name, price, image = '') {
+    // 1. Kiểm tra dữ liệu đầu vào
+    if (!name || !price) return;
+
+    // 2. Tạo đối tượng sản phẩm chuẩn
+    const product = {
+        name: name,
+        price: parseInt(price),
+        image: image || 'https://seller.tendoo.vn/favicon.ico',
+        quantity: 1
+    };
+
+    // 3. Logic thêm vào giỏ (nếu trùng tên thì tăng số lượng)
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push(product);
+    }
+
+    // 4. Lưu vào LocalStorage để không bị mất khi load lại trang
+    localStorage.setItem('tendoo_cart', JSON.stringify(cart));
+
+    // 5. Cập nhật giao diện (Gọi các hàm hiển thị của bạn)
+    if (typeof updateCartUI === 'function') updateCartUI();
+    if (typeof showCartCount === 'function') showCartCount();
+    
+    // 6. Hiệu ứng thông báo nhỏ (thay cho alert gây phiền)
+    console.log("Đã thêm: " + name);
+}
+
+// Hàm này dành riêng cho nút trong Popup
+function addFromModal() {
+    const name = document.getElementById('modal_product_name').innerText;
+    // Lấy giá trị số từ chuỗi (ví dụ "3.450.000đ" -> 3450000)
+    const priceText = document.getElementById('modal_product_price').innerText;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    const image = document.getElementById('modal_product_img').src;
+
+    addGeneralToCart(name, price, image);
+    closeModal();
+}
+
 </script>
 <div id="order_notif" class="order-notification">
     <div class="notif-img">
@@ -1338,9 +1370,10 @@ window.onclick = function(event) {
             <div id="modal_product_specs" style="font-size:0.85rem; color:#334155; line-height:1.6;"></div>
         </div>
         
-        <button id="modal_add_btn" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(238,0,46,0.3);">
-            THÊM VÀO GIỎ HÀNG
-        </button>
+        <button id="modal_add_btn" onclick="addFromModal()" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer;">
+    THÊM VÀO GIỎ HÀNG
+</button>
+
     </div>
 </div>
 </body>

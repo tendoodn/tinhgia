@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tendoo A2.3 - Tài Chính & POS 2026</title>
+    <title>Tendoo Tools - Tài Chính & POS 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="icon" type="image/x-icon" href="https://seller.tendoo.vn/favicon.ico">
@@ -1004,7 +1004,7 @@
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <button onclick="sendOrderZalo()" style="width:100%; padding:16px; border:none; background:#0068ff; color:white; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <i class="fab fa-whatsapp" style="font-size:1.4rem;"></i> GỬI QUA ZALO 0868.838.242
+                    <i class="fab fa-whatsapp" style="font-size:1.4rem;"></i> GỬI QUA ZALO (Dán vào tin nhắn)
                 </button>
                 
                 <div style="display: flex; gap: 10px;">
@@ -1411,58 +1411,58 @@ function sendOrderZalo() {
         return; 
     }
     
-    // 1. Soạn nội dung tin nhắn có định dạng
-    let message = `🚀 *YÊU CẦU BÁO GIÁ TENDOO 2026*\n`;
+    // 1. Soạn nội dung
+    let message = `🚀 *YÊU CẦU ĐƠN HÀNG*\nChào shop, tôi muốn đặt hàng\n`;
     message += `━━━━━━━━━━━━━━━━━━\n`;
-    message += `📞 SĐT Khách: ${phone}\n`;
+    message += `📞 SĐT: ${phone}\n`;
     message += `📦 Đơn hàng gồm:\n`;
     
-    // Cộng phí khởi tạo 500k nếu chưa có trong giỏ (tùy chọn)
     cart.forEach((item, i) => {
         message += `  ${i+1}. ${item.name} (${fmt(item.price)})\n`;
     });
     
     message += `━━━━━━━━━━━━━━━━━━\n`;
-    message += `💰 *TỔNG CỘNG: ${document.getElementById('cart_total').innerText}*`;
+    message += `💰 ${document.getElementById('cart_total').innerText}`;
 
-    // 2. Logic Sao chép thông minh (Hỗ trợ cả PC và Mobile)
-    const copyToClipboard = (text) => {
-        if (navigator.clipboard && window.isSecureContext) {
-            return navigator.clipboard.writeText(text);
-        } else {
-            let textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-999999px";
-            textArea.style.top = "-999999px";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            return new Promise((res, rej) => {
-                document.execCommand('copy') ? res() : rej();
-                document.body.removeChild(textArea);
+    // 2. Thực hiện copy NGAY LẬP TỨC (Dùng textarea để tương thích cao nhất)
+    const textArea = document.createElement("textarea");
+    textArea.value = message;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, 99999); // Hỗ trợ Mobile
+
+    let success = false;
+    try {
+        success = document.execCommand('copy');
+    } catch (err) {
+        success = false;
+    }
+    document.body.removeChild(textArea);
+
+    // 3. Xử lý sau khi copy
+    if (success) {
+        window.location.href = "https://zalo.me/0868838242";
+    } else {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(message).then(() => {
+                window.location.href = "https://zalo.me/0868838242";
             });
+        } else {
+            window.location.href = "https://zalo.me/0868838242";
         }
-    };
-
-    // 3. Thực hiện sao chép và gọi App Zalo
-    copyToClipboard(message).then(() => {
-        alert("✅ Đã sao chép đơn hàng!\n\nƯu tiên mở ứng dụng Zalo... Bạn chỉ cần 'Dán' (Ctrl+V) vào ô chat của Tendoo để gửi đơn.");
-        
-        // Cố gắng gọi giao thức ứng dụng Zalo trực tiếp
-        // chat?phone=... là lệnh gọi thẳng vào cửa sổ chat trên Zalo PC và Mobile
-        window.location.href = "zalo://chat?phone=0868838242";
-
-        // Sau 1.5 giây nếu không thấy phản hồi (máy không cài zalo app), 
-        // sẽ mở link web dự phòng để người dùng quét mã
-        setTimeout(function() {
-            if(document.hasFocus()) {
-                window.open("https://zalo.me/0868838242", '_blank');
-            }
-        }, 1500);
-    });
+    }
+    setTimeout(function() {
+        if(document.hasFocus()) {
+            window.open("https://zalo.me/0868838242", '_blank');
+        }
+    }, 2000);
 }
-    function closePos() { document.getElementById('posModal').style.display = 'none'; }
+
+   function closePos() { document.getElementById('posModal').style.display = 'none'; }
 
     function createPetals() {
         const container = document.getElementById('blossoms');
@@ -1569,13 +1569,7 @@ window.onclick = function(event) {
         closeModal();
     }
 }
-    function sendOrderZalo() {
-    const phone = "0868838242";
-    const zaloUrl = "https://zalo.me/" + phone;
-    setTimeout(function() {
-    window.location.assign(zaloUrl);
-    }, 100);
-}
+   
 </script>
 <div id="order_notif" class="order-notification">
     <div class="notif-img">

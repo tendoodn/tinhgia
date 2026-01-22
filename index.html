@@ -101,7 +101,7 @@
         .service-link:hover { color: #fff; transform: translateX(5px); }
 
         /* TABLE HOADON */
-        .table-invoice { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+        .table-invoice { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 5px; }
         .table-invoice th, .table-invoice td { border: 1px solid #eee; padding: 10px; text-align: center; }
         .table-invoice th { background: #f8fafc; color: var(--gray); }
 
@@ -175,6 +175,33 @@
     text-align: center;
     transition: 0.3s;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các khối lớn trong card */
+}
+
+.ketoan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    width: 100%; /* Chiếm hết chiều rộng để dóng lề */
+    text-align: left; /* Căn chữ lề trái */
+}
+
+.ketoan-card ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.ketoan-card ul li i {
+    color: #28a745; /* Màu xanh cho dấu check */
+    margin-top: 4px;
+    flex-shrink: 0; /* Không cho icon bị bóp méo khi xuống dòng */
 }
 
 .ketoan-card:hover { transform: translateY(-5px); border-color: var(--primary); }
@@ -393,192 +420,365 @@
     </div>
 
     <div id="tab3" class="tab-content">
-        <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">Phí khởi tạo hồ sơ lần đầu thu 500.000đ (chỉ thu một lần duy nhất)</h2></center>
         <div class="sub-tabs">
             <button class="sub-tab-btn active" onclick="switchSubTab('sub_hardware', this)">Máy POS</button>
             <button class="sub-tab-btn" onclick="switchSubTab('sub_software', this)">Phần mềm</button>
             <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">Hoá đơn</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">HĐ vCONTRACT</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_internet', this)">Internet Viettel</button>
-            
+            <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract Viettel</button>
         </div>
-        
+        <div style="text-align: center;">
+                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                        PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ (CHỈ THU MỘT LẦN)
+                    </h2>
+        </div>
         <div id="sub_hardware" class="sub-tab-content">
             <div class="pos-grid">
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'CPOS V201 1 màn hình', 
+                    price: 6850000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/26dd1255-bc88-4e3a-ad33-fe0f4b9c5d36.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/452ed7f5-8f6e-4918-aa6e-391aed49345e.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/1ba3047a-ec27-4321-86cd-dd8ad2897be6.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/3439ea54-e280-4865-9d42-82f260973c21.png',],
+                    specs: 'Bảo hành: 12 Tháng Bộ nhớ lưu trữ: SSD Msata 128G Ram: 8G Chíp xử lý: Intel® Core™ i5-3210M 3M bộ nhớ đệm, tối đa 3,10 GHz Màn Hình: Cảm ứng 15.6 inch độ phân giải ( 1366 x 768 ) Điện áp sử dụng: 12V-5A Hệ điều hành : Window 10 Tương thích phần mềm: CUKCUK, Kiotviet, Ocha, POS365, POSAPP, Sapo…'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/26dd1255-bc88-4e3a-ad33-fe0f4b9c5d36.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy POS V201 1 màn hình</div>
+                    <div style="color:var(--primary); font-weight:800;">6.850.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'CPOS V202 2 màn hình', 
+                    price: 7850000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/29d1c90e-5120-41ff-b8f7-6e5b0c273231.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/64638680-6fd0-4346-be49-fcbed2fb334e.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/650c261a-2eea-45ee-ac1b-684c30df50fe.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/1900c274-a867-4375-b244-2e742b8bb05c.png',],
+                    specs: 'Bảo hành: 12 Tháng Bộ nhớ lưu trữ: SSD Msata 128G Ram: 8G Chíp xử lý: Intel® Core™ i5-3210M 3M bộ nhớ đệm, tối đa 3,10 GHz Màn Hình:2 Màn cảm ứng 15.6 inch độ phân giải ( 1366 x 768 ) Điện áp sử dụng: 12V-5A Hệ điều hành : Window 10 Tương thích phần mềm: CUKCUK, Kiotviet, Ocha, POS365, POSAPP, Sapo…'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/29d1c90e-5120-41ff-b8f7-6e5b0c273231.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy POS V202 2 màn hình</div>
+                    <div style="color:var(--primary); font-weight:800;">7.850.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'CPOS V301 1 màn hình', 
+                    price: 7950000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/1baa780b-4617-4e9e-a890-871bff5be6b4.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/5525e0b4-5824-441f-833b-58e9a483fc8f.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/0f3a1ec1-b835-41e8-823c-5a82d7ef8531.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/646bb042-6804-456e-b14b-9a6542d41477.png',],
+                    specs: 'Bảo hành: 12 Tháng Bộ nhớ lưu trữ: SSD Msata 128G Ram: 8G Chíp xử lý:Intel® Core™ i5 – 4Th ( Thế hệ 4 ) Màn Hình:Màn hình cảm ứng 15.6 inch độ phân giải FHD ( 1980 x 1080 ) Điện áp sử dụng:12V-5A Hệ điều hành :Window 10 Tương thích phần mềm:CUKCUK, Kiotviet, Ocha, POS365, POSAPP, Sapo…'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/1baa780b-4617-4e9e-a890-871bff5be6b4.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy POS V301 (New 2025)</div>
+                    <div style="color:var(--primary); font-weight:800;">7.950.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'CPOS V302 2 màn hình', 
+                    price: 9150000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/672e6222-511d-4ab8-a21c-ccac69452c63.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/b6687a80-fdc4-49d8-9043-3fdaf0b86297.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/b1117636-9dc1-49c2-b08e-2ea9f97ade13.png',],
+                    specs: 'Bảo hành:12 Tháng Bộ nhớ lưu trữ:SSD Msata 128GRam:8G Chíp xử lý:Intel® Core™ i5 – 4Th ( Thế hệ 4 ) Màn Hình:Màn hình chính cảm ứng 15.6 inch độ phân giải FHD ( 1980 x 1080 ) Màn hình phụ 11.6 inch Điện áp sử dụng:12V-5A Hệ điều hành :Window 10 Tương thích phần mềm:CUKCUK, Kiotviet, Ocha, POS365, POSAPP, Sapo…'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/672e6222-511d-4ab8-a21c-ccac69452c63.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy POS V302 2 màn hình</div>
+                    <div style="color:var(--primary); font-weight:800;">9.150.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Máy in hoá đơn GPOS G302', 
+                    price: 1250000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/f816b643-32df-40db-b4c1-3a76ac0e2755.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/bb3177cd-de2d-4832-85be-05513990e43d.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/c72b6331-5e1b-4130-ba35-6203f228c069.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/e27a694b-e4f3-4899-869b-60294e2c031c.png',],
+                    specs: 'Bảo hành:12 Tháng với máy - Adapter và Đầu In Nhiệt 06 Tháng, Không bảo hành Trầy Xước đầu in Xuất xứ:China Khổ giấy:K80 - 80mm Cắt giấy tự động:Có Tốc độ in:200mm/s Chức năng:In báo chế biến nhà bếp, In Bill tính tiền cho shop, Siêu Thị, Nhà Sách, Các cửa hàng điện thoại Công Nghệ In:In nhiệt trực tiếp Cổng Kết Nối:LAN(Ethernet), USB Trọng lượng:0,95KG'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/e27a694b-e4f3-4899-869b-60294e2c031c.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy in hoá đơn GPOS G302</div>
+                    <div style="color:var(--primary); font-weight:800;">1.250.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Máy in tem mã vạch PDIT PD304', 
+                    price: 1350000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/3064bb81-9c0c-4aef-9d95-1ff0e29679e1.jpg',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/ba35564c-d157-48e2-8e24-b982c53e8912.jpg',],
+                    specs: 'Thông số kỹ thuật chính: Công nghệ in: In nhiệt trực tiếp (Direct Thermal) Độ phân giải: 203 DPI Cổng kết nối: USB 2.0, LAN (Ethernet) Tốc độ in: Lên đến 127 mm/s Chiều rộng in tối đa: 108 mm Chiều dài in tối đa: 1.000 mm (tùy phần mềm thiết kế) Đường kính cuộn giấy: Tối đa 127 mm Kích thước lõi giấy: 25 mm hoặc 40 mm Bộ nhớ: 4MB Flash, 8MB SDRAM Kích thước máy: 206mm (D) x 157mm (W) x 134.5mm (H) Ngôn ngữ máy in hỗ trợ: TSPL, ZPL, EPL Loại giấy hỗ trợ: Tem nhãn nhiệt, giấy decal nhiệt, tem vận đơn Trọng lượng: Khoảng 1.42kg Bảo hành: 12 tháng'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/3064bb81-9c0c-4aef-9d95-1ff0e29679e1.jpg">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy in tem mã vạch PDIT PD304</div>
+                    <div style="color:var(--primary); font-weight:800;">1.350.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Máy đọc mã vạch Syble XB-6240', 
+                    price: 890000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/c9ad25c3-748b-446e-9347-cea5e4e7ef56.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/09e63f25-5c50-4fb4-879e-f593bb02c71e.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/fe675dcb-e97d-4a10-9701-f5b61ce7d52d.png',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/3fd6f562-9518-45d2-af37-c205b423cd56.png',],
+                    specs: 'Bảo hành:12 Tháng Xuất xứ:China Loại Máy:1D, 2D, Cầm tay Chức năng:Quét mã Qrcode, Quét mã vạch siêu thị, shop, nhà sách Cổng Kết Nối:USB Độ phân giải:CMOD 640x480 Pin Lưu Điện:Không Phù Hợp Mô Hình:Các doanh nghiệp nhỏ - chủ bán hàng shopee, Shop, Nhà Sách, Siêu Thị '
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/c9ad25c3-748b-446e-9347-cea5e4e7ef56.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy đọc mã vạch Syble XB-6240</div>
+                    <div style="color:var(--primary); font-weight:800;">890.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Máy quét mã vạch iMarcone MC-9103', 
+                    price: 1550000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/bd4d6ea5-b419-4fe0-b495-8f10cf3158f9.jpg',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/c28db009-a3fa-42dd-819f-bb9c6d1103c0.jpg',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/238227b0-c3f2-4ae8-87c1-9b3c7346edc0.jpg',
+                             'https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/69d2bdaf-486f-4d36-86ed-1487b2d340dd.jpg',],
+                    specs: 'Bảo hành:12 Tháng Xuất xứ:China Loại Máy:2D Chức năng:Quét mã căn cước công dân, Quét mã Qrcode, Quét mã vạch siêu thị, shop, nhà sách Cổng Kết Nối:USB Độ phân giải:CMOD 640x480 ㅤ'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/bd4d6ea5-b419-4fe0-b495-8f10cf3158f9.jpg">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Máy quét mã vạch iMarcone MC-9103</div>
+                    <div style="color:var(--primary); font-weight:800;">1.550.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Bộ 16 thẻ rung oder tự phục vụ CPOS C16', 
+                    price: 1850000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/93bfb6c3-5cd2-4aeb-a980-40e21b0ca073.png',
+                             'https://canpos.vn/wp-content/uploads/2025/08/Ban-sao-cua-WIFI-6-49-768x768.png',
+                             'https://canpos.vn/wp-content/uploads/2025/08/Ban-sao-cua-WIFI-6-50-768x768.png',
+                             'https://canpos.vn/wp-content/uploads/2025/08/Ban-sao-cua-WIFI-6-48-768x768.png',],
+                    specs: 'Bộ 16 thẻ rung oder tự phục vụ CPOS C16 – THẾ HỆ MỚIRUNG VÀ KÊU TO HƠN – PHÍM GỌI BẰNG CẢM ỨNG————————————————-THIẾT KẾ THẺ RUNG TỰ PHỤC VỤ– Thẻ rung tự phục vụ với thiết kế mỏng, tiện lợi dễ dàng sử dung với đế sạc tích hợp thiết bị phát trung tâm, mà lại đem đến sự thoải mái cho trải nghiệm của khách hàng.– Sóng thẻ có thể bao trùm 1000m2 ( Nếu không có vật cản )– Thẻ được mã hoá công nghệ cao, dùng nhiều bộ cùng lúc mà không bị nhiễu;– Mỗi bộ chân cắm được 16 chiếc thẻ, tối đa có thể lên tới 99 chiếc thẻ;– Thiết bị sử dụng dễ dàng với các phím gọi và màn hình hiển thị trên bộ chân cắm.'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/93bfb6c3-5cd2-4aeb-a980-40e21b0ca073.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Bộ 16 thẻ rung oder tự phục vụ CPOS C16</div>
+                    <div style="color:var(--primary); font-weight:800;">1.850.000đ</div>
                 </div>
-                
-            
+                <div class="pos-item" onclick="openPos({
+                    name: 'Ngăn kéo đựng tiền lớn 10 kẹp', 
+                    price: 850000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/29004281-0205-49b7-ab1b-6f4e3d27ad35.jpg',],
+                    specs: 'Ngăn kéo đựng tiền lớn 10 kẹp'
+                    })">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/29004281-0205-49b7-ab1b-6f4e3d27ad35.jpg">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Ngăn kéo đựng tiền lớn 10 kẹp</div>
+                    <div style="color:var(--primary); font-weight:800;">850.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Giấy in nhiệt K80*45', 
+                    price: 4000,
+                    images: ['https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/f5613dbe-3261-4cb4-a520-d5d0430bd7f3.jpg',],
+                    specs: 'Mua ít nhất 50 SP để được hưởng giá sỉ 3.500đ'
+                    })">
+                    <img src="https://static.tendoo.vn/finan-prd/cd73a06a-99c6-49dd-adf4-677b88dec256/image/f5613dbe-3261-4cb4-a520-d5d0430bd7f3.jpg">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Giấy in nhiệt K80*45</div>
+                    <div style="color:var(--primary); font-weight:800;">4.000đ/cuộn</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Loa Tingee thông báo chuyển khoản', 
+                    price: 500000,
+                    images: ['https://tingee.vn/wp-content/uploads/2024/07/tingee-box-3s_optimized-768x768.png',],
+                    specs: 'Loa thông báo chuyển khoản'
+                    })">
+                    <img src="https://tingee.vn/wp-content/uploads/2024/07/tingee-box-3s_optimized-768x768.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Loa Tingee thông báo chuyển khoản</div>
+                    <div style="color:var(--primary); font-weight:800;">500.000đ/cuộn</div>
+                </div>
             </div>
         </div>
 
         <div id="sub_software" class="sub-tab-content" style="display:none">
             <div class="pos-grid">
-                
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Phần mềm Tendoo', 
+                    price: 785000,
+                    images: ['https://sme.viettel.vn/media/sme/icon/tendo_logo_update.jpeg'],
+                    specs: 'Tendoo là dịch vụ được đánh giá là một giải pháp quản lý bán hàng phù hợp với nhiều loại hình kinh doanh tại Việt Nam, từ cửa hàng nhỏ lẻ đến các chuỗi cửa hàng. Dịch vụ này được thiết kế để đáp ứng nhu cầu quản lý bán hàng đa dạng của các cửa hàng và doanh nghiệp thuộc nhiều lĩnh vực khác nhau.'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://sme.viettel.vn/media/sme/icon/tendo_logo_update.jpeg">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Phần mềm Tendoo</div>
+                    <div style="color:var(--primary); font-weight:800;">785.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V4 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Viettel CA - Chữ ký số Viettel', 
+                    price: 421000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA - Chữ ký số Viettel</div>
+                    <div style="color:var(--primary); font-weight:800;">421.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V3 PRO', 
-                    price: 3450000,
-                    images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
-                    specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
+                    name: 'Phần mềm kế toán Easybook', 
+                    price: 700000,
+                    images: ['https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSNcH9JBcXuaU8MMqccN8FSLyuRWEHcAjSQ-Qtq-FK_ViZZQCE3'],
+                    specs: 'Phần mềm kế toán chuyên nghiệp'
                     })">
-                <img src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg">
-                <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Sunmi V2 PRO</div>
-                <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSNcH9JBcXuaU8MMqccN8FSLyuRWEHcAjSQ-Qtq-FK_ViZZQCE3">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Phần mềm kế toán Easybook</div>
+                    <div style="color:var(--primary); font-weight:800;">700.000đ</div>
                 </div>
             </div>
         </div>
 
-       
-            
-             
+        <div id="sub_hoadon" class="sub-tab-content" style="display:none">
+            <div class="card">
+                <table class="table-invoice">
+                    <div style="text-align: center;">
+                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                        HOÁ ĐƠN TỪ MÁY TÍNH TIỀN
+                    </h2>
+                    </div>
+                    <thead>
+                    <tr>
+                        <th>HĐMTT</th>
+                        <th>Đơn giá<br>(Chưa VAT)</th>
+                        <th>Thành tiền <br>(Sau VAT)</th>
+                        <th>Giỏ hàng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>500 tờ</td>
+                        <td>560đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">308.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 500 tờ', 308000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>1.000 tờ</td>
+                        <td>460đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">506.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 1.000 tờ', 506000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>2.000 tờ</td>
+                        <td>400đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">880.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 2.000 tờ', 880000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>3.000 tờ</td>
+                        <td>3500đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.155.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 3.000 tờ', 1155000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>5.000 tờ</td>
+                        <td>260đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.430.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 5.000 tờ', 1430000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>7.000 tờ</td>
+                        <td>240đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.848.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 7.000 tờ', 1848000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>10.000 tờ</td>
+                        <td>200đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">2.200.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 10.000 tờ', 2200000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>20.000 tờ</td>
+                        <td>150đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">3.300.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 20.000 tờ', 3300000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>50.000 tờ</td>
+                        <td>100đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">5.500.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 500.000 tờ', 5500000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>100.000 tờ</td>
+                        <td>85đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">9.350.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 100.000 tờ', 9350000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>200.000 tờ</td>
+                        <td>560đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">12.100.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 200.000 tờ', 12100000)">+ Thêm</button></td>
+                    </tr>
+                    </tbody>
+                    </table>
+            </div>
 
-                <div id="sub_hoadon" class="sub-tab-content" style="display:none">
-                    <center><h2 style="font-size: 1.2rem; margin: 0 0 15px; color:red">HOÁ ĐƠN KHỞI TẠO TỪ MÁY TÍNH TIỀN</h2></center>
-    <div class="card">
-        <table class="table-invoice">
-            <thead>
-                <tr>
-                    <th>Số tờ</th>
-                    <th>Thành tiền (Sau VAT)</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>300 tờ</td>
-                    <td style="color:var(--primary); font-weight:bold;">214.500 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
-                </tr>
-                <tr>
-                    <td>500 tờ</td>
-                    <td style="color:var(--primary); font-weight:bold;">302.500 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 500 tờ', 302500)">+ Giỏ hàng</button></td>
-                </tr>
-                <tr>
-                    <td>1.000 tờ</td>
-                    <td style="color:var(--primary); font-weight:bold;">495.000 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 1.000 tờ', 495000)">+ Giỏ hàng</button></td>
-                </tr>
-                <tr>
-                    <td>2.000 tờ</td>
-                    <td style="color:var(--primary); font-weight:bold;">880.000 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 2.000 tờ', 880000)">+ Giỏ hàng</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div id="sub_vcontract" class="sub-tab-content" style="display:none">
-    <div class="card" style="margin-top: 15px;">
-        <div style="background: #e0f2fe; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #0284c7;">
+            <div class="card">
+                <table class="table-invoice">
+                <div style="text-align: center;">
+                <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                    HOÁ ĐƠN ĐẦU VÀO ĐỒNG BỘ TCT
+                </h2>
+                </div>
+                <thead>
+                    <tr>
+                        <th>HĐĐV</th>
+                        <th>Đơn giá<br>(Chưa VAT)</th>
+                        <th>Thành tiền <br>(Sau VAT)</th>
+                        <th>Giỏ hàng</th> 
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <div style="grid-column: 1 / -1; margin: 20px 0;">
+                        <div style="background: linear-gradient(90deg, #ee002e, #ff5f6d); color: white; padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; box-shadow: 0 4px 15px rgba(238,0,46,0.2);">
+                        <i class="fas fa-star"></i> LƯU Ý: HOÁ ĐƠN ĐẦU VÀO CÓ THỜI HẠN 1 NĂM, GIA HẠN 194.000/NĂM <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <tr>
+                        <td>300 tờ</td>
+                        <td>450đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">340.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 300 tờ', 340000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>500 tờ</td>
+                        <td>440đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">432.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 500 tờ', 432000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>1.000 tờ</td>
+                        <td>400đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">626.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 1.000 tờ', 626000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>2.000 tờ</td>
+                        <td>385đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.026.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 2.000 tờ', 1026000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>3.000 tờ</td>
+                        <td>370đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.393.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 3.000 tờ', 1393000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>5.000 tờ</td>
+                        <td>350đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">2.084.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 5.000 tờ', 2084000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>10.000 tờ</td>
+                        <td>320đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">3.650.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào 10.000 tờ', 3650000)">+ Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>>11.000 tờ</td>
+                        <td>295-320đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">Số HDDV x Số tờ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào trên 11.000 tờ', 0)">Liên hệ</button></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="sub_vcontract" class="sub-tab-content" style="display:none">
+            <div class="card" style="margin-top: 15px;">
+            <div style="background: #e0f2fe; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #0284c7;">
             <h4 style="margin:0; color:#0369a1;"><i class="fas fa-file-signature"></i> Hợp đồng điện tử vContract</h4>
             <p style="font-size: 0.8rem; color: #0c4a6e; margin: 5px 0 0;">Ký kết không giấy tờ - Pháp lý vững chắc - Tiết kiệm 90% chi phí.</p>
         </div>
@@ -593,19 +793,39 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Gói vCon 50 (50 lượt ký)</td>
-                    <td style="color:var(--primary); font-weight:bold;">650.000 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 50 lượt', 650000)">+ Giỏ</button></td>
+                    <td>Gói vCont_20 <br>(20 lượt ký/dùng thử 30 ngày)</td>
+                    <td style="color:var(--primary); font-weight:bold;">0 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 20 lượt', 0)">+ Giỏ</button></td>
                 </tr>
                 <tr>
-                    <td>Gói vCon 100 (100 lượt ký)</td>
-                    <td style="color:var(--primary); font-weight:bold;">1.100.000 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 100 lượt', 1100000)">+ Giỏ</button></td>
+                    <td>Gói vCont_100 (100 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">1.913.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 100 lượt', 1913000)">+ Giỏ</button></td>
                 </tr>
                 <tr>
-                    <td>Gói vCon 200 (200 lượt ký)</td>
-                    <td style="color:var(--primary); font-weight:bold;">2.000.000 đ</td>
-                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 200 lượt', 2000000)">+ Giỏ</button></td>
+                    <td>Gói vCont_500 (500 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">5.345.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 500 lượt', 5345000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCont_1000 (1.000 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">9.250.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 1.000 lượt', 9250000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCont_5000 (5.000 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">38.400.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 5.000 lượt', 38400000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCont_10K (10.000 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">73.600.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 10.000 lượt', 73600000)">+ Giỏ</button></td>
+                </tr>
+                <tr>
+                    <td>Gói vCont_100K (100.000 lượt ký)</td>
+                    <td style="color:var(--primary); font-weight:bold;">705.000.000 đ</td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 100.000 lượt', 705000000)">+ Giỏ</button></td>
                 </tr>
             </tbody>
         </table>
@@ -634,28 +854,69 @@
         <h3 style="text-align: center; color: var(--primary); margin-bottom: 25px;">BẢNG GIÁ DỊCH VỤ CHI TIẾT</h3>
         
         <div class="ketoan-grid">
-            <div class="ketoan-card">
-                <div class="card-tag">Phổ biến</div>
-                <h4>Khai Thuế Ban Đầu</h4>
-                <div class="price">1.500.000đ</div>
-                <ul>
-                    <li><i class="fas fa-check"></i> Thiết lập hồ sơ thuế</li>
-                    <li><i class="fas fa-check"></i> Đăng ký hóa đơn điện tử</li>
-                    <li><i class="fas fa-check"></i> Mua chữ ký số (Token)</li>
-                </ul>
-                <button onclick="addInvoiceToCart('Gói Khai Thuế Ban Đầu', 1500000)">+ THÊM GIỎ HÀNG</button>
-            </div>
+            <div class="ketoan-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
+    <h4 style="margin-bottom: 10px; color: #1e293b;">BÁO CÁO THEO QUÝ</h4>
+    
+    <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
+        500.000đ - 800.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
+    </div>
 
-            <div class="ketoan-card featured">
-                <h4>Kế Toán Trọn Gói</h4>
-                <div class="price">500.000đ<span>/tháng</span></div>
-                <ul>
-                    <li><i class="fas fa-check"></i> Báo cáo thuế hàng tháng/quý</li>
-                    <li><i class="fas fa-check"></i> Quyết toán thuế cuối năm</li>
-                    <li><i class="fas fa-check"></i> Đại diện làm việc với cơ quan thuế</li>
-                </ul>
-                <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 500000)">+ THÊM GIỎ HÀNG</button>
-            </div>
+    <ul>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span> Thiết lập hồ sơ thuế</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Đăng ký hóa đơn điện tử</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Nộp báo cáo theo quý</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
+        </li>
+    </ul>
+
+    <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
+            style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
+        + THÊM GIỎ HÀNG
+    </button>
+</div>
+
+            <div class="ketoan-card featured" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
+    <h4 style="margin-bottom: 10px; color: #1e293b;">Kế Toán Trọn Gói</h4>
+    
+    <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
+        700.000đ - 1.200.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
+    </div>
+
+    <ul>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Báo cáo thuế hàng tháng/quý</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Xuất hoá đơn theo yêu cầu</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Hỗ trợ, tư vấn các vấn đề liên quan</span>
+        </li>
+        <li>
+            <i class="fas fa-check"></i> 
+            <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
+        </li>
+    </ul>
+
+    <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
+            style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
+        + THÊM GIỎ HÀNG
+    </button>
+</div>
 
         </div>
     </div>
@@ -790,7 +1051,7 @@
         for(let i=1; i<=count; i++) {
             container.innerHTML += `
                 <div style="border: 1px solid #eee; border-radius:12px; padding:15px; margin-bottom:15px; background:#fff;">
-                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; margin-bottom:10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom:10px;">
                         <div>
                             <label>Ngành kinh doanh ${i}</label>
                             <select id="type_${i}" class="form-control" style="margin-bottom:5px;" onchange="toggleIndustryCustom(${i})">
@@ -951,16 +1212,70 @@
         const advice = document.getElementById('advice_text');
         const tag = document.getElementById('tag_nhom');
 
-        if (totalRev < 100000000) {
-            tag.innerText = "NHÓM: DƯỚI 100 TRIỆU";
-            advice.innerHTML = `<b>Trạng thái:</b> Miễn 100% thuế GTGT & TNCN. <br> <b>Hành động:</b> Chỉ cần nộp thuế môn bài (nếu có) và quản lý sổ sách đơn giản.`;
-        } else if (totalRev <= 500000000) {
-            tag.innerText = "NHÓM: 100TR - 500TR";
-            advice.innerHTML = `<b>Trạng thái:</b> Chỉ nộp thuế GTGT, Miễn thuế TNCN (dưới 500tr). <br> <b>Hành động:</b> Cần đăng ký mã số thuế cá nhân kinh doanh và kê khai doanh thu định kỳ.`;
+        if (totalRev < 500000000) {
+            tag.innerText = "NHÓM: DƯỚI 500 TRIỆU";
+            advice.innerHTML = `<b>Hộ, cá nhân kinh doanh được MIỄN THUẾ.</b>
+                                Theo quy định, hộ kinh doanh miễn thuế vẫn cần kê khai doanh thu 1 – 2 lần trong năm.
+                                <br><b>Hóa đơn điện tử</b>
+                                Không bắt buộc
+                                <br><b>Sổ sách kế toán</b>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S1a-HKD
+                                </a>
+                                <br><b>Tài khoản ngân hàng</b>
+                                Không bắt buộc
+                                <br><b>Kỳ kê khai:</b> 1 lần/năm
+                                <br><b>Hạn kê khai:</b>
+                                Khai doanh thu 1 lần trước 31/1 năm sau
+                                <br>Nếu vượt ngưỡng 6 tháng đầu, kê khai chậm nhất vào ngày 30/06 năm sau`;
+        } else if (totalRev <= 3000000000) {
+            tag.innerText = "NHÓM: 500TR - 3 TỈ";
+            advice.innerHTML = `<b>Hóa đơn điện tử</b>
+                                < 1 tỷ: Không bắt buộc, nhưng khuyến khích dùng
+                                <br>≥ 1 tỷ: Bắt buộc sử dụng hóa đơn điện tử
+                                <br>≥ 1 tỷ và có hoạt động bán hàng/dịch vụ trực tiếp (bán lẻ,..): 
+                                <br>Bắt buộc dùng hóa đơn điện tử máy tính tiền (Theo Nghị định 70/2025/NĐ-CP)
+                                <br><b>Sổ sách kế toán</b>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S2a-HKD
+                                </a>
+                                <br><b>Tài khoản ngân hàng</b>
+                                Bắt buộc mở tài khoản riêng phục vụ kinh doanh
+                                <br><b>Kỳ kê khai:</b>Theo quý
+                                <br><b>Hạn kê khai:</b>
+                                Thuế GTGT & Thuế TNCN: Theo Quý
+                                <br>Nếu chọn phương pháp tính thuế theo thu nhập (Doanh thu - Chi phí): Phải nộp thuế TNCN trước 31/1 năm sau
+                                <br>Hạn nộp hồ sơ khai thuế theo Quý muộn nhất: Quý 1 là ngày 30/04/năm; Quý 2 là 31/7/năm; Quý 3 là ngày 31/10/năm; Quý 4 là ngày 31/1/(năm+1)`;
         } else {
-            tag.innerText = "NHÓM: TRÊN 500 TRIỆU";
-            advice.innerHTML = `<b>Trạng thái:</b> Bắt buộc kê khai đầy đủ GTGT & TNCN. <br> 
-            <b>Hành động:</b> Sử dụng hóa đơn điện tử, máy tính tiền POS kết nối cơ quan thuế. Thực hiện 7 loại sổ sách theo TT 88/2021.`;
+            tag.innerText = "NHÓM: TRÊN 3 TỈ";
+            advice.innerHTML = `<b>Hóa đơn điện tử</b>
+                                Bắt buộc
+                                <br><b>Sổ sách kế toán</b>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S2b-HKD
+                                </a><br>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S2c-HKD
+                                </a><br>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S2d-HKD
+                                </a><br>
+                                <a href="https://docs.google.com/spreadsheets/d/1wqz2V-3uQlUAq9FtV1ZAOVszp49zlFsA/export?format=xlsx" 
+                                style="color: #22c55e; font-weight: bold; text-decoration: none; margin-left: 5px;">
+                                <i class="fas fa-file-download"></i>Mẫu số S2e-HKD
+                                </a>
+                                <br><b>Tài khoản ngân hàng</b>
+                                Bắt buộc mở tài khoản riêng phục vụ kinh doanh
+                                <br><b>Kỳ kê khai:</b>Theo quý
+                                <br><b>Hạn kê khai:</b>
+                                Thuế GTGT & Thuế TNCN: Theo Quý
+                                <br>Nếu chọn phương pháp tính thuế theo thu nhập (Doanh thu - Chi phí): Phải nộp thuế TNCN trước 31/1 năm sau
+                                <br>Hạn nộp hồ sơ khai thuế theo Quý muộn nhất: Quý 1 là ngày 30/04/năm; Quý 2 là 31/7/năm; Quý 3 là ngày 31/10/năm; Quý 4 là ngày 31/1/(năm+1)`;
         }
     }
 
@@ -979,8 +1294,6 @@
 //gio hang
 let cart = [];
 let swiper = null;
-// Đảm bảo các biến này nằm ngoài hàm (toàn cục)
-// Đảm bảo các biến này được khai báo ở đầu thẻ <script>
 let currentProduct = null;
 let currentImages = [];
 let currentIndex = 0;
@@ -1196,10 +1509,10 @@ const fakeData = {
     names: ["Anh Hùng", "Chị Lan", "Anh Minh", "Chú Bảy", "Chị Thảo", "Anh Quốc", "Tiệm Cafe Mộc", "Shop Bella"],
     cities: ["Đồng Nai", "TP.HCM", "Bình Dương", "Vũng Tàu", "Long An", "Cần Thơ"],
     products: [
-        { name: "Máy Sunmi V2 PRO", img: "https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" },
-        { name: "Combo Máy in & Phần mềm", img: "https://pos365.vn/storage/app/media/may-in-hoa-don-xprinter-n160ii.jpg" },
-        { name: "Gói 1.000 tờ hóa đơn", img: "https://vnpay.vn/wp-content/uploads/2022/10/invoice-icon.png" },
-        { name: "Máy POS để bàn T2", img: "https://cdn.pico.vn/Product/37841/300_300_may-tinh-tien-sunmi-t2-2-man-hinh-1.jpg" }
+        { name: "Máy POS V302", img: "https://marketplace.canva.com/hXHoU/MAFEx5hXHoU/1/tl/canva-salary-sell-money-business-buy-hand-icon-MAFEx5hXHoU.png" },
+        { name: "Combo Máy in & Phần mềm", img: "https://marketplace.canva.com/hXHoU/MAFEx5hXHoU/1/tl/canva-salary-sell-money-business-buy-hand-icon-MAFEx5hXHoU.png" },
+        { name: "Gói 1.000 tờ hóa đơn", img: "https://marketplace.canva.com/hXHoU/MAFEx5hXHoU/1/tl/canva-salary-sell-money-business-buy-hand-icon-MAFEx5hXHoU.png" },
+        { name: "Gói 5.000 hoá đơn đầu vào", img: "https://marketplace.canva.com/hXHoU/MAFEx5hXHoU/1/tl/canva-salary-sell-money-business-buy-hand-icon-MAFEx5hXHoU.png" }
     ]
 };
 
@@ -1259,7 +1572,7 @@ window.onclick = function(event) {
     </div>
     <div class="notif-content">
         <div id="notif_title" class="notif-title">Anh Hùng (Đồng Nai)</div>
-        <div id="notif_desc" class="notif-desc">Vừa đặt mua máy Sunmi V2 PRO</div>
+        <div id="notif_desc" class="notif-desc">Vừa đặt mua máy CPOS V302</div>
         <div class="notif-time">1 phút trước</div>
     </div>
     <button class="notif-close" onclick="hideNotif()">×</button>

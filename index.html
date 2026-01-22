@@ -252,24 +252,35 @@
     to { opacity: 1; transform: scale(1); }
 }
 
+/* Đảm bảo các nút điều hướng nằm trên cùng và bấm được */
 .slider-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.9);
     border: none;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    z-index: 100;
+    cursor: pointer;
+    font-size: 20px;
+    color: #1e293b;
+    z-index: 9999; /* Số cực lớn để luôn nằm trên ảnh */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
 }
-.slider-nav:hover { background: #fff; color: var(--primary); }
+
+.slider-nav:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+.slider-nav:hover {
+    background: #ee002e;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -489,6 +500,7 @@
 
         <div id="sub_software" class="sub-tab-content" style="display:none">
             <div class="pos-grid">
+                
                 <div class="pos-item" onclick="openPos({
                     name: 'Sunmi V2 PRO', 
                     price: 3450000,
@@ -500,7 +512,7 @@
                 <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
+                    name: 'Sunmi V4 PRO', 
                     price: 3450000,
                     images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
                     specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
@@ -510,7 +522,7 @@
                 <div style="color:var(--primary); font-weight:800;">3.450.000đ</div>
                 </div>
                 <div class="pos-item" onclick="openPos({
-                    name: 'Sunmi V2 PRO', 
+                    name: 'Sunmi V3 PRO', 
                     price: 3450000,
                     images: ['https://viettelnet.com.vn/wp-content/uploads/2024/04/lap-mang-viettel-5.jpg', 'https://htmart.vn/images/companies/1/Sunmi-V2-Pro-HTmart-4.jpg'],
                     specs: 'Màn hình: 5.99 inch HD+; Hệ điều hành: Android 7.1; RAM: 2GB; Kết nối: 4G/WiFi/Bluetooth.'
@@ -541,7 +553,7 @@
                 <tr>
                     <td>300 tờ</td>
                     <td style="color:var(--primary); font-weight:bold;">214.500 đ</td>
-                    <td><button class="add-cart-btn" onclick="addGeneralToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
+                    <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 300 tờ', 214500)">+ Giỏ hàng</button></td>
                 </tr>
                 <tr>
                     <td>500 tờ</td>
@@ -733,12 +745,7 @@
 
 <script>
     const fmt = (n) => new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' đ';
-    const THRESHOLD = 500000000;
-
-    // Khởi tạo giỏ hàng duy nhất
-    let cart = JSON.parse(localStorage.getItem('tendoo_cart')) || [];
-    let currentImageList = [];
-    let currentImgIdx = 0;
+    const THRESHOLD = 500000000; // Ngưỡng miễn thuế TNCN 2026
 
     document.addEventListener('input', function(e) {
         if(e.target.classList.contains('currency-input')) {
@@ -752,154 +759,20 @@
         return el ? parseFloat(el.value.replace(/\./g, "")) || 0 : 0;
     }
 
-    // --- HỆ THỐNG TAB ---
     function switchTab(id, b) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-        const target = document.getElementById(id);
-        if(target) target.classList.add('active'); 
-        if(b) b.classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.getElementById(id).classList.add('active'); 
+        b.classList.add('active');
     }
 
     function switchSubTab(id, b) {
         document.querySelectorAll('.sub-tab-content').forEach(c => c.style.display = 'none');
         document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-        const target = document.getElementById(id);
-        if(target) target.style.display = 'block';
-        if(b) b.classList.add('active');
+        document.getElementById(id).style.display = 'block';
+        b.classList.add('active');
     }
 
-    // --- GIỎ HÀNG TRUNG TÂM ---
-    function addToCart(name, price, image = '') {
-        const product = {
-            name: name,
-            price: parseInt(price),
-            image: image || 'https://seller.tendoo.vn/favicon.ico',
-            quantity: 1
-        };
-
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push(product);
-        }
-
-        localStorage.setItem('tendoo_cart', JSON.stringify(cart));
-        updateCartUI();
-        
-        // Hiệu ứng nút bấm nếu có event
-        if(window.event && window.event.target.tagName === 'BUTTON') {
-            const btn = window.event.target;
-            const oldText = btn.innerText;
-            btn.innerText = "Đã thêm!";
-            setTimeout(() => btn.innerText = oldText, 1000);
-        } else {
-            alert("Đã thêm " + name + " vào giỏ!");
-        }
-    }
-
-    function updateCartUI() {
-        const bubble = document.getElementById('cart_bubble');
-        const countEl = document.getElementById('cart_count');
-        const list = document.getElementById('cart_items_list');
-        const totalDiv = document.getElementById('cart_total');
-        
-        if(countEl) countEl.innerText = cart.length;
-        if(bubble) bubble.style.display = cart.length > 0 ? 'flex' : 'none';
-        
-        if (!list) return;
-
-        if (cart.length === 0) {
-            list.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:20px;">Giỏ hàng trống</div>`;
-            totalDiv.innerText = 'Tổng cộng: 0 đ';
-            return;
-        }
-
-        let total = 0;
-        list.innerHTML = cart.map((item, idx) => {
-            total += (item.price * item.quantity);
-            return `
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:10px; background:#f8fafc; border-radius:8px;">
-                    <div style="flex:1;">
-                        <div style="font-size:0.85rem; font-weight:600; color:#334155;">${item.name} x${item.quantity}</div>
-                        <div style="font-size:0.8rem; color:#ee002e; font-weight:700;">${fmt(item.price * item.quantity)}</div>
-                    </div>
-                    <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#cbd5e1; cursor:pointer; padding:5px;">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>`;
-        }).join('');
-        
-        if(totalDiv) totalDiv.innerText = 'Tổng cộng: ' + fmt(total);
-    }
-
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('tendoo_cart', JSON.stringify(cart));
-        updateCartUI();
-    }
-
-    function toggleCartModal() {
-        const m = document.getElementById('cartModal');
-        if(m) m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    // --- POPUP SẢN PHẨM ---
-    function openPos(product) {
-        currentImageList = product.images || [product.image || 'https://seller.tendoo.vn/favicon.ico'];
-        currentImgIdx = 0;
-
-        document.getElementById('modal_product_name').innerText = product.name;
-        document.getElementById('modal_product_price').innerText = fmt(product.price);
-        document.getElementById('modal_product_specs').innerText = product.specs;
-
-        updateModalGallery();
-
-        document.getElementById('modal_add_btn').onclick = function() {
-            addToCart(product.name, product.price, currentImageList[0]);
-            closeModal();
-        };
-
-        document.getElementById('productModal').style.display = 'flex';
-    }
-
-    function updateModalGallery() {
-        const imgObj = document.getElementById('modal_product_img');
-        const counter = document.getElementById('image_counter');
-        const btnPrev = document.getElementById('btn_prev');
-        const btnNext = document.getElementById('btn_next');
-
-        imgObj.src = currentImageList[currentImgIdx];
-        counter.innerText = (currentImgIdx + 1) + '/' + currentImageList.length;
-
-        const isMultiple = currentImageList.length > 1;
-        btnPrev.style.display = isMultiple ? 'flex' : 'none';
-        btnNext.style.display = isMultiple ? 'flex' : 'none';
-        counter.style.display = isMultiple ? 'block' : 'none';
-    }
-
-    function changeImage(n) {
-        currentImgIdx += n;
-        if (currentImgIdx >= currentImageList.length) currentImgIdx = 0;
-        if (currentImgIdx < 0) currentImgIdx = currentImageList.length - 1;
-        updateModalGallery();
-    }
-
-    function closeModal() {
-        document.getElementById('productModal').style.display = 'none';
-    }
-
-    // Đóng khi bấm ra ngoài vùng trắng của modal
-    window.onclick = function(event) {
-        const pModal = document.getElementById('productModal');
-        const cModal = document.getElementById('cartModal');
-        if (event.target == pModal) closeModal();
-        if (event.target == cModal) toggleCartModal();
-    }
-
-    // --- CÁC HÀM TÍNH TOÁN THUẾ (Giữ nguyên logic của bạn) ---
     const taxRates = [
         { name: "Phân phối hàng hóa", g: 0.01, t: 0.005 },
         { name: "Dịch vụ, xây dựng", g: 0.05, t: 0.02 },
@@ -909,9 +782,7 @@
     ];
 
     function renderIndustryFields() {
-        const countEl = document.getElementById('industry_count');
-        if(!countEl) return;
-        const count = parseInt(countEl.value);
+        const count = parseInt(document.getElementById('industry_count').value);
         const container = document.getElementById('multi_industry_container');
         container.innerHTML = '';
         for(let i=1; i<=count; i++) {
@@ -930,13 +801,22 @@
                         </div>
                     </div>
                     <div id="custom_rate_area_${i}" style="display:none; background: #f8fafc; padding: 10px; border-radius: 8px; margin-top: 5px;">
-                        <input type="text" id="custom_name_${i}" class="form-control" placeholder="Tên ngành tự định nghĩa" oninput="calcTax()">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:5px;">
-                             <input type="number" id="custom_g_${i}" class="form-control" placeholder="% Thuế GTGT" oninput="calcTax()">
-                             <input type="number" id="custom_t_${i}" class="form-control" placeholder="% Thuế TNCN" oninput="calcTax()">
+                        <label style="font-size:0.7rem;">Tên ngành/Dịch vụ tự định nghĩa</label>
+                        <input type="text" id="custom_name_${i}" class="form-control" placeholder="Ví dụ: Cho thuê mặt bằng" style="padding:8px; margin-bottom:10px;" oninput="calcTax()">
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                             <div>
+                                <label style="font-size:0.7rem;">% Thuế GTGT</label>
+                                <input type="number" id="custom_g_${i}" class="form-control" placeholder="%" oninput="calcTax()">
+                             </div>
+                             <div>
+                                <label style="font-size:0.7rem;">% Thuế TNCN</label>
+                                <input type="number" id="custom_t_${i}" class="form-control" placeholder="%" oninput="calcTax()">
+                             </div>
                         </div>
                     </div>
-                </div>`;
+                </div>
+            `;
         }
         calcTax();
     }
@@ -944,68 +824,433 @@
     function toggleIndustryCustom(i) {
         const sel = document.getElementById(`type_${i}`).value;
         const area = document.getElementById(`custom_rate_area_${i}`);
-        area.style.display = taxRates[sel].custom ? 'block' : 'none';
+        area.style.display = taxRates[sel].custom ? 'grid' : 'none';
         calcTax();
     }
 
     function calcTax() {
-        const countEl = document.getElementById('industry_count');
-        if(!countEl) return;
-        const count = parseInt(countEl.value);
-        let totalRev = 0, industries = [];
+        const count = parseInt(document.getElementById('industry_count').value);
+        let totalRev = 0;
+        let industries = [];
 
+        // 1. Thu thập dữ liệu và tính Tổng doanh thu trước
         for(let i=1; i<=count; i++) {
             let rev = getVal(`rev_${i}`);
             let rateIdx = document.getElementById(`type_${i}`).value;
             let rateObj = taxRates[rateIdx];
             let g_rate = rateObj.custom ? (parseFloat(document.getElementById(`custom_g_${i}`).value)/100 || 0) : rateObj.g;
             let t_rate = rateObj.custom ? (parseFloat(document.getElementById(`custom_t_${i}`).value)/100 || 0) : rateObj.t;
+            let name = rateObj.custom ? (document.getElementById(`custom_name_${i}`).value || "Ngành tự nhập") : rateObj.name;
+
             if(rev > 0) {
-                industries.push({ rev, g_rate, t_rate, name: rateObj.custom ? document.getElementById(`custom_name_${i}`).value : rateObj.name });
+                industries.push({ rev, g_rate, t_rate, name: name });
                 totalRev += rev;
             }
         }
 
-        let totalGTGT = 0, totalTNCN = 0;
+        let totalGTGT = 0;
+        let totalTNCN = 0;
+        let detailHTML = '';
+        
+        // Ngưỡng miễn thuế TNCN 2026 là 500 triệu
         let taxableRevTNCN = Math.max(0, totalRev - THRESHOLD);
 
-        industries.forEach((item) => {
-            totalGTGT += item.rev * item.g_rate;
-            let ratio = item.rev / totalRev;
-            totalTNCN += (taxableRevTNCN * ratio) * item.t_rate;
+        // 2. Tính toán và diễn giải chi tiết từng bước phân bổ
+        industries.forEach((item, index) => {
+            // Thuế GTGT tính trên doanh thu thực tế của ngành
+            let g = item.rev * item.g_rate;
+            totalGTGT += g;
+
+            // Thuế TNCN tính trên doanh thu phân bổ
+            let ratio = item.rev / totalRev; // Tỷ lệ đóng góp của ngành
+            let allocatedRev = taxableRevTNCN * ratio; // Doanh thu vượt ngưỡng được chia cho ngành này
+            let t = allocatedRev * item.t_rate;
+            totalTNCN += t;
+
+            detailHTML += `
+                <div style="margin-bottom: 15px; padding: 12px; background: #fff; border: 1px solid #eee; border-radius: 10px;">
+                    <div style="font-weight:bold; font-size:0.85rem; color:var(--primary); margin-bottom:8px;">${index+1}. ${item.name}</div>
+                    
+                    <div class="math-row">
+                        <span>• Thuế GTGT:</span>
+                        <span style="font-weight:bold;">${fmt(g)}</span>
+                    </div>
+                    <div style="font-size:0.7rem; color:#888; margin-bottom:10px; padding-left:10px;">
+                        Cơ sở: ${fmt(item.rev)} × ${(item.g_rate*100).toFixed(1)}%
+                    </div>
+
+                    <div class="math-row">
+                        <span>• Thuế TNCN:</span>
+                        <span style="font-weight:bold;">${fmt(t)}</span>
+                    </div>
+                    <div style="font-size:0.7rem; color:#888; padding-left:10px; line-height:1.4;">
+                        Tỷ trọng ngành: ${(ratio * 100).toFixed(1)}% doanh thu tổng <br>
+                        DT phân bổ: ${fmt(taxableRevTNCN)} × ${(ratio * 100).toFixed(1)}% = <b style="color:#555;">${fmt(allocatedRev)}</b> <br>
+                        Thuế: ${fmt(allocatedRev)} × ${(item.t_rate*100).toFixed(1)}%
+                    </div>
+
+                    <div class="math-row" style="border-top:1px dashed #ddd; margin-top:8px; padding-top:8px; color:#000;">
+                        <span style="font-weight:bold;">Tổng thuế ngành ${index+1}:</span>
+                        <span style="font-weight:bold; color:var(--primary);">${fmt(g + t)}</span>
+                    </div>
+                </div>`;
         });
 
-        const total1 = totalGTGT + totalTNCN;
-        if(document.getElementById('res_tax_1')) document.getElementById('res_tax_1').innerText = fmt(total1);
+        // 3. Tổng hợp cuối cùng
+        let total1 = totalGTGT + totalTNCN;
+        document.getElementById('res_tax_1').innerText = fmt(total1);
         
-        // Cập nhật các kết quả khác (Cách 2, v.v...) tương tự logic cũ của bạn
-        updateCartUI(); 
+        let subDetail = `
+            <div style="margin-top:10px; border: 2px solid #333; padding: 12px; border-radius: 10px; background: #f8fafc;">
+                <div class="math-row"><span>Tổng doanh thu (a):</span> <span>${fmt(totalRev)}</span></div>
+                <div class="math-row"><span>Doanh thu miễn thuế:</span> <span>${fmt(THRESHOLD)}</span></div>
+                <div class="math-row" style="color:var(--green); font-weight:bold;"><span>DT chịu thuế TNCN (b):</span> <span>${fmt(taxableRevTNCN)}</span></div>
+                <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;">
+                <div class="math-row"><span>1. Tổng GTGT (tính trên a):</span> <span>${fmt(totalGTGT)}</span></div>
+                <div class="math-row"><span>2. Tổng TNCN (tính trên b):</span> <span>${fmt(totalTNCN)}</span></div>
+                <div class="math-row" style="margin-top:5px; padding-top:5px; border-top: 2px solid #333;">
+                    <span style="font-weight:900;">TỔNG CỘNG:</span> 
+                    <span style="font-size:1.2rem; font-weight:900; color:var(--primary);">${fmt(total1)}</span>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('detail_tax_1').innerHTML = detailHTML + subDetail;
+        document.getElementById('avg_1').innerText = fmt(total1 / 12);
+
+        // Giữ nguyên logic Cách 2
+        let cost = getVal('tax_c');
+        let ln = Math.max(0, totalRev - cost);
+        let total2 = ln * 0.15;
+        document.getElementById('val_ln').innerText = fmt(ln);
+        document.getElementById('val_tax_ln').innerText = fmt(total2);
+        document.getElementById('val_total_2').innerText = fmt(total2);
+        document.getElementById('res_tax_2').innerText = fmt(total2);
+        document.getElementById('avg_2').innerText = fmt(total2 / 12);
+        updateUIResult(totalRev, total1, total2);
     }
 
-    window.onload = () => { 
-        if(document.getElementById('industry_count')) renderIndustryFields();
-        updateCartUI();
+    function updateUIResult(totalRev, t1, t2) {
+        const card1 = document.getElementById('card_1');
+        const card2 = document.getElementById('card_2');
+        const b1 = document.getElementById('badge_1');
+        const b2 = document.getElementById('badge_2');
+
+        if(t1 <= t2 || t2 <= 0) {
+            card1.className = 'tax-card best'; card2.className = 'tax-card warning';
+            b1.className = 'badge-status badge-best'; b1.innerText = 'Tối ưu';
+            b2.className = 'badge-status badge-warn'; b2.innerText = 'Cảnh báo';
+        } else {
+            card2.className = 'tax-card best'; card1.className = 'tax-card warning';
+            b2.className = 'badge-status badge-best'; b2.innerText = 'Tối ưu';
+            b1.className = 'badge-status badge-warn'; b1.innerText = 'Cảnh báo';
+        }
+
+        const advice = document.getElementById('advice_text');
+        const tag = document.getElementById('tag_nhom');
+
+        if (totalRev < 100000000) {
+            tag.innerText = "NHÓM: DƯỚI 100 TRIỆU";
+            advice.innerHTML = `<b>Trạng thái:</b> Miễn 100% thuế GTGT & TNCN. <br> <b>Hành động:</b> Chỉ cần nộp thuế môn bài (nếu có) và quản lý sổ sách đơn giản.`;
+        } else if (totalRev <= 500000000) {
+            tag.innerText = "NHÓM: 100TR - 500TR";
+            advice.innerHTML = `<b>Trạng thái:</b> Chỉ nộp thuế GTGT, Miễn thuế TNCN (dưới 500tr). <br> <b>Hành động:</b> Cần đăng ký mã số thuế cá nhân kinh doanh và kê khai doanh thu định kỳ.`;
+        } else {
+            tag.innerText = "NHÓM: TRÊN 500 TRIỆU";
+            advice.innerHTML = `<b>Trạng thái:</b> Bắt buộc kê khai đầy đủ GTGT & TNCN. <br> 
+            <b>Hành động:</b> Sử dụng hóa đơn điện tử, máy tính tiền POS kết nối cơ quan thuế. Thực hiện 7 loại sổ sách theo TT 88/2021.`;
+        }
+    }
+
+    function toggleT() {
+        document.getElementById('t_custom').style.display = (document.getElementById('t_select').value === 'custom') ? 'block' : 'none';
+        calcPrice();
+    }
+
+    function calcPrice() {
+        let x = getVal('x_val'), y = getVal('y_val');
+        let t_val = document.getElementById('t_select').value;
+        let t = t_val === 'custom' ? (parseFloat(document.getElementById('t_custom').value)/100 || 0) : parseFloat(t_val);
+        // Công thức ngược: Giá bán = (Giá vốn + Lợi nhuận) / (1 - % thuế)
+        document.getElementById('p_res').innerText = fmt((t < 1) ? (x + y) / (1 - t) : 0);
+    }
+//gio hang
+let cart = [];
+let swiper = null;
+// Đảm bảo các biến này nằm ngoài hàm (toàn cục)
+// Đảm bảo các biến này được khai báo ở đầu thẻ <script>
+let currentProduct = null;
+let currentImages = [];
+let currentIndex = 0;
+
+function openPos(product) {
+    currentProduct = product; // Lưu lại để thêm vào giỏ hàng
+    currentImages = (product.images && product.images.length > 0) ? product.images : [product.image];
+    currentIndex = 0;
+
+    // Đổ dữ liệu vào Modal
+    document.getElementById('modal_product_name').innerText = product.name;
+    document.getElementById('modal_product_price').innerText = product.price.toLocaleString() + 'đ';
+    document.getElementById('modal_product_specs').innerText = product.specs;
+
+    updateSlider(); // Hiển thị ảnh đầu tiên
+
+    // Hiển thị Modal
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function updateSlider() {
+    const imgElement = document.getElementById('modal_product_img');
+    const counterElement = document.getElementById('image_counter');
+    
+    // Cập nhật ảnh
+    if (imgElement && currentImages.length > 0) {
+        imgElement.src = currentImages[currentIndex];
+    }
+    
+    // Cập nhật số thứ tự (1/2, 2/2...)
+    if (counterElement) {
+        counterElement.innerText = (currentIndex + 1) + '/' + currentImages.length;
+    }
+
+    // Hiện/Ẩn mũi tên nếu chỉ có 1 ảnh
+    const btnPrev = document.getElementById('btn_prev');
+    const btnNext = document.getElementById('btn_next');
+    if (btnPrev && btnNext) {
+        const display = currentImages.length > 1 ? 'flex' : 'none';
+        btnPrev.style.display = display;
+        btnNext.style.display = display;
+    }
+}
+
+// HÀM QUAN TRỌNG: Phải có hàm này mũi tên mới chạy
+function changeImage(step) {
+    if (currentImages.length <= 1) return;
+    currentIndex += step;
+    if (currentIndex >= currentImages.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = currentImages.length - 1;
+    updateSlider();
+}
+
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+function addToCart() {
+    cart.push(currentProduct);
+    updateCartUI();
+    closePos();
+    alert('Đã thêm ' + currentProduct.name + ' vào giỏ hàng!');
+}
+
+function updateCartUI() {
+    const bubble = document.getElementById('cart_bubble');
+    const list = document.getElementById('cart_items_list');
+    const totalDiv = document.getElementById('cart_total');
+    
+    bubble.style.display = cart.length > 0 ? 'flex' : 'none';
+    document.getElementById('cart_count').innerText = cart.length;
+    
+    if (cart.length === 0) {
+        list.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:20px;">Giỏ hàng trống</div>`;
+        totalDiv.innerText = 'Tổng cộng: 0 đ';
+        return;
+    }
+
+    let total = 0;
+    list.innerHTML = cart.map((item, idx) => {
+        total += item.price;
+        return `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:10px; background:#f8fafc; border-radius:8px;">
+                <div style="flex:1;">
+                    <div style="font-size:0.85rem; font-weight:600; color:#334155;">${item.name}</div>
+                    <div style="font-size:0.8rem; color:var(--primary); font-weight:700;">${fmt(item.price)}</div>
+                </div>
+                <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#cbd5e1; cursor:pointer; padding:5px;">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>`;
+    }).join('');
+    
+    totalDiv.innerText = 'Tổng cộng: ' + fmt(total);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+function toggleCartModal() {
+    const m = document.getElementById('cartModal');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function sendOrderZalo() {
+    const phone = document.getElementById('cust_phone').value;
+    if (!phone) { 
+        alert('Vui lòng nhập Số điện thoại để Tendoo liên hệ hỗ trợ!'); 
+        return; 
+    }
+    
+    // 1. Soạn nội dung tin nhắn có định dạng
+    let message = `🚀 *YÊU CẦU BÁO GIÁ TENDOO 2026*\n`;
+    message += `━━━━━━━━━━━━━━━━━━\n`;
+    message += `📞 SĐT Khách: ${phone}\n`;
+    message += `📦 Đơn hàng gồm:\n`;
+    
+    // Cộng phí khởi tạo 500k nếu chưa có trong giỏ (tùy chọn)
+    cart.forEach((item, i) => {
+        message += `  ${i+1}. ${item.name} (${fmt(item.price)})\n`;
+    });
+    
+    message += `━━━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *TỔNG CỘNG: ${document.getElementById('cart_total').innerText}*`;
+
+    // 2. Logic Sao chép thông minh (Hỗ trợ cả PC và Mobile)
+    const copyToClipboard = (text) => {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                document.execCommand('copy') ? res() : rej();
+                document.body.removeChild(textArea);
+            });
+        }
     };
 
-    function sendOrderZalo() {
-        const phone = document.getElementById('cust_phone').value;
-        if (!phone) return alert('Nhập SĐT để nhận báo giá!');
+    // 3. Thực hiện sao chép và gọi App Zalo
+    copyToClipboard(message).then(() => {
+        alert("✅ Đã sao chép đơn hàng!\n\nƯu tiên mở ứng dụng Zalo... Bạn chỉ cần 'Dán' (Ctrl+V) vào ô chat của Tendoo để gửi đơn.");
         
-        let message = `🚀 *YÊU CẦU BÁO GIÁ TENDOO*\nSĐT: ${phone}\n📦 Đơn hàng:\n`;
-        let total = 0;
-        cart.forEach((item, i) => {
-            message += `${i+1}. ${item.name} x${item.quantity} (${fmt(item.price * item.quantity)})\n`;
-            total += (item.price * item.quantity);
-        });
-        message += `💰 TỔNG: ${fmt(total)}`;
+        // Cố gắng gọi giao thức ứng dụng Zalo trực tiếp
+        // chat?phone=... là lệnh gọi thẳng vào cửa sổ chat trên Zalo PC và Mobile
+        window.location.href = "zalo://chat?phone=0868838242";
 
-        navigator.clipboard.writeText(message).then(() => {
-            alert("Đã sao chép! Đang mở Zalo...");
-            window.location.href = "zalo://chat?phone=0868838242";
+        // Sau 1.5 giây nếu không thấy phản hồi (máy không cài zalo app), 
+        // sẽ mở link web dự phòng để người dùng quét mã
+        setTimeout(function() {
+            if(document.hasFocus()) {
+                window.open("https://zalo.me/0868838242", '_blank');
+            }
+        }, 1500);
+    });
+}
+    function closePos() { document.getElementById('posModal').style.display = 'none'; }
+
+    function createPetals() {
+        const container = document.getElementById('blossoms');
+        for (let i = 0; i < 20; i++) {
+            let petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = petal.style.height = Math.random() * 8 + 5 + 'px';
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(petal);
+        }
+    }
+
+    window.onload = () => { renderIndustryFields(); createPetals(); calcPrice(); };
+
+    function addInvoiceToCart(name, price) {
+    // Tạo đối tượng tương tự sản phẩm POS để giỏ hàng xử lý được
+    const invoiceItem = {
+        name: name,
+        price: price,
+        images: [], // Hóa đơn không cần ảnh slide
+        specs: "Hóa đơn điện tử có mã của Cơ quan Thuế theo Thông tư 78/2021/TT-BTC."
+    };
+    
+    cart.push(invoiceItem);
+    updateCartUI();
+    
+    // Hiệu ứng thông báo nhỏ thay vì dùng alert gây gián đoạn
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.innerText = "Đã thêm!";
+    btn.style.background = "#28a745";
+    
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.background = "";
+    }, 1500);
+}
+function clearCart() {
+    if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?")) {
+        cart = [];
+        updateCartUI();
+        toggleCartModal(); // Tắt giỏ hàng sau khi xóa hết
+    }
+}
+const fakeData = {
+    names: ["Anh Hùng", "Chị Lan", "Anh Minh", "Chú Bảy", "Chị Thảo", "Anh Quốc", "Tiệm Cafe Mộc", "Shop Bella"],
+    cities: ["Đồng Nai", "TP.HCM", "Bình Dương", "Vũng Tàu", "Long An", "Cần Thơ"],
+    products: [
+        { name: "Máy Sunmi V2 PRO", img: "https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" },
+        { name: "Combo Máy in & Phần mềm", img: "https://pos365.vn/storage/app/media/may-in-hoa-don-xprinter-n160ii.jpg" },
+        { name: "Gói 1.000 tờ hóa đơn", img: "https://vnpay.vn/wp-content/uploads/2022/10/invoice-icon.png" },
+        { name: "Máy POS để bàn T2", img: "https://cdn.pico.vn/Product/37841/300_300_may-tinh-tien-sunmi-t2-2-man-hinh-1.jpg" }
+    ]
+};
+
+function showRandomNotif() {
+    const name = fakeData.names[Math.floor(Math.random() * fakeData.names.length)];
+    const city = fakeData.cities[Math.floor(Math.random() * fakeData.cities.length)];
+    const product = fakeData.products[Math.floor(Math.random() * fakeData.products.length)];
+    
+    document.getElementById('notif_title').innerText = `${name} (${city})`;
+    document.getElementById('notif_desc').innerText = `Vừa đặt mua ${product.name}`;
+    document.getElementById('notif_thumb').src = product.img;
+    
+    const notif = document.getElementById('order_notif');
+    notif.classList.add('show');
+    
+    // Tự ẩn sau 6 giây
+    setTimeout(() => {
+        hideNotif();
+    }, 6000);
+}
+
+function hideNotif() {
+    document.getElementById('order_notif').classList.remove('show');
+}
+
+// Bắt đầu chạy sau 5 giây khi web tải xong
+setTimeout(() => {
+    showRandomNotif();
+    // Sau đó cứ mỗi 20 giây lại hiện một cái mới
+    setInterval(showRandomNotif, 20000);
+}, 5000);
+
+// Tự động cuộn lên đầu khi nhấn vào bất kỳ tab nào
+document.addEventListener('click', function (e) {
+    // Kiểm tra nếu mục được nhấn có class là 'tab-item' hoặc nằm trong thanh điều hướng tab
+    if (e.target.classList.contains('tab-item') || e.target.closest('.tabs')) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Cuộn mượt mà
         });
     }
-</script>
+}, true);
 
+
+
+// Đóng khi bấm ra ngoài vùng trắng của modal
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+</script>
 <div id="order_notif" class="order-notification">
     <div class="notif-img">
         <img id="notif_thumb" src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" alt="POS">
@@ -1024,14 +1269,21 @@
             &times;
         </div>
         
-        <div style="position: relative; width: 100%; border-radius: 12px; background: #f8fafc; overflow:hidden; border: 1px solid #f1f5f9;">
-            <img id="modal_product_img" src="" style="width: 100%; height: auto; display: block; min-height: 200px; object-fit: contain;">
-            
-            <button class="slider-nav" onclick="changeImage(-1)" id="btn_prev" style="left: 8px;">&#10094;</button>
-            <button class="slider-nav" onclick="changeImage(1)" id="btn_next" style="right: 8px;">&#10095;</button>
-            
-            <div id="image_counter" style="position: absolute; bottom: 10px; right: 10px; background: rgba(15, 23, 42, 0.7); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">1/1</div>
-        </div>
+        <div style="position: relative; width: 100%; height: 250px; background: #f8fafc; border-radius: 12px; overflow: hidden;">
+    <img id="modal_product_img" src="" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+    
+    <button type="button" class="slider-nav" onclick="changeImage(-1)" id="btn_prev" 
+        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+        &#10094;
+    </button>
+    
+    <button type="button" class="slider-nav" onclick="changeImage(1)" id="btn_next" 
+        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+        &#10095;
+    </button>
+    
+    <div id="image_counter" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; padding: 2px 10px; border-radius: 10px; font-size: 11px; z-index: 101;">1/1</div>
+</div>
 
         <h3 id="modal_product_name" style="margin:15px 0 5px; font-size:1.25rem; color:#1e293b; text-align:center;"></h3>
         <div id="modal_product_price" style="color:#ee002e; font-size:1.5rem; font-weight:900; margin-bottom:15px; text-align:center;"></div>
@@ -1043,10 +1295,9 @@
             <div id="modal_product_specs" style="font-size:0.85rem; color:#334155; line-height:1.6;"></div>
         </div>
         
-        <button id="modal_add_btn" onclick="addFromModal()" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer;">
-    THÊM VÀO GIỎ HÀNG
+        <button class="add-cart-btn" onclick="addInvoiceToCart(currentProduct.name, currentProduct.price); document.getElementById('productModal').style.display='none';" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(238,0,46,0.3);">
+    <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
 </button>
-
     </div>
 </div>
 </body>

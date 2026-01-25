@@ -3,7 +3,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Tendoo Tools - Tài Chính & POS 2026</title>
+    <title>Công Cụ Tendoo - Tài Chính & Máy POS Bán Hàng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="msapplication-TileImage" content="https://seller.tendoo.vn/favicon.ico">
     <meta name="msapplication-TileColor" content="#ee002e">
@@ -502,13 +502,14 @@
         .slider-nav:hover {
             background: #ee002e;
             color: white;}
+       
     </style>
 </head>
 <body>
 <div class="cherry-blossom-container" id="blossoms"></div>
 
 <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('tab1', this)">ĐỊNH GIÁ</button>
+    <button class="tab-btn active" onclick="switchTab('tab1', this)">TÍNH GIÁ</button>
     <button class="tab-btn" onclick="switchTab('tab2', this)">TÍNH THUẾ</button>
     <button class="tab-btn" onclick="switchTab('tab3', this)">BÁO GIÁ</button>
     <button class="tab-btn" onclick="switchTab('tab4', this)">KẾ TOÁN</button>
@@ -516,26 +517,51 @@
 
 <div class="container">
     <div id="tab1" class="tab-content active">
-        <div class="card" style="max-width: 500px; margin: 0 auto;">
-            <h2 style="font-size: 1.2rem; text-align: center;">Tính Giá Niêm Yết</h2>
-            <label>Giá vốn nhập (x)</label>
+    <div class="card" style="max-width: 500px; margin: 0 auto; padding: 15px;">
+        
+        <div class="sub-tabs">
+            <button onclick="switchSubTab('sub1', this)" class="sub-tab-btn active" >Tính Giá Niêm Yết</button>
+            <button onclick="switchSubTab('sub2', this)" class="sub-tab-btn">Tính Doanh Thu Ngược</button>
+        </div>
+
+        <div id="sub1" class="sub-tab-content">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Niêm Yết</h2>
+            <label>Giá vốn nhập hàng</label>
             <input type="text" id="x_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-            <label>Lợi nhuận mong muốn (y)</label>
+            <label>Lợi nhuận mong muốn</label>
             <input type="text" id="y_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-            <label>Tỉ lệ thuế ngành (t)</label>
+            <label>Tỉ lệ thuế ngành</label>
             <select id="t_select" class="form-control" onchange="toggleT()">
                 <option value="0.015">Phân phối hàng hóa (1.5%)</option>
                 <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
                 <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
                 <option value="custom">Tự nhập %</option>
             </select>
-            <input type="number" id="t_custom" class="form-control" style="display:none" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
-            
-            <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px;">
-                <span style="font-size:0.75rem; font-weight:bold; color:var(--gray); text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
-                <span id="p_res" style="font-size:2.5rem; font-weight:900; color:var(--primary); display:block;">0 đ</span>
+            <input type="number" id="t_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
+            <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px; border: 1px solid #fee2e2;">
+                <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
+                <span id="p_res" style="font-size:2.3rem; font-weight:900; color:#e63946; display:block;">0 đ</span>
             </div>
         </div>
+
+        <div id="sub2" class="sub-tab-content" style="display:none;">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Doanh Thu Từ Thuế Khoán</h2> 
+            <label>Số thuế khoán cũ</label>
+            <input type="text" id="tax_paid" class="form-control currency-input" placeholder="0" oninput="calcRevenue()">
+            <label>Tỉ lệ thuế ngành áp dụng</label>
+            <select id="t_rev_select" class="form-control" onchange="toggleTRev()">
+                <option value="0.015">Phân phối hàng hóa (1.5%)</option>
+                <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
+                <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
+                <option value="custom">Tự nhập %</option>
+            </select>
+            <input type="number" id="t_rev_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcRevenue()">
+            <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #eef2ff, #e0e7ff); border-radius:15px; margin-top:20px; border: 1px solid #e0e7ff;">
+                <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Doanh Thu Tương Ứng Một Tháng</span>
+                <span id="rev_res" style="font-size:2.3rem; font-weight:900; color:#4361ee; display:block;">0 đ </span>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div id="tab2" class="tab-content">
@@ -563,7 +589,6 @@
         </div>
 
         <div id="tag_nhom" style="background:#333; color:white; padding:6px 15px; border-radius:6px; font-size:0.75rem; font-weight:bold; margin-bottom:15px; display:inline-block;">NHÓM PHÂN TÍCH</div>
-        
         <div class="tax-grid">
             <div class="tax-card" id="card_1">
                 <div id="badge_1" class="badge-status badge-best">Tối ưu</div>
@@ -620,10 +645,11 @@
             <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract Viettel</button>
         </div>
         <div style="text-align: center;">
-                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
-                        PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ (CHỈ THU MỘT LẦN)
-                    </h2>
+            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ (CHỈ THU MỘT LẦN)
+            </h2>
         </div>
+
         <div id="sub_hardware" class="sub-tab-content">
             <div class="pos-grid">
                 <div class="pos-item" onclick="openPos({
@@ -969,14 +995,15 @@
                 </table>
             </div>
         </div>
+
         <div id="sub_vcontract" class="sub-tab-content" style="display:none">
             <div class="card" style="margin-top: 15px;">
             <div style="background: #e0f2fe; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #0284c7;">
             <h4 style="margin:0; color:#0369a1;"><i class="fas fa-file-signature"></i> Hợp đồng điện tử vContract</h4>
             <p style="font-size: 0.8rem; color: #0c4a6e; margin: 5px 0 0;">Ký kết không giấy tờ - Pháp lý vững chắc - Tiết kiệm 90% chi phí.</p>
-        </div>
+            </div>
 
-        <table class="table-invoice">
+            <table class="table-invoice">
             <thead>
                 <tr>
                     <th>Gói dịch vụ</th>
@@ -1021,14 +1048,9 @@
                     <td><button class="add-cart-btn" onclick="addInvoiceToCart('vContract 100.000 lượt', 705000000)">+ Giỏ</button></td>
                 </tr>
             </tbody>
-        </table>
-    </div>
-</div>
-
-
-
-
-
+            </table>
+            </div>
+        </div>
     </div>
         
     <div id="tab4" class="tab-content">
@@ -1040,89 +1062,76 @@
                 <div class="banner-badge">Chuyên nghiệp - Tận tâm - Bảo mật</div>
             </div>
         </div>
-    </div>
-
-    <div style="padding: 20px;">
-        <h3 style="text-align: center; color: var(--primary); margin-bottom: 25px;">BẢNG GIÁ DỊCH VỤ CHI TIẾT</h3>
-        
-        <div class="ketoan-grid">
-            <div class="ketoan-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
-    <h4 style="margin-bottom: 10px; color: #1e293b;">BÁO CÁO THEO QUÝ</h4>
-    
-    <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
-        500.000đ - 800.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
-    </div>
-
-    <ul>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span> Thiết lập hồ sơ thuế</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Đăng ký hóa đơn điện tử</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Nộp báo cáo theo quý</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
-        </li>
-    </ul>
-
-    <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
-            style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
-        + THÊM GIỎ HÀNG
-    </button>
-</div>
-
-            <div class="ketoan-card featured" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
-    <h4 style="margin-bottom: 10px; color: #1e293b;">Kế Toán Trọn Gói</h4>
-    
-    <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
-        700.000đ - 1.200.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
-    </div>
-
-    <ul>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Báo cáo thuế hàng tháng/quý</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Xuất hoá đơn theo yêu cầu</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Hỗ trợ, tư vấn các vấn đề liên quan</span>
-        </li>
-        <li>
-            <i class="fas fa-check"></i> 
-            <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
-        </li>
-    </ul>
-
-    <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
-            style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
-        + THÊM GIỎ HÀNG
-    </button>
-</div>
-
         </div>
-    </div>
+        <div style="padding: 20px;">
+            <h3 style="text-align: center; color: var(--primary); margin-bottom: 25px;">BẢNG GIÁ DỊCH VỤ CHI TIẾT</h3>
+            <div class="ketoan-grid">
+                <div class="ketoan-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
+                <h4 style="margin-bottom: 10px; color: #1e293b;">BÁO CÁO THEO QUÝ</h4>
+                <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
+                    500.000đ - 800.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
+                </div>
+                    <ul>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span> Thiết lập hồ sơ thuế</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Đăng ký hóa đơn điện tử</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Nộp báo cáo theo quý</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
+                    </li>
+                    </ul>
+                <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
+                    style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
+                        + THÊM GIỎ HÀNG
+                </button>
+                </div>
 
-
-
-
-    <img src="https://i.ibb.co/23brjGx6/z7451248947957-91ba6db41c4c5a633b9269cb5ab143ce.jpg" alt="Kế toán siêu cấp vip pro" class="responsive-img">
+                <div class="ketoan-card featured" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 15px;">
+                <h4 style="margin-bottom: 10px; color: #1e293b;">Kế Toán Trọn Gói</h4>
+                    <div class="price" style="font-weight: 800; color: #ee002e; font-size: 1.2rem;">
+                        700.000đ - 1.200.000đ<span style="font-size: 0.8rem; color: #64748b;">/tháng</span>
+                    </div>
+                    <ul>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Báo cáo thuế hàng tháng/quý</span>
+                    </li>
+                            <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Xuất hoá đơn theo yêu cầu</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Hỗ trợ, tư vấn các vấn đề liên quan</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i> 
+                        <span>Chi phí linh hoạt phụ thuộc số lượng mặt hàng, số giao dịch và các vấn đề liên quan</span>
+                    </li>
+                    </ul>
+                <button onclick="addInvoiceToCart('Kế Toán Trọn Gói (1 tháng)', 1200000)" 
+                    style="width: 100%; padding: 12px; background: #ee002e; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
+                        + THÊM GIỎ HÀNG
+                </button>
+                </div>
+            </div>
+        </div>
+        <img src="https://i.ibb.co/23brjGx6/z7451248947957-91ba6db41c4c5a633b9269cb5ab143ce.jpg" alt="Kế toán siêu cấp vip pro" class="responsive-img">
     </div>
     
     <div class="service-footer">
     <b style="font-size:1.3rem; letter-spacing:1px; display: block; margin-bottom: 5px;">TENDOO VIỆT NAM</b>
     <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 25px;">Đối tác công nghệ tài chính tin cậy cho Hộ kinh doanh</p>
-    
+
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; margin-bottom: 0px;">
         <a href="javascript:void(0)" onclick="document.querySelectorAll('.tab-btn')[3].click();" class="service-link">
             <i class="fas fa-file-invoice-dollar" style="color:#fbbf24; font-size: 1.2rem;"></i> 👉Dịch vụ Kế toán Thuế trọn gói
@@ -1215,37 +1224,70 @@
         </div>
     </div>
 </div>
-
+    <div id="order_notif" class="order-notification">
+        <div class="notif-img">
+            <img id="notif_thumb" src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" alt="POS">
+        </div>
+        <div class="notif-content">
+            <div id="notif_title" class="notif-title">Anh Hùng (Đồng Nai)</div>
+            <div id="notif_desc" class="notif-desc">Vừa đặt mua máy CPOS V302</div>
+            <div class="notif-time">1 phút trước</div>
+        </div>
+        <button class="notif-close" onclick="hideNotif()">×</button>
+    </div>
+    <div id="productModal" class="modal" style="display:none; position:fixed; z-index:10001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+        <div style="background:#fff; width:95%; max-width:420px; border-radius:20px; position:relative; padding:25px 20px 20px; box-shadow:0 20px 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease;">  
+            <div onclick="closeModal()" style="position:absolute; top:12px; right:12px; width:32px; height:32px; background:#f1f5f9; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:22px; color:#64748b; z-index:110;">&times;
+            </div>
+            <div style="position: relative; width: 100%; height: 250px; background: #f8fafc; border-radius: 12px; overflow: hidden;">
+                <img id="modal_product_img" src="" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+            <button type="button" class="slider-nav" onclick="changeImage(-1)" id="btn_prev" 
+                style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&#10094;
+            </button>
+            <button type="button" class="slider-nav" onclick="changeImage(1)" id="btn_next" 
+                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&#10095;
+            </button>
+                <div id="image_counter" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; padding: 2px 10px; border-radius: 10px; font-size: 11px; z-index: 101;">1/1</div>
+            </div>
+            <h3 id="modal_product_name" style="margin:15px 0 5px; font-size:1.25rem; color:#1e293b; text-align:center;"></h3>
+            <div id="modal_product_price" style="color:#ee002e; font-size:1.5rem; font-weight:900; margin-bottom:15px; text-align:center;"></div>
+            <div style="text-align:left; background:#f8fafc; padding:15px; border-radius:12px; border:1px solid #f1f5f9;">
+                <div style="font-weight:bold; margin-bottom:8px; font-size:0.85rem; color:#475569; display:flex; align-items:center; gap:5px;">
+                    <i class="fas fa-info-circle"></i> CẤU HÌNH CHI TIẾT
+                </div>
+                <div id="modal_product_specs" style="font-size:0.85rem; color:#334155; line-height:1.6;"></div>
+            </div>
+            <button class="add-cart-btn" onclick="addInvoiceToCart(currentProduct.name, currentProduct.price); document.getElementById('productModal').style.display='none';" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(238,0,46,0.3);">
+            <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+            </button>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
     const fmt = (n) => new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' đ';
-    const THRESHOLD = 500000000; // Ngưỡng miễn thuế TNCN 2026
-
+    const THRESHOLD = 500000000; 
     document.addEventListener('input', function(e) {
         if(e.target.classList.contains('currency-input')) {
             let val = e.target.value.replace(/\D/g, "");
             e.target.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     });
-
     function getVal(id) {
         const el = document.getElementById(id);
         return el ? parseFloat(el.value.replace(/\./g, "")) || 0 : 0;
     }
-
     function switchTab(id, b) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
         document.getElementById(id).classList.add('active'); 
         b.classList.add('active');
     }
-
     function switchSubTab(id, b) {
         document.querySelectorAll('.sub-tab-content').forEach(c => c.style.display = 'none');
         document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
         document.getElementById(id).style.display = 'block';
         b.classList.add('active');
     }
-
     const taxRates = [
         { name: "Phân phối hàng hóa", g: 0.01, t: 0.005 },
         { name: "Dịch vụ, xây dựng", g: 0.05, t: 0.02 },
@@ -1253,7 +1295,6 @@
         { name: "Hoạt động khác", g: 0.02, t: 0.01 },
         { name: "Tự nhập tỷ lệ %", g: 0, t: 0, custom: true }
     ];
-
     function renderIndustryFields() {
         const count = parseInt(document.getElementById('industry_count').value);
         const container = document.getElementById('multi_industry_container');
@@ -1293,20 +1334,16 @@
         }
         calcTax();
     }
-
     function toggleIndustryCustom(i) {
         const sel = document.getElementById(`type_${i}`).value;
         const area = document.getElementById(`custom_rate_area_${i}`);
         area.style.display = taxRates[sel].custom ? 'grid' : 'none';
         calcTax();
     }
-
     function calcTax() {
         const count = parseInt(document.getElementById('industry_count').value);
         let totalRev = 0;
         let industries = [];
-
-        // 1. Thu thập dữ liệu và tính Tổng doanh thu trước
         for(let i=1; i<=count; i++) {
             let rev = getVal(`rev_${i}`);
             let rateIdx = document.getElementById(`type_${i}`).value;
@@ -1320,26 +1357,17 @@
                 totalRev += rev;
             }
         }
-
         let totalGTGT = 0;
         let totalTNCN = 0;
         let detailHTML = '';
-        
-        // Ngưỡng miễn thuế TNCN 2026 là 500 triệu
         let taxableRevTNCN = Math.max(0, totalRev - THRESHOLD);
-
-        // 2. Tính toán và diễn giải chi tiết từng bước phân bổ
         industries.forEach((item, index) => {
-            // Thuế GTGT tính trên doanh thu thực tế của ngành
             let g = item.rev * item.g_rate;
             totalGTGT += g;
-
-            // Thuế TNCN tính trên doanh thu phân bổ
-            let ratio = item.rev / totalRev; // Tỷ lệ đóng góp của ngành
-            let allocatedRev = taxableRevTNCN * ratio; // Doanh thu vượt ngưỡng được chia cho ngành này
+            let ratio = item.rev / totalRev;
+            let allocatedRev = taxableRevTNCN * ratio;
             let t = allocatedRev * item.t_rate;
             totalTNCN += t;
-
             detailHTML += `
                 <div style="margin-bottom: 15px; padding: 12px; background: #fff; border: 1px solid #eee; border-radius: 10px;">
                     <div style="font-weight:bold; font-size:0.85rem; color:var(--primary); margin-bottom:8px;">${index+1}. ${item.name}</div>
@@ -1368,11 +1396,8 @@
                     </div>
                 </div>`;
         });
-
-        // 3. Tổng hợp cuối cùng
         let total1 = totalGTGT + totalTNCN;
         document.getElementById('res_tax_1').innerText = fmt(total1);
-        
         let subDetail = `
             <div style="margin-top:10px; border: 2px solid #333; padding: 12px; border-radius: 10px; background: #f8fafc;">
                 <div class="math-row"><span>Tổng doanh thu (a):</span> <span>${fmt(totalRev)}</span></div>
@@ -1390,8 +1415,6 @@
         
         document.getElementById('detail_tax_1').innerHTML = detailHTML + subDetail;
         document.getElementById('avg_1').innerText = fmt(total1 / 12);
-
-        // Giữ nguyên logic Cách 2
         let cost = getVal('tax_c');
         let ln = Math.max(0, totalRev - cost);
         let total2 = ln * 0.15;
@@ -1408,7 +1431,6 @@
         const card2 = document.getElementById('card_2');
         const b1 = document.getElementById('badge_1');
         const b2 = document.getElementById('badge_2');
-
         if(t1 <= t2 || t2 <= 0) {
             card1.className = 'tax-card best'; card2.className = 'tax-card warning';
             b1.className = 'badge-status badge-best'; b1.innerText = 'Tối ưu';
@@ -1418,10 +1440,8 @@
             b2.className = 'badge-status badge-best'; b2.innerText = 'Tối ưu';
             b1.className = 'badge-status badge-warn'; b1.innerText = 'Cảnh báo';
         }
-
         const advice = document.getElementById('advice_text');
         const tag = document.getElementById('tag_nhom');
-
         if (totalRev < 500000000) {
             tag.innerText = "NHÓM: DƯỚI 500 TRIỆU";
             advice.innerHTML = `<b>Hộ, cá nhân kinh doanh được MIỄN THUẾ.</b>
@@ -1488,19 +1508,32 @@
                                 <br>Hạn nộp hồ sơ khai thuế theo Quý muộn nhất: Quý 1 là ngày 30/04/năm; Quý 2 là 31/7/năm; Quý 3 là ngày 31/10/năm; Quý 4 là ngày 31/1/(năm+1)`;
         }
     }
+// tính Giá Niêm Yết
+function calcPrice() {
+    let x = getVal('x_val');
+    let y = getVal('y_val');
+    let t_val = document.getElementById('t_select').value;
+    let t = t_val === 'custom' ? (parseFloat(document.getElementById('t_custom').value)/100 || 0) : parseFloat(t_val);
+    let finalPrice = (t < 1) ? (x + y) / (1 - t) : 0;
+    document.getElementById('p_res').innerText = fmt(finalPrice);
+}
+function toggleT() {
+    document.getElementById('t_custom').style.display = (document.getElementById('t_select').value === 'custom') ? 'block' : 'none';
+    calcPrice();
+}
+// tính Doanh thu ngược 
+function calcRevenue() {
+    let tax = getVal('tax_paid');
+    let t_val = document.getElementById('t_rev_select').value;
+    let t = t_val === 'custom' ? (parseFloat(document.getElementById('t_rev_custom').value)/100 || 0) : parseFloat(t_val);
+    let revenue = (t > 0) ? (tax / t) : 0;
+    document.getElementById('rev_res').innerText = fmt(revenue);
+}
+function toggleTRev() {
+    document.getElementById('t_rev_custom').style.display = (document.getElementById('t_rev_select').value === 'custom') ? 'block' : 'none';
+    calcRevenue();
+}
 
-    function toggleT() {
-        document.getElementById('t_custom').style.display = (document.getElementById('t_select').value === 'custom') ? 'block' : 'none';
-        calcPrice();
-    }
-
-    function calcPrice() {
-        let x = getVal('x_val'), y = getVal('y_val');
-        let t_val = document.getElementById('t_select').value;
-        let t = t_val === 'custom' ? (parseFloat(document.getElementById('t_custom').value)/100 || 0) : parseFloat(t_val);
-        // Công thức ngược: Giá bán = (Giá vốn + Lợi nhuận) / (1 - % thuế)
-        document.getElementById('p_res').innerText = fmt((t < 1) ? (x + y) / (1 - t) : 0);
-    }
 //gio hang
 let cart = [];
 let swiper = null;
@@ -1508,28 +1541,24 @@ let currentProduct = null;
 let currentImages = [];
 let currentIndex = 0;
 function openPos(product) {
-    currentProduct = product; // Lưu lại để thêm vào giỏ hàng
+    currentProduct = product;
     currentImages = (product.images && product.images.length > 0) ? product.images : [product.image];
     currentIndex = 0;
-    // Đổ dữ liệu vào giỏ
     document.getElementById('modal_product_name').innerText = product.name;
     document.getElementById('modal_product_price').innerText = product.price.toLocaleString() + 'đ';
     document.getElementById('modal_product_specs').innerText = product.specs;
-    updateSlider(); // Hiển thị ảnh đầu tiên
+    updateSlider();
     document.getElementById('productModal').style.display = 'flex';
 }
 function updateSlider() {
     const imgElement = document.getElementById('modal_product_img');
     const counterElement = document.getElementById('image_counter');
-    // Cập nhật ảnh
     if (imgElement && currentImages.length > 0) {
         imgElement.src = currentImages[currentIndex];
     }
-    // Cập nhật số thứ tự (1/2, 2/2...)
     if (counterElement) {
         counterElement.innerText = (currentIndex + 1) + '/' + currentImages.length;
     }
-    // Hiện/Ẩn mũi tên nếu chỉ có 1 ảnh
     const btnPrev = document.getElementById('btn_prev');
     const btnNext = document.getElementById('btn_next');
     if (btnPrev && btnNext) {
@@ -1538,7 +1567,6 @@ function updateSlider() {
         btnNext.style.display = display;
     }
 }
-// HÀM QUAN TRỌNG: Phải có mũi tên mới chạy
 function changeImage(step) {
     if (currentImages.length <= 1) return;
     currentIndex += step;
@@ -1546,11 +1574,9 @@ function changeImage(step) {
     if (currentIndex < 0) currentIndex = currentImages.length - 1;
     updateSlider();
 }
-
 function closeModal() {
     document.getElementById('productModal').style.display = 'none';
 }
-
 function addToCart() {
     cart.push(currentProduct);
     updateCartUI();
@@ -1562,16 +1588,13 @@ function updateCartUI() {
     const bubble = document.getElementById('cart_bubble');
     const list = document.getElementById('cart_items_list');
     const totalDiv = document.getElementById('cart_total');
-    
     bubble.style.display = cart.length > 0 ? 'flex' : 'none';
     document.getElementById('cart_count').innerText = cart.length;
-    
     if (cart.length === 0) {
         list.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:20px;">Giỏ hàng trống</div>`;
         totalDiv.innerText = 'Tổng cộng: 0 đ';
         return;
     }
-
     let total = 0;
     list.innerHTML = cart.map((item, idx) => {
         total += item.price;
@@ -1586,7 +1609,6 @@ function updateCartUI() {
                 </button>
             </div>`;
     }).join('');
-    
     totalDiv.innerText = 'Tổng cộng: ' + fmt(total);
 }
 
@@ -1606,21 +1628,15 @@ function sendOrderZalo() {
         alert('Vui lòng nhập Số điện thoại để Tendoo liên hệ hỗ trợ!'); 
         return; 
     }
-    
-    // 1. Soạn nội dung
     let message = `🚀 *YÊU CẦU ĐƠN HÀNG*\nChào shop, tôi muốn đặt hàng\n`;
     message += `━━━━━━━━━━━━━━━━━━\n`;
     message += `📞 SĐT: ${phone}\n`;
     message += `📦 Đơn hàng gồm:\n`;
-    
     cart.forEach((item, i) => {
         message += `  ${i+1}. ${item.name} (${fmt(item.price)})\n`;
     });
-    
     message += `━━━━━━━━━━━━━━━━━━\n`;
     message += `💰 ${document.getElementById('cart_total').innerText}`;
-
-    // 2. Thực hiện copy NGAY LẬP TỨC (Dùng textarea để tương thích cao nhất)
     const textArea = document.createElement("textarea");
     textArea.value = message;
     textArea.style.position = "fixed";
@@ -1629,8 +1645,7 @@ function sendOrderZalo() {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    textArea.setSelectionRange(0, 99999); // Hỗ trợ Mobile
-
+    textArea.setSelectionRange(0, 99999); 
     let success = false;
     try {
         success = document.execCommand('copy');
@@ -1638,8 +1653,6 @@ function sendOrderZalo() {
         success = false;
     }
     document.body.removeChild(textArea);
-
-    // 3. Xử lý sau khi copy
     if (success) {
         window.location.href = "https://zalo.me/0868838242";
     } else {
@@ -1658,8 +1671,7 @@ function sendOrderZalo() {
     }, 2000);
 }
 
-   function closePos() { document.getElementById('posModal').style.display = 'none'; }
-
+    function closePos() { document.getElementById('posModal').style.display = 'none'; }
     function createPetals() {
         const container = document.getElementById('blossoms');
         for (let i = 0; i < 20; i++) {
@@ -1672,27 +1684,22 @@ function sendOrderZalo() {
             container.appendChild(petal);
         }
     }
-
     window.onload = () => { renderIndustryFields(); createPetals(); calcPrice(); };
 
     function addInvoiceToCart(name, price) {
-    // Tạo đối tượng tương tự sản phẩm POS để giỏ hàng xử lý được
     const invoiceItem = {
         name: name,
         price: price,
-        images: [], // Hóa đơn không cần ảnh slide
+        images: [],
         specs: "Hóa đơn điện tử có mã của Cơ quan Thuế theo Thông tư 78/2021/TT-BTC."
     };
-    
+
     cart.push(invoiceItem);
     updateCartUI();
-    
-    // Hiệu ứng thông báo nhỏ thay vì dùng alert gây gián đoạn
     const btn = event.target;
     const originalText = btn.innerText;
     btn.innerText = "Đã thêm!";
     btn.style.background = "#28a745";
-    
     setTimeout(() => {
         btn.innerText = originalText;
         btn.style.background = "";
@@ -1702,7 +1709,7 @@ function clearCart() {
     if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?")) {
         cart = [];
         updateCartUI();
-        toggleCartModal(); // Tắt giỏ hàng sau khi xóa hết
+        toggleCartModal();
     }
 }
 const fakeData = {
@@ -1720,15 +1727,11 @@ function showRandomNotif() {
     const name = fakeData.names[Math.floor(Math.random() * fakeData.names.length)];
     const city = fakeData.cities[Math.floor(Math.random() * fakeData.cities.length)];
     const product = fakeData.products[Math.floor(Math.random() * fakeData.products.length)];
-    
     document.getElementById('notif_title').innerText = `${name} (${city})`;
     document.getElementById('notif_desc').innerText = `Vừa đặt mua ${product.name}`;
     document.getElementById('notif_thumb').src = product.img;
-    
     const notif = document.getElementById('order_notif');
     notif.classList.add('show');
-    
-    // Tự ẩn sau 6 giây
     setTimeout(() => {
         hideNotif();
     }, 6000);
@@ -1738,27 +1741,22 @@ function hideNotif() {
     document.getElementById('order_notif').classList.remove('show');
 }
 
-// Bắt đầu chạy sau 5 giây khi web tải xong
 setTimeout(() => {
     showRandomNotif();
-    // Sau đó cứ mỗi 20 giây lại hiện một cái mới
     setInterval(showRandomNotif, 20000);
 }, 5000);
 
 // Tự động cuộn lên đầu khi nhấn vào bất kỳ tab nào
 document.addEventListener('click', function (e) {
-    // Kiểm tra nếu mục được nhấn có class là 'tab-item' hoặc nằm trong thanh điều hướng tab
     if (e.target.classList.contains('tab-item') || e.target.closest('.tabs')) {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth' // Cuộn mượt mà
+            behavior: 'smooth'
         });
     }
 }, true);
 
-
-
-// Đóng khi bấm ra ngoài vùng trắng của modal
+// Đóng khi bấm ra ngoài vùng trắng
 window.onclick = function(event) {
     const modal = document.getElementById('productModal');
     if (event.target == modal) {
@@ -1767,55 +1765,5 @@ window.onclick = function(event) {
 }
    
 </script>
-<div id="order_notif" class="order-notification">
-    <div class="notif-img">
-        <img id="notif_thumb" src="https://pos365.vn/storage/app/media/may-pos-cam-tay-sunmi-v2.jpg" alt="POS">
-    </div>
-    <div class="notif-content">
-        <div id="notif_title" class="notif-title">Anh Hùng (Đồng Nai)</div>
-        <div id="notif_desc" class="notif-desc">Vừa đặt mua máy CPOS V302</div>
-        <div class="notif-time">1 phút trước</div>
-    </div>
-    <button class="notif-close" onclick="hideNotif()">×</button>
-</div>
-<div id="productModal" class="modal" style="display:none; position:fixed; z-index:10001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
-    <div style="background:#fff; width:95%; max-width:420px; border-radius:20px; position:relative; padding:25px 20px 20px; box-shadow:0 20px 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease;">
-        
-        <div onclick="closeModal()" style="position:absolute; top:12px; right:12px; width:32px; height:32px; background:#f1f5f9; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:22px; color:#64748b; z-index:110;">
-            &times;
-        </div>
-        
-        <div style="position: relative; width: 100%; height: 250px; background: #f8fafc; border-radius: 12px; overflow: hidden;">
-    <img id="modal_product_img" src="" style="width: 100%; height: 100%; object-fit: contain; display: block;">
-    
-    <button type="button" class="slider-nav" onclick="changeImage(-1)" id="btn_prev" 
-        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-        &#10094;
-    </button>
-    
-    <button type="button" class="slider-nav" onclick="changeImage(1)" id="btn_next" 
-        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 100; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-        &#10095;
-    </button>
-    
-    <div id="image_counter" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; padding: 2px 10px; border-radius: 10px; font-size: 11px; z-index: 101;">1/1</div>
-</div>
-
-        <h3 id="modal_product_name" style="margin:15px 0 5px; font-size:1.25rem; color:#1e293b; text-align:center;"></h3>
-        <div id="modal_product_price" style="color:#ee002e; font-size:1.5rem; font-weight:900; margin-bottom:15px; text-align:center;"></div>
-        
-        <div style="text-align:left; background:#f8fafc; padding:15px; border-radius:12px; border:1px solid #f1f5f9;">
-            <div style="font-weight:bold; margin-bottom:8px; font-size:0.85rem; color:#475569; display:flex; align-items:center; gap:5px;">
-                <i class="fas fa-info-circle"></i> CẤU HÌNH CHI TIẾT
-            </div>
-            <div id="modal_product_specs" style="font-size:0.85rem; color:#334155; line-height:1.6;"></div>
-        </div>
-        
-        <button class="add-cart-btn" onclick="addInvoiceToCart(currentProduct.name, currentProduct.price); document.getElementById('productModal').style.display='none';" style="width:100%; margin-top:20px; padding:16px; background:#ee002e; color:white; border:none; border-radius:12px; font-weight:bold; font-size:1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(238,0,46,0.3);">
-    <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
-</button>
-    </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>

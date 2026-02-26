@@ -168,8 +168,11 @@
             <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract Viettel</button>
         </div>
         <div style="text-align: center;">
-            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
-                PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ (CHỈ THU MỘT LẦN)
+            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
+                PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ
+            <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 500000)">
+                CHỈ THU MỘT LẦN
+            </button>
             </h2>
         </div>
 
@@ -720,7 +723,7 @@
     </div>
 </div>
 
-<div id="cart_bubble" onclick="toggleCartModal()" style="position:fixed; bottom:30px; right:20px; width:60px; height:60px; background:var(--primary); border-radius:50%; display:none; align-items:center; justify-content:center; color:white; box-shadow:0 10px 30px rgba(238,0,46,0.4); z-index:999; cursor:pointer;">
+<div id="cart_bubble" onclick="toggleCartModal()" style="position:fixed; bottom:160px; right:30px; width:50px; height:50px; background:var(--primary); border-radius:50%; display:none; align-items:center; justify-content:center; color:white; box-shadow:0 10px 30px rgba(238,0,46,0.4); z-index:999; cursor:pointer;">
     <i class="fas fa-shopping-cart"></i>
     <span id="cart_count" style="position:absolute; top:0; right:0; background:black; font-size:10px; padding:4px 7px; border-radius:50%;">0</span>
 </div>
@@ -804,6 +807,15 @@
             <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
             </button>
         </div>
+    </div>
+    <div class="floating-contact">
+    <a href="https://zalo.me/0393906086" class="contact-zalo zalo-btn" target="_blank" title="Chat Zalo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+    </a>
+
+    <a href="tel:0393906086" class="contact-phone phone-btn" title="Gọi Hotline">
+        <img src="https://canpos.vn/wp-content/plugins/button-contact-vr/img/phone.png" alt="Phone">
+    </a>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="script.js"></script>

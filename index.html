@@ -40,31 +40,44 @@
     <div class="card" style="max-width: 500px; margin: 0 auto; padding: 15px;">
         
         <div class="sub-tabs">
-            <button onclick="switchSubTab('sub1', this)" class="sub-tab-btn active" >Giá Niêm Yết</button>
-            <button onclick="switchSubTab('sub2', this)" class="sub-tab-btn">Doanh Thu Ngược</button>
+            <button class="sub-tab-btn active" id="btn_hoadon_hkd" onclick="switchpTab('p_ny', this)">Giá Niêm Yết</button>
+            <button class="sub-tab-btn" id="btn_hoadon_cty" onclick="switchpTab('p_dt', this)">Doanh Thu Ngược</button>
         </div>
 
-        <div id="sub1" class="sub-tab-content">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Niêm Yết</h2>
-            <label>Giá vốn nhập hàng</label>
-            <input type="text" id="x_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-            <label>Lợi nhuận mong muốn</label>
-            <input type="text" id="y_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-            <label>Tỉ lệ thuế ngành</label>
-            <select id="t_select" class="form-control" onchange="toggleT()">
-                <option value="0.015">Phân phối hàng hóa (1.5%)</option>
-                <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
-                <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
-                <option value="custom">Tự nhập %</option>
-            </select>
-            <input type="number" id="t_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
-            <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px; border: 1px solid #fee2e2;">
-                <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
-                <span id="p_res" style="font-size:2.3rem; font-weight:900; color:#e63946; display:block;">0 đ</span>
-            </div>
-        </div>
+        <div id="p_ny" class="p-tab-content">
+    <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Niêm Yết</h2>
+    
+    <label>Giá vốn nhập hàng (Chưa VAT)</label>
+    <input type="text" id="x_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
+    
+    <label>Tỉ lệ VAT đầu vào (%)</label>
+    <select id="vat_select" class="form-control" onchange="toggleVAT()">
+        <option value="0" selected>Không thuế (0%)</option>
+        <option value="0.05">VAT (5%)</option>
+        <option value="0.08">VAT (8%)</option>
+        <option value="0.1">VAT (10%)</option>
+    </select>
+    <input type="number" id="vat_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % VAT" oninput="calcPrice()">
 
-        <div id="sub2" class="sub-tab-content" style="display:none;">
+    <label>Lợi nhuận mong muốn</label>
+    <input type="text" id="y_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
+    
+    <label>Tỉ lệ thuế ngành (Đầu ra)</label>
+    <select id="t_select" class="form-control" onchange="toggleT()">
+        <option value="0.015">Phân phối hàng hóa (1.5%)</option>
+        <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
+        <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
+        <option value="custom">Tự nhập %</option>
+    </select>
+    <input type="number" id="t_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
+    
+    <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px; border: 1px solid #fee2e2;">
+        <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
+        <span id="p_res" style="font-size:2.3rem; font-weight:900; color:#e63946; display:block;">0 đ</span>
+    </div>
+</div>
+
+        <div id="p_dt" class="p-tab-content" style="display:none;">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Doanh Thu Từ Thuế Khoán</h2> 
             <label>Số thuế khoán cũ</label>
             <input type="text" id="tax_paid" class="form-control currency-input" placeholder="0" oninput="calcRevenue()">
@@ -166,14 +179,6 @@
             <button class="sub-tab-btn" onclick="switchSubTab('sub_software', this)">Phần mềm</button>
             <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">Hoá đơn</button>
             <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract Viettel</button>
-        </div>
-        <div style="text-align: center;">
-            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
-                PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ
-            <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 500000)">
-                CHỈ THU MỘT LẦN
-            </button>
-            </h2>
         </div>
 
         <div id="sub_hardware" class="sub-tab-content">
@@ -361,6 +366,19 @@
         </div>
 
         <div id="sub_hoadon" class="sub-tab-content" style="display:none">
+            <div class="sub-tabs" style="margin-bottom: 20px; justify-content: center; display: flex; gap: 10px;">
+                <button class="sub-tab-btn active" id="btn_hoadon_hkd" onclick="switchInnerTab('inner_hkd', this)">Giá Cho HKD</button>
+                <button class="sub-tab-btn" id="btn_hoadon_cty" onclick="switchInnerTab('inner_cty', this)">Giá Cho CTY</button>
+            </div>
+            <div id="inner_hkd" class="inner-tab-content">
+                <div style="text-align: center;">
+            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
+                PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ
+            <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 500000)">
+                CHỈ THU MỘT LẦN
+            </button>
+            </h2>
+                </div>
             <div class="card">
                 <table class="table-invoice">
                     <div style="text-align: center;">
@@ -444,9 +462,8 @@
                         <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 200.000 tờ', 12100000)">Thêm</button></td>
                     </tr>
                     </tbody>
-                    </table>
+                </table>
             </div>
-
             <div class="card">
                 <table class="table-invoice">
                 <div style="text-align: center;">
@@ -519,6 +536,19 @@
                     </tr>
                 </tbody>
                 </table>
+            </div>
+            </div>
+
+            <div id="inner_cty" class="inner-tab-content" style="display:none">
+                <div style="text-align: center;">
+            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
+                PHÍ KHỞI TẠO HỢP ĐỒNG 1.000.OOOĐ
+            <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 1000000)">
+                CHỈ THU MỘT LẦN
+            </button>
+            </h2>
+                </div>
+            
             </div>
         </div>
 
@@ -651,7 +681,8 @@
                 </div>
             </div>
         </div>
-        <img src="https://i.ibb.co/23brjGx6/z7451248947957-91ba6db41c4c5a633b9269cb5ab143ce.jpg" alt="Kế toán siêu cấp vip pro" class="responsive-img">
+        
+<img src="https://i.ibb.co/23brjGx6/z7451248947957-91ba6db41c4c5a633b9269cb5ab143ce.jpg" alt="Kế toán siêu cấp vip pro" class="responsive-img">    
     </div>
     
     <div class="service-footer">
@@ -819,6 +850,7 @@
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
 

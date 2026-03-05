@@ -242,14 +242,27 @@ const fmt = (n) => new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' đ';
                                 <br>Hạn nộp hồ sơ khai thuế theo Quý muộn nhất: Quý 1 là ngày 30/04/năm; Quý 2 là 31/7/năm; Quý 3 là ngày 31/10/năm; Quý 4 là ngày 31/1/(năm+1)`;
         }
     }
-// tính Giá Niêm Yết
+    //tính giá niêm yết
 function calcPrice() {
-    let x = getVal('x_val');
+    let x = getVal('x_val'); 
+    let v_val = document.getElementById('vat_select').value;
+    let v = v_val === 'custom' 
+        ? (parseFloat(document.getElementById('vat_custom').value) / 100 || 0) 
+        : parseFloat(v_val);
     let y = getVal('y_val');
     let t_val = document.getElementById('t_select').value;
-    let t = t_val === 'custom' ? (parseFloat(document.getElementById('t_custom').value)/100 || 0) : parseFloat(t_val);
-    let finalPrice = (t < 1) ? (x + y) / (1 - t) : 0;
+    let t = t_val === 'custom' 
+        ? (parseFloat(document.getElementById('t_custom').value) / 100 || 0) 
+        : parseFloat(t_val);
+    let finalPrice = 0;
+    if (t < 1) {
+        finalPrice = (x * (1 + v) + y) / (1 - t);
+    }
     document.getElementById('p_res').innerText = fmt(finalPrice);
+}
+function toggleVAT() {
+    document.getElementById('vat_custom').style.display = (document.getElementById('vat_select').value === 'custom') ? 'block' : 'none';
+    calcPrice();
 }
 function toggleT() {
     document.getElementById('t_custom').style.display = (document.getElementById('t_select').value === 'custom') ? 'block' : 'none';
@@ -501,3 +514,28 @@ window.onclick = function(event) {
     }
 }
    
+//banggia
+function switchInnerTab(tabId, btn) {
+    document.querySelectorAll('.inner-tab-content').forEach(content => {
+        content.style.display = 'none';
+    });
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.sub-tab-btn').forEach(b => {
+        b.classList.remove('active');
+    });
+    document.getElementById(tabId).style.display = 'block';
+    btn.classList.add('active');
+}
+//tinhgia
+function switchpTab(tabId, btn) {
+    document.querySelectorAll('.p-tab-content').forEach(content => {
+        content.style.display = 'none';
+    });
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.sub-tab-btn').forEach(b => {
+        b.classList.remove('active');
+    });
+    document.getElementById(tabId).style.display = 'block';
+    btn.classList.add('active');
+}
+

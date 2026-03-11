@@ -538,14 +538,14 @@ function switchpTab(tabId, btn) {
     document.getElementById(tabId).style.display = 'block';
     btn.classList.add('active');
 }
-
+//tính hoá đơn
 function toggleCustomTax() {
     const select = document.getElementById('taxRate');
     const customInput = document.getElementById('customTax');
     customInput.style.display = (select.value === 'custom') ? 'block' : 'none';
     calculate();
 }
-//tính hoá đơn
+
 function calculate() {
     const inputA = document.getElementById('valA');
     const inputB = document.getElementById('valB');
@@ -565,7 +565,6 @@ function calculate() {
     const F = A + E;
     const G = B;
     const H = B - A - E;
-    document.getElementById('resD').innerText = D.toLocaleString('vi-VN');
     document.getElementById('resE').innerText = E.toLocaleString('vi-VN') + " đ";
     document.getElementById('resF').innerText = F.toLocaleString('vi-VN') + " đ";
     document.getElementById('resG').innerText = G.toLocaleString('vi-VN') + " đ";

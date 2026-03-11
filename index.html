@@ -40,42 +40,39 @@
     <div class="card" style="max-width: 500px; margin: 0 auto; padding: 15px;">
         
         <div class="sub-tabs">
-            <button class="sub-tab-btn active" id="btn_hoadon_hkd" onclick="switchpTab('p_ny', this)">Giá Niêm Yết</button>
-            <button class="sub-tab-btn" id="btn_hoadon_cty" onclick="switchpTab('p_dt', this)">Doanh Thu Ngược</button>
+            <button class="sub-tab-btn active" id="btn_ny" onclick="switchpTab('p_ny', this)">Giá Niêm Yết</button>
+            <button class="sub-tab-btn" id="btn_dt" onclick="switchpTab('p_dt', this)">Doanh Thu Ngược</button>
+            <button class="sub-tab-btn" id="btn_ghd" onclick="switchpTab('p_ghd', this)">Tính Giá Hoá Đơn</button>
         </div>
 
         <div id="p_ny" class="p-tab-content">
-    <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Niêm Yết</h2>
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Niêm Yết</h2>
+            <label>Giá vốn nhập hàng (Chưa VAT)</label>
+            <input type="text" id="x_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
+            <label>Tỉ lệ VAT đầu vào (%)</label>
+            <select id="vat_select" class="form-control" onchange="toggleVAT()">
+                <option value="0" selected>Không thuế (0%)</option>
+                <option value="0.05">VAT (5%)</option>
+                <option value="0.08">VAT (8%)</option>
+                <option value="0.1">VAT (10%)</option>
+            </select>
+            <input type="number" id="vat_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % VAT" oninput="calcPrice()">
+            <label>Lợi nhuận mong muốn</label>
+            <input type="text" id="y_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
+            <label>Tỉ lệ thuế ngành (Đầu ra)</label>
+            <select id="t_select" class="form-control" onchange="toggleT()">
+                <option value="0.015">Phân phối hàng hóa (1.5%)</option>
+                <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
+                <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
+                <option value="custom">Tự nhập %</option>
+            </select>
+            <input type="number" id="t_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
     
-    <label>Giá vốn nhập hàng (Chưa VAT)</label>
-    <input type="text" id="x_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-    
-    <label>Tỉ lệ VAT đầu vào (%)</label>
-    <select id="vat_select" class="form-control" onchange="toggleVAT()">
-        <option value="0" selected>Không thuế (0%)</option>
-        <option value="0.05">VAT (5%)</option>
-        <option value="0.08">VAT (8%)</option>
-        <option value="0.1">VAT (10%)</option>
-    </select>
-    <input type="number" id="vat_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % VAT" oninput="calcPrice()">
-
-    <label>Lợi nhuận mong muốn</label>
-    <input type="text" id="y_val" class="form-control currency-input" placeholder="0" oninput="calcPrice()">
-    
-    <label>Tỉ lệ thuế ngành (Đầu ra)</label>
-    <select id="t_select" class="form-control" onchange="toggleT()">
-        <option value="0.015">Phân phối hàng hóa (1.5%)</option>
-        <option value="0.045">Dịch vụ, sản xuất (4.5%)</option>
-        <option value="0.07">Dịch vụ không hàng hóa (7%)</option>
-        <option value="custom">Tự nhập %</option>
-    </select>
-    <input type="number" id="t_custom" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập % tổng thuế" oninput="calcPrice()">
-    
-    <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px; border: 1px solid #fee2e2;">
-        <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
-        <span id="p_res" style="font-size:2.3rem; font-weight:900; color:#e63946; display:block;">0 đ</span>
-    </div>
-</div>
+            <div style="text-align:center; padding:25px; background:linear-gradient(135deg, #fff5f5, #ffebeb); border-radius:15px; margin-top:20px; border: 1px solid #fee2e2;">
+                <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Giá Niêm Yết Đề Xuất</span>
+                <span id="p_res" style="font-size:2.3rem; font-weight:900; color:#e63946; display:block;">0 đ</span>
+            </div>
+        </div>
 
         <div id="p_dt" class="p-tab-content" style="display:none;">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Doanh Thu Từ Thuế Khoán</h2> 
@@ -93,6 +90,27 @@
                 <span style="font-size:0.75rem; font-weight:bold; color:#666; text-transform: uppercase;">Doanh Thu Tương Ứng Một Tháng</span>
                 <span id="rev_res" style="font-size:2.3rem; font-weight:900; color:#4361ee; display:block;">0 đ </span>
             </div>
+        </div>
+
+        <div id="p_ghd" class="p-tab-content" style="display:none;">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 15px;">Tính Giá Hoá Đơn</h2>
+        <label>Giá tiền thực tế :</label>
+        <input type="text" id="valA" class="form-control" placeholder="Ví dụ: 1000000" oninput="calculate()">
+        <label>Giá cần xuất hóa đơn :</label>
+        <input type="text" id="valB" class="form-control"  placeholder="Ví dụ: 1500000" oninput="calculate()">
+        <label>Tỉ lệ thuế muốn thu :</label>
+        <select id="taxRate" class="form-control" onchange="toggleCustomTax()">
+            <option value="0.10">10%</option>
+            <option value="0.15" selected>15%</option>
+            <option value="custom">Tùy chỉnh (%)</option>
+        </select>
+        <input type="number" id="customTax" class="form-control" style="display:none; margin-top:5px;" placeholder="Nhập %" oninput="calculate()">
+        <div class="result">
+            <p>Phí hóa đơn : <span id="resE" class="highlight">0</span></p>
+            <p>Tổng thu tiền mặt : <span id="resF" class="highlight">0</span></p>
+            <p>Tổng thu chuyển khoản : <span id="resG" class="highlight">0</span></p>
+            <p>Tiền thối lại cho khách : <span id="resH" class="highlight">0</span></p>
+        </div>
         </div>
     </div>
     </div>

@@ -539,3 +539,35 @@ function switchpTab(tabId, btn) {
     btn.classList.add('active');
 }
 
+function toggleCustomTax() {
+    const select = document.getElementById('taxRate');
+    const customInput = document.getElementById('customTax');
+    customInput.style.display = (select.value === 'custom') ? 'block' : 'none';
+    calculate();
+}
+//tính hoá đơn
+function calculate() {
+    const inputA = document.getElementById('valA');
+    const inputB = document.getElementById('valB');
+    inputA.value = inputA.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    inputB.value = inputB.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const A = parseFloat(inputA.value.replace(/\./g, "")) || 0;
+    const B = parseFloat(inputB.value.replace(/\./g, "")) || 0;
+    let rate = 0;
+    const select = document.getElementById('taxRate');
+    if (select.value === 'custom') {
+        rate = (parseFloat(document.getElementById('customTax').value) || 0) / 100;
+    } else {
+        rate = parseFloat(select.value);
+    }
+    const D = 1 - rate;
+    const E = (B - A) * rate;
+    const F = A + E;
+    const G = B;
+    const H = B - A - E;
+    document.getElementById('resD').innerText = D.toLocaleString('vi-VN');
+    document.getElementById('resE').innerText = E.toLocaleString('vi-VN') + " đ";
+    document.getElementById('resF').innerText = F.toLocaleString('vi-VN') + " đ";
+    document.getElementById('resG').innerText = G.toLocaleString('vi-VN') + " đ";
+    document.getElementById('resH').innerText = H.toLocaleString('vi-VN') + " đ";
+}

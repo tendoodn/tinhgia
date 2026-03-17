@@ -16,12 +16,37 @@ const fmt = (n) => new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' đ';
         document.getElementById(id).classList.add('active'); 
         b.classList.add('active');
     }
+// tab
     function switchSubTab(id, b) {
         document.querySelectorAll('.sub-tab-content').forEach(c => c.style.display = 'none');
         document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(id).style.display = 'block';
+    const target = document.getElementById(id);
+        if (target) target.style.display = 'block';
         b.classList.add('active');
+    const moreMenu = document.getElementById("moreMenu");
+        if (moreMenu) moreMenu.classList.remove('show');
     }
+    function toggleMoreMenu(event) {
+        event.stopPropagation(); 
+    const menu = document.getElementById("moreMenu");
+    menu.classList.toggle("show");
+    }
+    window.onclick = function(event) {
+    const menu = document.getElementById("moreMenu");
+    if (menu && menu.classList.contains('show')) {
+        if (!event.target.closest('.tabs-more')) {
+            menu.classList.remove('show');
+        }
+    }}
+    //banggia
+    function switchInnerTab(tabId, btn) {
+        document.querySelectorAll('.inner-tab-content').forEach(content => {content.style.display = 'none';});
+        const parent = btn.parentElement;
+        parent.querySelectorAll('.sub-tab-btn').forEach(b => {b.classList.remove('active');});
+        document.getElementById(tabId).style.display = 'block';
+        btn.classList.add('active');
+}
+
     const taxRates = [
         { name: "Phân phối hàng hóa", g: 0.01, t: 0.005 },
         { name: "Dịch vụ, xây dựng", g: 0.05, t: 0.02 },
@@ -514,18 +539,7 @@ window.onclick = function(event) {
     }
 }
    
-//banggia
-function switchInnerTab(tabId, btn) {
-    document.querySelectorAll('.inner-tab-content').forEach(content => {
-        content.style.display = 'none';
-    });
-    const parent = btn.parentElement;
-    parent.querySelectorAll('.sub-tab-btn').forEach(b => {
-        b.classList.remove('active');
-    });
-    document.getElementById(tabId).style.display = 'block';
-    btn.classList.add('active');
-}
+
 //tinhgia
 function switchpTab(tabId, btn) {
     document.querySelectorAll('.p-tab-content').forEach(content => {
@@ -569,4 +583,8 @@ function calculate() {
     document.getElementById('resF').innerText = F.toLocaleString('vi-VN') + " đ";
     document.getElementById('resG').innerText = G.toLocaleString('vi-VN') + " đ";
     document.getElementById('resH').innerText = H.toLocaleString('vi-VN') + " đ";
+}
+
+function toggleDropdown() {
+    document.getElementById("moreMenu").classList.toggle("show");
 }

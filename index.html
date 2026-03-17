@@ -194,11 +194,25 @@
 
     <div id="tab3" class="tab-content">
         <div class="sub-tabs">
-            <button class="sub-tab-btn active" onclick="switchSubTab('sub_hardware', this)">Máy POS</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_software', this)">Phần mềm</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">Hoá đơn</button>
-            <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract Viettel</button>
+    <button class="sub-tab-btn active" onclick="switchSubTab('sub_hardware', this)">Máy POS</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('sub_software', this)">Phần mềm</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('sub_hoadon', this)">HĐĐT</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('sub_vcontract', this)">vContract</button>
+    <div class="tabs-more" style="position: relative; display: inline-block;">
+        <button class="sub-tab-btn dropdown-toggle" onclick="toggleMoreMenu(event)">
+            Xem thêm ▾
+        </button>
+        
+        <div id="moreMenu" class="dropdown-menu">
+            <button class="sub-tab-btn" onclick="switchSubTab('camera', this)">Camera</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('sign', this)">MySign</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('internet', this)">Internet</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('demo1', this)">Demo1</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('demo2', this)">Demo2</button>
+            <button class="sub-tab-btn" onclick="switchSubTab('demo3', this)">Demo3</button>
         </div>
+    </div>
+</div>
 
         <div id="sub_hardware" class="sub-tab-content">
             <div class="pos-grid">
@@ -352,6 +366,67 @@
         <div id="sub_software" class="sub-tab-content" style="display:none">
             <div class="pos-grid">
                 <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA - HKD 1 NĂM', 
+                    price: 421000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA - HKD 1 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">421.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA - HKD 2 NĂM', 
+                    price: 810000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA - HKD 2 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">810.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA - HKD 3 NĂM', 
+                    price: 1134000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA - HKD 3 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">1.134.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA1 - CTY 1 NĂM', 
+                    price: 1635000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA1 - CTY 1 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">1.635.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA2 - CTY 2 NĂM', 
+                    price: 2413000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA2 - CTY 2 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">2.413.000đ</div>
+                </div>
+                <div class="pos-item" onclick="openPos({
+                    name: 'Viettel CA3 - CTY 3 NĂM', 
+                    price: 2643000,
+                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
+                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
+                    })">
+                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
+                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA3 - CTY 3 NĂM</div>
+                    <div style="color:var(--primary); font-weight:800;">2.643.000đ</div>
+                </div>
+
+                <div class="pos-item" onclick="openPos({
                     name: 'Phần mềm Tendoo', 
                     price: 785000,
                     images: ['https://sme.viettel.vn/media/sme/icon/tendo_logo_update.jpeg'],
@@ -361,16 +436,7 @@
                     <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Phần mềm bán hàng Tendoo</div>
                     <div style="color:var(--primary); font-weight:800;">785.000đ</div>
                 </div>
-                <div class="pos-item" onclick="openPos({
-                    name: 'Viettel CA - Chữ ký số Viettel', 
-                    price: 421000,
-                    images: ['https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png'],
-                    specs: 'Viettel CA - Chữ ký số Viettel (hay còn gọi là Chứng thư số Viettel) là dịch vụ giải pháp hiện đại an toàn và bảo mật, toàn bộ thông tin dữ liệu được xử lý mã hóa và đảm bảo tính đầy đủ của doanh nghiệp. Chữ ký số dùng để ký số hóa điện tử thay cho chữ ký tay thông thường trên các loại văn bản hoặc tài liệu số thông qua mạng Internet.'
-                    })">
-                    <img src="https://giaiphapdoanhnghiepviettel.vn/uploads/2023/10/chukyso.png">
-                    <div style="font-size:0.85rem; font-weight:bold; margin-top:10px;">Viettel CA - Chữ ký số Viettel</div>
-                    <div style="color:var(--primary); font-weight:800;">421.000đ</div>
-                </div>
+                
                 <div class="pos-item" onclick="openPos({
                     name: 'Phần mềm kế toán Easybook', 
                     price: 700000,
@@ -386,25 +452,24 @@
 
         <div id="sub_hoadon" class="sub-tab-content" style="display:none">
             <div class="sub-tabs" style="margin-bottom: 20px; justify-content: center; display: flex; gap: 10px;">
-                <button class="sub-tab-btn active" id="btn_hoadon_hkd" onclick="switchInnerTab('inner_hkd', this)">Giá Cho HKD</button>
-                <button class="sub-tab-btn" id="btn_hoadon_cty" onclick="switchInnerTab('inner_cty', this)">Giá Cho CTY</button>
+                <button class="sub-tab-btn active" id="btn_hoadon_hkd" onclick="switchInnerTab('inner_hkd', this)">HĐĐT HKD</button>
+                <button class="sub-tab-btn" id="btn_hoadon_cty" onclick="switchInnerTab('inner_cty', this)">HĐĐT CTY</button>
+                <button class="sub-tab-btn" id="btn_hoadon_dv" onclick="switchInnerTab('inner_dv', this)">HĐ ĐẦU VÀO</button>
             </div>
             <div id="inner_hkd" class="inner-tab-content">
-                
-            <div class="card">
-                <table class="table-invoice">
-                    <div style="text-align: center;">
+                <div style="text-align: center;">
                     <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
                         PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ
-                    <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 500000)">
-                    CHỈ THU MỘT LẦN
-                </button>
-            </h2>
-                </div>
-                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
-                        HOÁ ĐƠN TỪ MÁY TÍNH TIỀN
+                        <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo HKD', 500000)">
+                        CHỈ THU MỘT LẦN
+                        </button>
                     </h2>
-                    </div>
+                </div>                
+                <div class="card">
+                    <table class="table-invoice">
+                        <h2 style="text-align: center; font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                            HOÁ ĐƠN TỪ MÁY TÍNH TIỀN DÀNH CHO HKD
+                        </h2>
                     <thead>
                     <tr>
                         <th>HĐMTT</th>
@@ -434,7 +499,7 @@
                     </tr>
                     <tr>
                         <td>3.000 tờ</td>
-                        <td>3500đ</td>
+                        <td>350đ</td>
                         <td style="color:var(--primary); font-weight:bold;">1.155.000 đ</td>
                         <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 3.000 tờ', 1155000)">Thêm</button></td>
                     </tr>
@@ -481,25 +546,109 @@
                         <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn 200.000 tờ', 12100000)">Thêm</button></td>
                     </tr>
                     </tbody>
-                </table>
-            </div>
-            <div class="card">
-                <table class="table-invoice">
-                <div style="text-align: center;">
-                <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
-                    HOÁ ĐƠN ĐẦU VÀO ĐỒNG BỘ TCT
-                </h2>
+                    </table>
                 </div>
-                <thead>
+            </div>
+
+            <div id="inner_cty" class="inner-tab-content" style="display:none">
+                <div style="text-align: center;">
+                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
+                        PHÍ KHỞI TẠO HỢP ĐỒNG 1.000.OOOĐ
+                        <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo CTY', 1000000)">
+                        CHỈ THU MỘT LẦN
+                        </button>
+                    </h2>
+                </div>                
+                <div class="card">
+                    <table class="table-invoice">
+                        <h2 style="text-align: center; font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                            HOÁ ĐƠN DÀNH CHO CÔNG TY
+                        </h2>
+                    <thead>
                     <tr>
-                        <th>HĐĐV</th>
-                        <th>Đơn giá<br>(Chưa VAT)</th>
-                        <th>Thành tiền <br>(Sau VAT)</th>
-                        <th>Giỏ hàng</th> 
+                        <th>HĐMTT</th>
+                        <th>Đơn giá<br></th>
+                        <th>Thành tiền <br></th>
+                        <th>Giỏ hàng</th>
                     </tr>
-                    
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>300 tờ</td>
+                        <td>1430đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">429.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 300 tờ', 429000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>500 tờ</td>
+                        <td>1166đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">583.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 500 tờ', 583000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>1.000 tờ</td>
+                        <td>913đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">913.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 1.000 tờ', 913000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>2.000 tờ</td>
+                        <td>688đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.375.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 2.000 tờ', 1375000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>3.000 tờ</td>
+                        <td>645đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">1.936.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 3.000 tờ', 1936000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>5.000 tờ</td>
+                        <td>587đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">2.937.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 5.000 tờ', 2937000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>7.000 tờ</td>
+                        <td>558đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">3.905.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 7.000 tờ', 3905000)">Thêm</button></td>
+                    </tr>
+                    <tr>
+                        <td>10.000 tờ</td>
+                        <td>486đ</td>
+                        <td style="color:var(--primary); font-weight:bold;">4.862.000 đ</td>
+                        <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn CTY 10.000 tờ', 4862000)">Thêm</button></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="inner_dv" class="inner-tab-content" style="display:none">
+                <div style="text-align: center;">
+                    <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
+                        PHÍ KHỞI TẠO HỢP ĐỒNG 500.OOOĐ
+                        <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo CTY', 1000000)">
+                        CHỈ THU MỘT LẦN
+                        </button>
+                    </h2>
+                </div>
+                <div class="card">
+                    <table class="table-invoice">
+                        <h2 style="text-align: center; font-size: 1.2rem; margin-top: 0px; margin-bottom: 0px; color: red; display: inline-block; width: 100%;">
+                            HOÁ ĐƠN ĐẦU VÀO ĐỒNG BỘ TCT
+                        </h2>
+                    <thead>
+                <tr>
+                   <th>HĐĐV</th>
+                    <th>Đơn giá<br>(Chưa VAT)</th>
+                    <th>Thành tiền <br>(Sau VAT)</th>
+                    <th>Giỏ hàng</th> 
+                </tr>    
+                    </thead>
+                    <tbody>
                     <div style="grid-column: 1 / -1; margin: 20px 0;">
                         <div style="background: linear-gradient(90deg, #ee002e, #ff5f6d); color: white; padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; box-shadow: 0 4px 15px rgba(238,0,46,0.2);">
                         <i class="fas fa-star"></i> LƯU Ý: HOÁ ĐƠN ĐẦU VÀO CÓ THỜI HẠN 1 NĂM, GIA HẠN 194.000/NĂM <i class="fas fa-star"></i>
@@ -553,22 +702,10 @@
                         <td style="color:var(--primary); font-weight:bold;">Số HDDV x Số tờ</td>
                         <td><button class="add-cart-btn" onclick="addInvoiceToCart('Gói hóa đơn đầu vào trên 11.000 tờ', 0)">Liên hệ</button></td>
                     </tr>
-                </tbody>
-                </table>
-            </div>
-            </div>
-
-            <div id="inner_cty" class="inner-tab-content" style="display:none">
-                <div style="text-align: center;">
-            <h2 style="font-size: 1.2rem; margin-top: 0px; margin-bottom: -55px; color: red; display: inline-block; width: 100%;">
-                PHÍ KHỞI TẠO HỢP ĐỒNG 1.000.OOOĐ
-            <button class="btn-pulse" onclick="addInvoiceToCart('Phí khởi tạo', 1000000)">
-                CHỈ THU MỘT LẦN
-            </button>
-            </h2>
+                    </tbody>
+                    </table>
                 </div>
-            
-            </div>
+        </div>
         </div>
 
         <div id="sub_vcontract" class="sub-tab-content" style="display:none">
@@ -626,7 +763,26 @@
             </table>
             </div>
         </div>
-    </div>
+
+        <div id="camera" class="sub-tab-content">
+                cam
+        </div>
+        <div id="sign" class="sub-tab-content">
+                sign
+        </div>
+        <div id="internet" class="sub-tab-content">
+                internet
+        </div>
+        <div id="demo1" class="sub-tab-content">
+                demo1
+        </div>
+        <div id="demo2" class="sub-tab-content">
+                demo2
+        </div>
+        <div id="demo3" class="sub-tab-content">
+                demo3
+        </div>
+    </div>    
         
     <div id="tab4" class="tab-content">
         <div class="accountant-banner">

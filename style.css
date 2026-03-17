@@ -147,10 +147,20 @@
             margin-bottom: 5px; 
             font-size: 1rem; }
         /* SUB-TABS & POS  */
-        .sub-tabs { display: flex; 
+        .sub-tabs { 
+            display: flex; 
             justify-content: center; 
             gap: 10px; 
-            margin-bottom: 20px; }
+            margin-bottom: 20px; 
+            flex-wrap: wrap; }
+        /* Cấu hình riêng cho Mobile */
+        @media (max-width: 768px) {
+        .sub-tab-btn {
+            flex: 0 1 calc((100% - 20px) / 3); 
+            min-width: 80px;
+            padding: 10px 5px;
+            text-align: center;
+            box-sizing: border-box;}}
         .sub-tab-btn { padding: 10px 20px; 
             border-radius: 20px; 
             border: 1px solid #ddd; 
@@ -567,3 +577,24 @@
         .result { margin-top: 20px; padding: 15px; background: #e7f3ff; border-left: 5px solid #2196F3; }
         .result p { margin: 5px 0; font-size: 1.1em; }
         .highlight { font-weight: bold; color: #d32f2f;font-size: 1.5em; }
+
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 99;
+            min-width: 150px;
+            flex-direction: column;}
+        .dropdown-menu.show {display: flex;}
+        .dropdown-menu .sub-tab-btn {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;}
+        .dropdown-menu .sub-tab-btn:last-child {border-bottom: none;}
+        
